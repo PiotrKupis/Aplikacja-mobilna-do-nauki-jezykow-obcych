@@ -4,4 +4,13 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
+    <string name="kategorie">Kategorie</string>
+    <string name="profil">Profil</string>
+    <string name="kursy">Kursy</string>
+    <string name="home">Home</string>
+    <string name="rejestracja">rejestracja</string>
+    <string name="button">Button</string>
+    <string name="home_fragment">Home Fragment</string>
+    <string name="courses" />
+
 </resources>
