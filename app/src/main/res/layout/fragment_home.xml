@@ -4,13 +4,28 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light">
 
-    <TextView
+    <!--    <TextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="@string/home_fragment"-->
+    <!--        android:textSize="30sp"-->
+    <!--        android:layout_centerInParent="true"-->
+    <!--        />-->
+
+    <Button
+        android:id="@+id/registerBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/home_fragment"
-        android:textSize="30sp"
         android:layout_centerInParent="true"
-        />
+        android:onClick="categoriesBtnClick"
+        android:text="Rejestracja" />
 
-
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/registerBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Button" />
 </RelativeLayout>

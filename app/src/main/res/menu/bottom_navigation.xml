@@ -10,6 +10,7 @@
         android:id="@+id/nav_courses"
         android:icon="@drawable/ic_baseline_menu_book_24"
         android:title="@string/kursy" />
+
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_baseline_person_24"
