@@ -4,21 +4,25 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light">
 
-    <!--    <TextView-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="@string/home_fragment"-->
-    <!--        android:textSize="30sp"-->
-    <!--        android:layout_centerInParent="true"-->
-    <!--        />-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_fragment"
+            android:textSize="30sp"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/poppins_medium"
+            android:id="@+id/text"
+            />
 
     <Button
         android:id="@+id/registerBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_below="@+id/text"
         android:onClick="categoriesBtnClick"
-        android:text="@string/rejestracja" />
+        android:text="@string/rejestracja"
+        />
 
     <Button
         android:id="@+id/button3"
@@ -27,5 +31,9 @@
         android:layout_below="@+id/registerBtn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:text="Button" />
+        android:text="Button"
+        />
+
+
+
 </RelativeLayout>

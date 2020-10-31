@@ -10,57 +10,76 @@
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp">
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp">
 
-
-
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/bodyPartsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Części ciała"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            />
 
         <ImageButton
+            android:id="@+id/bodyPartsButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_below="@+id/bodyPartsText"
             android:src="@drawable/toan_nguyen_vieluufzesg_unsplash"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             />
-        <ImageButton
+
+        <TextView
+            android:id="@+id/plantsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/plant"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_below="@+id/bodyPartsButton"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Rośliny"
             />
+
         <ImageButton
+            android:id="@+id/plantsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/plantsText"
             android:src="@drawable/palnt2"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             />
-        <ImageButton
+
+        <TextView
+            android:id="@+id/carsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/plantsButton"
+            android:text="Samochody"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
+            />
+
+        <ImageButton
+            android:id="@+id/carsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/carsText"
             android:src="@drawable/car"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             />
-
-
-
-    </LinearLayout>
-
 
 
     </RelativeLayout>
