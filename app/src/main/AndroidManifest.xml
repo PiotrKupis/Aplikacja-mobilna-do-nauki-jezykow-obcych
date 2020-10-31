@@ -11,6 +11,9 @@
         android:theme="@style/Theme.ProjektKompetencyjnyV2">
         <activity android:name=".Profile" />
         <activity android:name=".register" />
+        <activity android:name=".PlantsDifficulty"/>
+        <activity android:name=".PlantsEasy"/>
+        <activity android:name=".PlanstMedium"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

@@ -53,8 +53,13 @@ public class MainActivity extends AppCompatActivity {
             };
 
 
-    public void categoriesBtnClick (View view) {
+    public void registerBtnClick(View view) {
         Intent myIntent = new Intent(getBaseContext(), register.class);
+        startActivity(myIntent);
+    }
+
+    public void bodyPartsClick(View view) {
+        Intent myIntent = new Intent(getBaseContext(), PlantsDifficulty.class);
         startActivity(myIntent);
     }
 
