@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:onClick="categoriesBtnClick"
-        android:text="Rejestracja" />
+        android:text="@string/rejestracja" />
 
     <Button
         android:id="@+id/button3"
