@@ -14,7 +14,6 @@ public class PlantsDifficulty extends AppCompatActivity {
         setContentView(R.layout.activity_plants_difficulty);
     }
 
-
     public void easyDifficultyBtnOnClick(View view) {
         Intent myIntent = new Intent(getBaseContext(), PlantsEasy.class);
         startActivity(myIntent);
@@ -24,5 +23,4 @@ public class PlantsDifficulty extends AppCompatActivity {
         Intent myIntent = new Intent(getBaseContext(), PlanstMedium.class);
         startActivity(myIntent);
     }
-//    TODO: przejście do kliknięciu easy nie działa nie wiem czemu i nie mam już siły tego sprawdzać
 }

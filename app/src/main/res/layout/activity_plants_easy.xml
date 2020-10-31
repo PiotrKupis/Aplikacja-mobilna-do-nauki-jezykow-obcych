@@ -17,7 +17,7 @@
     />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -28,6 +28,23 @@
         android:paddingTop="60dp"
         android:layout_centerHorizontal="true"
          />
+
+    <Button
+        android:id="@+id/OKBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:layout_below="@+id/answer"
+        android:background="@color/purple_700"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:onClick="OKBtnClick"
+        />
+
+
+
+
+
 
 
 </RelativeLayout>
