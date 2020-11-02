@@ -2,15 +2,51 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_dark">
+    android:background="@color/white"
+    >
+
+    <TextView
+        android:id="@+id/profileText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profil użytkownika"
+        android:fontFamily="@font/poppins_bold_italic"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="30sp"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileText"
+        android:src="@drawable/ic_baseline_account_circle_128"
+        android:background="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:id="@+id/nameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Imię:"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="100dp"
+        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile
-"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"
+        android:text="Nazwisko:"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_below="@+id/nameText"
+        android:layout_marginLeft="170dp"
+
         />
 
 
