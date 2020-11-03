@@ -11,7 +11,7 @@ public class PlantsDifficulty extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plants_difficulty);
+        setContentView(R.layout.activity_difficulty);
     }
 
     public void easyDifficultyBtnOnClick(View view) {

@@ -1,50 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/word"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Czekolada"
-        android:fontFamily="@font/poppins_medium"
-        android:textSize="30sp"
-        android:textColor="@color/black"
-        android:paddingTop="60dp"
         android:layout_centerHorizontal="true"
-
-    />
+        android:fontFamily="@font/poppins_medium"
+        android:paddingTop="50dp"
+        android:text="reka"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:layout_below="@+id/word"
-        android:inputType="textPersonName"
-        android:textSize="30sp"
-        android:textColor="@color/black"
-        android:paddingTop="60dp"
         android:layout_centerHorizontal="true"
-         />
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:paddingTop="60dp"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/OKBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OK"
         android:layout_below="@+id/answer"
-        android:background="@color/purple_700"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
+        android:background="@color/purple_700"
         android:onClick="OKBtnClick"
+        android:text="OK" />
+
+    <TextView
+        android:id="@+id/counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0/10"
+        android:textSize="30sp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="50dp"
         />
-
-
-
-
-
 
 
 </RelativeLayout>
