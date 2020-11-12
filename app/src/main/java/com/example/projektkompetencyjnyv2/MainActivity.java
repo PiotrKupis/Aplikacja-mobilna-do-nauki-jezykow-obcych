@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String EXTRA_TEXT="com.example.projektkompetencyjnyv2.EXTRA_TEXT";
+    public static final String EXTRA_NUMBER="com.example.projektkompetencyjnyv2.EXTRA_NUMBER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,16 @@ public class MainActivity extends AppCompatActivity {
     public void registerBtnClick(View view) {
         Intent myIntent = new Intent(getBaseContext(), register.class);
         startActivity(myIntent);
+    }
+
+    public void moveToWordLists(View view){
+        EditText userIdEdtTxt=findViewById(R.id.userIdTxt);
+        int userId=Integer.parseInt(userIdEdtTxt.getText().toString());
+
+        Intent intent=new Intent(this,WordLists.class);
+        intent.putExtra(EXTRA_NUMBER,userId);
+
+        startActivity(intent);
     }
 
     public void bodyPartsClick(View view) {
