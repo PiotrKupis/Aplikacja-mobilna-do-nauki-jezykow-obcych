@@ -58,28 +58,23 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void registerBtnClick(View view) {
-        Intent myIntent = new Intent(getBaseContext(), register.class);
+        Intent myIntent = new Intent(getBaseContext(), Register.class);
         startActivity(myIntent);
     }
 
     public void moveToWordLists(View view){
-        EditText userIdEdtTxt=findViewById(R.id.userIdTxt);
-        int userId=Integer.parseInt(userIdEdtTxt.getText().toString());
+        EditText userIdEdtTxt = findViewById(R.id.userIdTxt);
+        int userId = Integer.parseInt(userIdEdtTxt.getText().toString());
 
-        Intent intent=new Intent(this,WordLists.class);
-        intent.putExtra(EXTRA_NUMBER,userId);
+        Intent intent = new Intent(this, WordLists.class);
+        intent.putExtra(EXTRA_NUMBER ,userId);
 
         startActivity(intent);
     }
 
     public void bodyPartsClick(View view) {
-        Intent myIntent = new Intent(getBaseContext(), PlantsDifficulty.class);
+        Intent myIntent = new Intent(getBaseContext(), Difficulty.class);
         startActivity(myIntent);
     }
 
-    //jest inne niż to wyżej bo jest na dolnym pasku???
-//    public void profileClick(MenuItem item) {
-//        Intent myIntent = new Intent(getBaseContext(), Profile.class);
-//        startActivity(myIntent);
-//    }
 }

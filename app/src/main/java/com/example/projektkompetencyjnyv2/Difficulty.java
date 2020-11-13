@@ -6,7 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class PlantsDifficulty extends AppCompatActivity {
+public class Difficulty extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,12 +15,12 @@ public class PlantsDifficulty extends AppCompatActivity {
     }
 
     public void easyDifficultyBtnOnClick(View view) {
-        Intent myIntent = new Intent(getBaseContext(), PlantsEasy.class);
+        Intent myIntent = new Intent(getBaseContext(), BodyPartsEasy.class);
         startActivity(myIntent);
     }
 
     public void mediumDifficultyBtnOnClick(View view) {
-        Intent myIntent = new Intent(getBaseContext(), PlanstMedium.class);
+        Intent myIntent = new Intent(getBaseContext(), BodyPartsMedium.class);
         startActivity(myIntent);
     }
 }
