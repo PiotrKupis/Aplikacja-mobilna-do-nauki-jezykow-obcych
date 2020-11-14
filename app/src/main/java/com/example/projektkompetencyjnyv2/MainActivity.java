@@ -63,9 +63,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void moveToWordLists(View view){
-        EditText userIdEdtTxt = findViewById(R.id.userIdTxt);
-        int userId = Integer.parseInt(userIdEdtTxt.getText().toString());
 
+        int userId = 1;
         Intent intent = new Intent(this, WordLists.class);
         intent.putExtra(EXTRA_NUMBER ,userId);
 
