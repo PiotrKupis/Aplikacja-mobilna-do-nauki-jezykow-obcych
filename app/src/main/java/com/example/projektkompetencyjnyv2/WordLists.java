@@ -37,8 +37,8 @@ public class WordLists extends AppCompatActivity {
 
         //pobieranie id usera
         Intent intent=getIntent();
-        userId=intent.getIntExtra(MainActivity.EXTRA_NUMBER,0);
-        userId=1;//póki co id jest stałe (brak logowania)
+        userId = intent.getIntExtra(MainActivity.EXTRA_NUMBER,0);
+        userId = 1;//póki co id jest stałe (brak logowania)
 
         //inicjalizacja list danych
         listNames=new ArrayList<>();
@@ -80,19 +80,19 @@ public class WordLists extends AppCompatActivity {
 
     }
 
-    private void initWordLists(){
+    private void initWordLists() {
         Log.d(TAG, "initWordLists: init records");
 
         int listId;
-        ResultSet listsRS,wordsRS,learnedRS;
-        Statement commList,commWord,commLearned;
+        ResultSet listsRS, wordsRS, learnedRS;
+        Statement commList, commWord, commLearned;
 
         try {
             if(con!=null){
                 Toast.makeText(this, "Udało się połączyć z bazą", Toast.LENGTH_LONG).show();
 
-                commList=con.createStatement();
-                listsRS=commList.executeQuery(
+                commList = con.createStatement();
+                listsRS = commList.executeQuery(
                         "select name,difficulty_level,owner_id,id_wordList\n" +
                         "from Word_list as wl inner join [User_WordList] as uwl \n" +
                         "\ton wl.id_word_list=uwl.id_wordList \n" +
@@ -111,7 +111,7 @@ public class WordLists extends AppCompatActivity {
                     wordsRS=commWord.executeQuery(
                             "select count(id_progress) as wordsQuantity\n" +
                             "from progress \n" +
-                            "where id_list="+listId+"\n" +
+                            "where id_list=" + listId + "\n" +
                             "group by id_list");
 
                     if(wordsRS.next()){
@@ -146,8 +146,8 @@ public class WordLists extends AppCompatActivity {
     public void initRecyvlerView(){
         Log.d(TAG, "initRecyvlerView: init recyclerview");
 
-        listsRecView=findViewById(R.id.listsRecView);
-        WordListsAdapter adapter=new WordListsAdapter(this,listNames,difficultyLevels,wordQuantities,learnedQuantities);
+        listsRecView = findViewById(R.id.listsRecView);
+        WordListsAdapter adapter = new WordListsAdapter(this,listNames,difficultyLevels,wordQuantities,learnedQuantities);
         listsRecView.setAdapter(adapter);
         listsRecView.setLayoutManager(new LinearLayoutManager(this));
     }

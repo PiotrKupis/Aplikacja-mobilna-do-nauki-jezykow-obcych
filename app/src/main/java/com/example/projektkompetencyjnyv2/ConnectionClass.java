@@ -9,10 +9,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionClass {
-    String ip = "projektkompetencyjnybaza.database.windows.net";
+    String ip = "projektkompetencyjnybaza.database.windows.net"; //server name
     String db = "ProjektKompetencyjnyBaza";
-    String un = "admin123@projektkompetencyjnybaza";
-    String password = "Projekt!@#";
+    String un = "admin123@projektkompetencyjnybaza"; //login
+    String password = "Projekt!@#"; //hasło
 
     @SuppressLint("NewApi")
     public Connection CONN() {

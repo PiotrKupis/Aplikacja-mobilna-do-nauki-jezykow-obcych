@@ -10,7 +10,7 @@
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/poppins_medium"
         android:paddingTop="50dp"
-        android:text="reka"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="30sp" />
 
@@ -38,7 +38,7 @@
         android:text="OK" />
 
     <TextView
-        android:id="@+id/counter"
+        android:id="@+id/roundCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0/10"
@@ -46,8 +46,33 @@
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
         android:layout_marginStart="300dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="15dp"
         />
+    <TextView
+        android:id="@+id/pointsCouter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginStart="300dp"
+        android:text="0 pkt."
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:layout_below="@id/roundCounter"
+        />
+
+    <TextView
+        android:id="@+id/isAnswerCorrect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/OKBtn"
+        android:layout_centerHorizontal="true"
+        />
+
 
 
 </RelativeLayout>
