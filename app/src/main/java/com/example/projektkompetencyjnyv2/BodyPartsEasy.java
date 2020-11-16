@@ -93,12 +93,14 @@ public class BodyPartsEasy extends AppCompatActivity {
         }
         roundCounterView.setText(roundCounter + "/10");
 
-        if (roundCounter == 10) {
-            endGameStats(view);     //TODO: to nie działa i trzba naprawić
+        if (roundCounter == 11) {
+            endGameStats(view);
             counter = 0;
             roundCounter = 0;
             pointsCounter = 0;
+            return;
         }
+        
         roundCounter++;
         counter++;
         txt.setText(wordsPolish.get(counter));
@@ -106,6 +108,7 @@ public class BodyPartsEasy extends AppCompatActivity {
 
     public void endGameStats(View view) {
         Intent myIntent = new Intent(getBaseContext(), AfterGameStats.class);
+        myIntent.putExtra("key", pointsCounter);
         startActivity(myIntent);
     }
 }

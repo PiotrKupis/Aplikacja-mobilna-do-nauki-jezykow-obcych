@@ -7,7 +7,7 @@
         android:id="@+id/gratulacje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gratulacje, Twój wynik to imponujące: "
+        android:text="Gratulacje! Twój wynik to imponujące: "
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:fontFamily="@font/poppins_medium"

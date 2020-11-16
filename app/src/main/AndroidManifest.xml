@@ -24,6 +24,8 @@
         <activity android:name=".BodyPartsEasy" />
         <activity android:name=".BodyPartsMedium" />
         <activity android:name=".Difficulty" />
+        <activity android:name=".AfterGameStats"/>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
