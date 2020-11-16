@@ -29,6 +29,7 @@ public class WordLists extends AppCompatActivity {
     private ArrayList<Integer> difficultyLevels;
     private ArrayList<Integer> wordQuantities;
     private ArrayList<Integer> learnedQuantities;
+    private ArrayList<String> owners;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class WordLists extends AppCompatActivity {
         difficultyLevels=new ArrayList<>();
         wordQuantities=new ArrayList<>();
         learnedQuantities=new ArrayList<>();
+        owners=new ArrayList<>();
 
         //inicjalizacja połaczenia się z bazą
         connectionClass=new ConnectionClass();
@@ -83,13 +85,12 @@ public class WordLists extends AppCompatActivity {
     private void initWordLists() {
         Log.d(TAG, "initWordLists: init records");
 
-        int listId;
-        ResultSet listsRS, wordsRS, learnedRS;
-        Statement commList, commWord, commLearned;
+        int listId,ownerId;
+        ResultSet listsRS, wordsRS, learnedRS,ownerRS;
+        Statement commList, commWord, commLearned,commOwner;
 
         try {
             if(con!=null){
-                Toast.makeText(this, "Udało się połączyć z bazą", Toast.LENGTH_LONG).show();
 
                 commList = con.createStatement();
                 listsRS = commList.executeQuery(
@@ -104,7 +105,18 @@ public class WordLists extends AppCompatActivity {
                     listNames.add(listsRS.getString("name"));
                     difficultyLevels.add(listsRS.getInt("difficulty_level"));
                     listId=listsRS.getInt("id_wordList");
+                    ownerId=listsRS.getInt("owner_id");
 
+                    Log.d(TAG, "initWordLists: pobieranie nazwy właściciela");
+                    commOwner=con.createStatement();
+                    ownerRS=commOwner.executeQuery(
+                            "select login from [User] where id_user="+ownerId);
+                    if(ownerRS.next()) {
+                        owners.add(ownerRS.getString("login"));
+                        Log.d(TAG, "initWordLists: "+ownerRS.getString("login"));
+                    }
+                    else
+                        owners.add("-----");
 
                     Log.d(TAG, "initWordLists: liczba słów");
                     commWord=con.createStatement();
@@ -147,7 +159,7 @@ public class WordLists extends AppCompatActivity {
         Log.d(TAG, "initRecyvlerView: init recyclerview");
 
         listsRecView = findViewById(R.id.listsRecView);
-        WordListsAdapter adapter = new WordListsAdapter(this,listNames,difficultyLevels,wordQuantities,learnedQuantities);
+        WordListsAdapter adapter = new WordListsAdapter(this,listNames,difficultyLevels,wordQuantities,learnedQuantities,owners);
         listsRecView.setAdapter(adapter);
         listsRecView.setLayoutManager(new LinearLayoutManager(this));
     }
