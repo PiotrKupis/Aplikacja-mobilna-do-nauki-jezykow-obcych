@@ -10,5 +10,13 @@
     <string name="button">Button</string>
     <string name="home_fragment">Home Fragment</string>
     <string name="courses" />
+    <string name="zgadzam_si_na_prztwarzanie_moich_danych_osobowych_i_lubi_ciasteczka">Zgadzam się na prztwarzanie moich danych osobowych i lubię ciasteczka</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="buttonregister">Rejestracja</string>
+    <string name="login3">hint</string>
+    <string name="login">Login</string>
+    <string name="loginbutton">login</string>
+    <string name="passwordbutton">password</string>
 
 </resources>

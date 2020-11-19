@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.File;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,10 +60,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void registerBtnClick(View view) {
+        File file = new File(getApplicationContext().getFilesDir(), "LoginPassword.txt");
+        if (file.exists()) {
+            setContentView(R.layout.fragment_profile);
+            return;
+        }
         Intent myIntent = new Intent(getBaseContext(), Register.class);
         startActivity(myIntent);
     }
-
     public void moveToWordLists(View view){
 
         int userId = 1;
