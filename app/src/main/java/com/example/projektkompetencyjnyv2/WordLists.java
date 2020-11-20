@@ -3,12 +3,20 @@ package com.example.projektkompetencyjnyv2;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,7 +24,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class WordLists extends AppCompatActivity {
+public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
     private static final String TAG = "WordLists";
 
@@ -55,15 +63,12 @@ public class WordLists extends AppCompatActivity {
         //pobieranie z bazy
         initWordLists();
         //tworzenie listy
-        initRecyvlerView();
-
+        initRecyclerView();
 
         /*
         //trzeba bedzie wrzucić dostęp do bazy w innych wątkach
             new Thread() {
                 public void run() {
-
-
                             runOnUiThread(new Runnable() {
 
                                 @Override
@@ -74,12 +79,9 @@ public class WordLists extends AppCompatActivity {
                                     initRecyvlerView();
                                 }
                             });
-
-
                 }
             }.start();
             */
-
     }
 
     private void initWordLists() {
@@ -155,12 +157,37 @@ public class WordLists extends AppCompatActivity {
         }
     }
 
-    public void initRecyvlerView(){
+    public void initRecyclerView(){
         Log.d(TAG, "initRecyvlerView: init recyclerview");
 
         listsRecView = findViewById(R.id.listsRecView);
         WordListsAdapter adapter = new WordListsAdapter(this,listNames,difficultyLevels,wordQuantities,learnedQuantities,owners);
         listsRecView.setAdapter(adapter);
         listsRecView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public void showListMenu(View view){
+        PopupMenu listPopupMenu=new PopupMenu(this, view);
+        listPopupMenu.setOnMenuItemClickListener(this);
+        listPopupMenu.inflate(R.menu.lists_popup_menu);
+        listPopupMenu.show();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+
+        switch(item.getItemId()){
+            case R.id.searchList:
+                Toast.makeText(this, "szukaj", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.createList:
+
+                Intent intent = new Intent(this, CreateNewList.class);
+                intent.putExtra(MainActivity.EXTRA_NUMBER ,userId);
+                startActivity(intent);
+                return true;
+            default:
+                return false;
+        }
     }
 }

@@ -14,15 +14,27 @@
         android:layout_centerHorizontal="true"
         android:text="Twoje listy słów"
         android:textStyle="bold"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:textSize="20dp"
+        />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_lists_menu"
+        android:layout_toRightOf="@+id/userIdTxt"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:onClick="showListMenu"
         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listsRecView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/userIdTxt" />
+        android:layout_below="@id/userIdTxt"
+        android:layout_marginTop="20dp"/>
+
 
 
 </RelativeLayout>

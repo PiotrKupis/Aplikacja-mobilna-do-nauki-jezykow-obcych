@@ -19,4 +19,11 @@
     <string name="loginbutton">login</string>
     <string name="passwordbutton">password</string>
 
+    <string-array name="listPrivacy">
+        <item>publiczna</item>
+        <item>prywatna</item>
+    </string-array>
+
+
+
 </resources>
