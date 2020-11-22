@@ -6,12 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".Words">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Dodaj nowe słowo do listy"
+        android:textAllCaps="false"
+        android:id="@+id/addNewWordBtn"
+        android:layout_marginTop="20dp"
+        android:onClick="moveToAddingNewWord"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:id="@+id/listIdTxt"
-        android:text="Słowa:"/>
+        android:layout_below="@+id/addNewWordBtn"
+        android:layout_marginTop="10dp"
+        android:text="Słowa w podanej liście"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wordsRecView"

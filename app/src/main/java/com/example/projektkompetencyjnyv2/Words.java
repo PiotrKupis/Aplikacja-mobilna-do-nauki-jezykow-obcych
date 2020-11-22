@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,8 +39,8 @@ public class Words extends AppCompatActivity {
         TextView listIdTxt=findViewById(R.id.listIdTxt);
 
         Intent intent=getIntent();
-        listName = intent.getStringExtra("listName");
-        ownerLogin=intent.getStringExtra("owner");
+        listName = intent.getStringExtra(MainActivity.EXTRA_TEXT);
+        ownerLogin=intent.getStringExtra(MainActivity.EXTRA_TEXT2);
         listIdTxt.setText(listName+"\n"+ownerLogin);
 
         words=new ArrayList<>();
@@ -57,7 +59,6 @@ public class Words extends AppCompatActivity {
 
 
     private void initWordLists() {
-        Log.d(TAG, "initWordLists: init records");
 
         int ownerId;
         ResultSet ownerRS,wordsRS;
@@ -67,6 +68,7 @@ public class Words extends AppCompatActivity {
             if(con!=null){
 
                 //pobranie id właściciela by znaleźć konkretna listę
+                Log.d(TAG, "initWordLists: pobieranie id właściciela");
                 commOwner = con.createStatement();
                 Log.d(TAG, "initWordLists: m"+ownerLogin+"m");
                 ownerRS = commOwner.executeQuery(
@@ -78,6 +80,7 @@ public class Words extends AppCompatActivity {
                     ownerId=ownerRS.getInt("id");
 
                     //pobranie słów z wybranej listy
+                    Log.d(TAG, "initWordLists: pobieranie słów");
                     commWords = con.createStatement();
                     wordsRS = commWords.executeQuery(
                             "select w.word as word, w.meaning as meaning, w.example_sentence as sentence\n" +
@@ -110,5 +113,14 @@ public class Words extends AppCompatActivity {
         WordsAdapter adapter = new WordsAdapter(this,words,meanings,sentences);
         wordsRecView.setAdapter(adapter);
         wordsRecView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    //TODO dodać sprawdzenie czy lsita nalezy do użytkownika jeśli nie, nie pokazuj tego przycisku
+    public void moveToAddingNewWord(View view){
+        Log.d(TAG, "moveToAddingNewWord: kliknięto dodawanie słowa");
+        Intent intent = new Intent(this, AddNewWord.class);
+        intent.putExtra("listName" ,listName);
+        intent.putExtra("owner" ,ownerLogin);
+        startActivity(intent);
     }
 }

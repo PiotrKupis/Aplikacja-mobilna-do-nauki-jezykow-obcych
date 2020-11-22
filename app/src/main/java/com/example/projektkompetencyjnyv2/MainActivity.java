@@ -18,6 +18,7 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_TEXT="com.example.projektkompetencyjnyv2.EXTRA_TEXT";
+    public static final String EXTRA_TEXT2="com.example.projektkompetencyjnyv2.EXTRA_TEXT2";
     public static final String EXTRA_NUMBER="com.example.projektkompetencyjnyv2.EXTRA_NUMBER";
 
     @Override

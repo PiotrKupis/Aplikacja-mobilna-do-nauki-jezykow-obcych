@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddNewWord">
+
+    <TextView
+        android:id="@+id/addWordTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Dodawanie nowego słowa"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/newWordTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addWordTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Słowo"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/newWordEdtTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newWordTxt"
+        android:layout_centerHorizontal="true"
+        android:hint="Podaj nowe słowo" />
+
+    <TextView
+        android:id="@+id/newMeaningTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newWordEdtTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Znaczenie"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/newMeaningEdtTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newMeaningTxt"
+        android:layout_centerHorizontal="true"
+        android:hint="Podaj znaczenie słowa" />
+
+    <TextView
+        android:id="@+id/newSentenceTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newMeaningEdtTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Przykładowe zdanie (opcjonalne)"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/newSentenceEdtTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newSentenceTxt"
+        android:layout_centerHorizontal="true"
+        android:hint="Podaj przykładowe zdanie"/>
+
+    <Button
+        android:id="@+id/addNewWordBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newSentenceEdtTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:onClick="addNewWord"
+        android:text="Dodaj słowo" />
+
+    <TextView
+        android:id="@+id/newWordMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addNewWordBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Komunikat"
+        android:textSize="20dp"
+        android:visibility="invisible"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+</RelativeLayout>

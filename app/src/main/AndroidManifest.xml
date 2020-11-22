@@ -15,8 +15,11 @@
         android:theme="@style/Theme.ProjektKompetencyjnyV2"
         android:windowSoftInputMode="adjustPan|stateHidden">
         <activity
+            android:name=".AddNewWord"
+            android:parentActivityName=".Words" />
+        <activity
             android:name=".CreateNewList"
-            android:parentActivityName=".WordLists"/>
+            android:parentActivityName=".WordLists" />
         <activity
             android:name=".Words"
             android:parentActivityName=".WordLists" />
