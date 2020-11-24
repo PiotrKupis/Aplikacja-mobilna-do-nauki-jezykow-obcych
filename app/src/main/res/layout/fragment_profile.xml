@@ -39,15 +39,24 @@
         />
 
     <TextView
+        android:id="@+id/TextID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nazwisko:"
-        android:textSize="20sp"
-        android:fontFamily="@font/poppins_medium"
         android:layout_below="@+id/nameText"
         android:layout_marginLeft="170dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Id:"
 
-        />
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/buttonlogout"
+        android:layout_width="299dp"
+        android:layout_height="58dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="28dp"
+        android:text="WYLOGUJ" />
 
 
 </RelativeLayout>

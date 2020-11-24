@@ -36,7 +36,6 @@ public class Register extends AppCompatActivity {
         // connect with data base
         connectionClass=new ConnectionClass();
         con=connectionClass.CONN();
-
         Button button = findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -83,6 +82,20 @@ public class Register extends AppCompatActivity {
                              int result  = commList.executeUpdate(
                             "INSERT INTO [User](login,password,learned_words_quantity,profile_photo) values ('"+login+"','"+password+"',0,'')");
                             Log.d(null, "Utworzenie usera");
+
+                            CurrentUser currentUser = new CurrentUser(getApplicationContext());
+                            currentUser.setlogin(login);
+                            currentUser.setPassword(password);
+                            Log.d(null, "SELECT [id_user] FROM [User] WHERE login = '"+login+"'");
+                            ResultSet resultid  = commList.executeQuery("SELECT id_user FROM [User] WHERE login = '"+login+"'");
+                            if(resultid.next())
+                            {
+                                currentUser.setId(resultid.getInt("id_user"));
+                            }
+
+                            setContentView(R.layout.fragment_profile);
+
+                            /*
                               File file2 = new File(getApplicationContext().getFilesDir(),"LoginPassword.txt");
                               if(file2.exists())
                               {
@@ -96,13 +109,12 @@ public class Register extends AppCompatActivity {
                                 writer.close();
                                 setContentView(R.layout.fragment_profile);
                             }
-
+                             */
                         }
                         correctdata = 0;
                     }
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
-                }catch (IOException throwables) {
                 }
             }
         });

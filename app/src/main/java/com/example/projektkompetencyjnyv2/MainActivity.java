@@ -1,5 +1,6 @@
 package com.example.projektkompetencyjnyv2;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,8 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.File;
 
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity  extends AppCompatActivity{
     public static final String EXTRA_TEXT="com.example.projektkompetencyjnyv2.EXTRA_TEXT";
     public static final String EXTRA_TEXT2="com.example.projektkompetencyjnyv2.EXTRA_TEXT2";
     public static final String EXTRA_NUMBER="com.example.projektkompetencyjnyv2.EXTRA_NUMBER";
@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
@@ -61,11 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void registerBtnClick(View view) {
-        File file = new File(getApplicationContext().getFilesDir(), "LoginPassword.txt");
-        if (file.exists()) {
-            setContentView(R.layout.fragment_profile);
-            return;
-        }
         Intent myIntent = new Intent(getBaseContext(), Register.class);
         startActivity(myIntent);
     }
