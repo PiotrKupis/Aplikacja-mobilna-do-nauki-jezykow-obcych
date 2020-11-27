@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main_screen">
+
+    <Button
+        android:id="@+id/main_scren_register"
+        android:layout_width="220dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:layout_marginBottom="60dp"
+        android:layout_height="140dp"
+        android:onClick="register"
+        android:text="Rejestracja" />
+
+    <Button
+        android:id="@+id/main_screen_login"
+        android:layout_below="@+id/main_scren_register"
+        android:layout_height="140dp"
+        android:layout_width="220dp"
+        android:layout_centerHorizontal="true"
+        android:text="Zaloguj" />
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/main_screen_login"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_lists_menu"
+        />
+
+</RelativeLayout>

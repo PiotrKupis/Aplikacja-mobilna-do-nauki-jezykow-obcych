@@ -21,8 +21,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="252dp" />
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="194dp" />
 
     <Button
         android:id="@+id/button5"
@@ -37,6 +37,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
-        tools:layout_editor_absoluteX="222dp"
-        tools:layout_editor_absoluteY="364dp" />
+        tools:layout_editor_absoluteX="182dp"
+        tools:layout_editor_absoluteY="261dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

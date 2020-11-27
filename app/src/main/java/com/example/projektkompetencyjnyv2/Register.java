@@ -32,7 +32,7 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-
+        Log.d(null,"uruchamiamy rejestacje");
         // connect with data base
         connectionClass=new ConnectionClass();
         con=connectionClass.CONN();
@@ -92,7 +92,7 @@ public class Register extends AppCompatActivity {
                             {
                                 currentUser.setId(resultid.getInt("id_user"));
                             }
-
+                            Log.d(null,"rejestacja udana");
                             setContentView(R.layout.fragment_profile);
 
                             /*
