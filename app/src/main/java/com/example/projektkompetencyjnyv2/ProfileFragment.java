@@ -1,5 +1,6 @@
 package com.example.projektkompetencyjnyv2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,19 +27,16 @@ public class ProfileFragment extends Fragment {
         text.setText("Login: " +currentUser.getlogin() );
         TextView TextID =(TextView)  view.findViewById(R.id.TextID);
         TextID.setText("ID: " +currentUser.getId() );
-        Button button = view.findViewById(R.id.buttonlogout);
+        Button button = (Button) view.findViewById(R.id.buttonlogout);
         button.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
+                CurrentUser currentUser = new CurrentUser(getActivity().getApplicationContext());
                 currentUser.cleardata();
+                Intent intent = new Intent(getActivity(), main_screen.class);
+                startActivity(intent);
             }
         });
         return view;
     }
-    /*
-    public void setprofile()
-    {
-        CurrentUser currentUser = new CurrentUser(getActivity().getApplicationContext());
-        TextView text =(TextView)  findViewById(R.id.nameText);
-    }
-     */
 }

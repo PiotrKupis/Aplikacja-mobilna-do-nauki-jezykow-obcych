@@ -26,4 +26,9 @@ public class main_screen extends AppCompatActivity {
         Intent myIntent = new Intent(getBaseContext(), Register.class);
         startActivity(myIntent);
     }
+    public  void  login(View view)
+    {
+        Intent myIntent = new Intent(getBaseContext(), LoginUser.class);
+        startActivity(myIntent);
+    }
 }

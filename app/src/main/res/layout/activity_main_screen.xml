@@ -22,6 +22,7 @@
         android:layout_height="140dp"
         android:layout_width="220dp"
         android:layout_centerHorizontal="true"
+        android:onClick="login"
         android:text="Zaloguj" />
 
     <ImageButton
