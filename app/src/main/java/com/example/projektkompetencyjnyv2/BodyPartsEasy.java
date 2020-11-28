@@ -78,7 +78,6 @@ public class BodyPartsEasy extends AppCompatActivity {
         TextView roundCounterView = (TextView) findViewById(R.id.roundCounter);
         TextView pointsCounterView = (TextView) findViewById(R.id.pointsCouter);
         TextView isAnswerCorrect = (TextView) findViewById(R.id.isAnswerCorrect);
-        //TODO: pobieranie słów z bazy danych
         String guessStr = answer.getText().toString();
         String answerStr;
         answer.getText().clear();

@@ -9,7 +9,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout5"
+        android:id="@+id/loginField"
         android:layout_width="350dp"
         android:layout_height="90dp"
         android:layout_marginLeft="90dp"
@@ -28,7 +28,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
+        android:id="@+id/passwordField"
         android:layout_width="350dp"
         android:layout_marginLeft="90dp"
         android:layout_marginRight="90dp"
@@ -49,7 +49,7 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/registerConfirmBtn"
         android:onClick="signin"
         android:layout_width="268dp"
         android:layout_height="96dp"

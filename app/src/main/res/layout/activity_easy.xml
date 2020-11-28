@@ -35,6 +35,7 @@
         android:layout_marginTop="30dp"
         android:background="@color/purple_700"
         android:onClick="OKBtnClick"
+
         android:text="OK" />
 
     <TextView
