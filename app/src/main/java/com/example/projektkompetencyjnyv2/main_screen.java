@@ -1,11 +1,11 @@
 package com.example.projektkompetencyjnyv2;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class main_screen extends AppCompatActivity {
 
@@ -15,22 +15,21 @@ public class main_screen extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         CurrentUser currentUser = new CurrentUser(getApplicationContext());
-        if(currentUser.getId()!= 0)
-        {
+
+        if (currentUser.getId() != 0) {
             Intent myIntent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(myIntent);
-        }else
-        {
+        } else {
             setContentView(R.layout.activity_main_screen);
         }
     }
-    public  void  register(View view)
-    {
+
+    public void register(View view) {
         Intent myIntent = new Intent(getBaseContext(), Register.class);
         startActivity(myIntent);
     }
-    public  void  login(View view)
-    {
+
+    public void login(View view) {
         Intent myIntent = new Intent(getBaseContext(), LoginUser.class);
         startActivity(myIntent);
     }

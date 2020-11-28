@@ -1,16 +1,13 @@
 package com.example.projektkompetencyjnyv2;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -30,9 +27,9 @@ public class Register extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_registration);
 
-        Log.d(null,"uruchamiamy rejestacje");
+        Log.d(null, "uruchamiamy rejestacje");
         // connect with data base
         connectionClass = new ConnectionClass();
         con = connectionClass.CONN();
@@ -43,30 +40,30 @@ public class Register extends AppCompatActivity {
                 String[] files = getApplicationContext().fileList();
                 Log.d(null, Arrays.toString(files));
 
-                EditText loginText = (EditText) findViewById(R.id.loginField);
+                EditText loginText = (EditText) findViewById(R.id.loginFieldReg);
                 //EditText textInputEditTextlogin = findViewById(R.id.login);
                 try {
                     if (con != null) {
 
                         Statement commList = con.createStatement();
                         ResultSet listsRS = commList.executeQuery(
-                                "select login from [User] WHERE login='" + loginText.getText()+"'");
+                                "select login from [User] WHERE login='" + loginText.getText() + "'");
                         while (listsRS.next()) {
                             loginText.setError("Taki login juz jest uzywany");
                             Log.d(null, "initWordLists: nowy element listy");
                             correctdata = 1;
                         }
 
-                        if(correctdata== 0) {
+                        if (correctdata == 0) {
                             login = String.valueOf(loginText.getText());
                             loginText.setError("");
                             //TextInputLayout textInputLayoutpassword1 = ( TextInputLayout) findViewById(R.id.textInputLayout6);
                             //TextInputEditText textInputEditTextpassword = findViewById(R.id.password);
-                            EditText passwordText = (EditText) findViewById(R.id.passwordField);
+                            EditText passwordText = (EditText) findViewById(R.id.passwordFieldReg);
                             EditText passworConfirmText = findViewById(R.id.passwordConfirmField);
                             Log.d(null, String.valueOf(passwordText.getText()));
                             Log.d(null, String.valueOf(passworConfirmText.getText()));
-                            if(String.valueOf(passwordText.getText()).equals(String.valueOf(passworConfirmText.getText()))) {
+                            if (String.valueOf(passwordText.getText()).equals(String.valueOf(passworConfirmText.getText()))) {
                                 password = String.valueOf(passwordText.getText());
                                 passwordText.setError("");
                             } else {
@@ -74,21 +71,20 @@ public class Register extends AppCompatActivity {
                                 correctdata = 1;
                             }
                         }
-                        if(correctdata == 0) {
-                             int result  = commList.executeUpdate(
-                            "INSERT INTO [User](login,password,learned_words_quantity,profile_photo) values ('"+login+"','"+password+"',0,'')");
+                        if (correctdata == 0) {
+                            int result = commList.executeUpdate(
+                                    "INSERT INTO [User](login,password,learned_words_quantity,profile_photo) values ('" + login + "','" + password + "',0,'')");
                             Log.d(null, "Utworzenie usera");
 
                             CurrentUser currentUser = new CurrentUser(getApplicationContext());
                             currentUser.setlogin(login);
                             currentUser.setPassword(password);
-                            Log.d(null, "SELECT [id_user] FROM [User] WHERE login = '"+login+"'");
-                            ResultSet resultid  = commList.executeQuery("SELECT id_user FROM [User] WHERE login = '"+login+"'");
-                            if(resultid.next())
-                            {
+                            Log.d(null, "SELECT [id_user] FROM [User] WHERE login = '" + login + "'");
+                            ResultSet resultid = commList.executeQuery("SELECT id_user FROM [User] WHERE login = '" + login + "'");
+                            if (resultid.next()) {
                                 currentUser.setId(resultid.getInt("id_user"));
                             }
-                            Log.d(null,"rejestacja udana");
+                            Log.d(null, "rejestacja udana");
                             setContentView(R.layout.fragment_profile);
 
                             /*

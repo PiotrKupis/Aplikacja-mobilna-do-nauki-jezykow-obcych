@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddNewWord">
+    tools:context=".AddNewWord"
+    android:background=""
+    >
 
     <TextView
         android:id="@+id/addWordTitle"
@@ -13,8 +14,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:text="Dodawanie nowego słowa"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
 
     <TextView
         android:id="@+id/newWordTxt"
@@ -24,15 +28,20 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:text="Słowo"
-        android:textSize="18sp" />
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        />
 
     <EditText
         android:id="@+id/newWordEdtTxt"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/newWordTxt"
+        android:textColor="@color/black"
         android:layout_centerHorizontal="true"
-        android:hint="Podaj nowe słowo" />
+        android:hint="Podaj nowe słowo"
+        android:textColorHint="@color/black"
+        />
 
     <TextView
         android:id="@+id/newMeaningTxt"
@@ -40,17 +49,23 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/newWordEdtTxt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:text="Znaczenie"
-        android:textSize="18sp" />
+        android:textSize="22sp"
+        android:textColor="@color/black"
+
+        />
 
     <EditText
         android:id="@+id/newMeaningEdtTxt"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/newMeaningTxt"
         android:layout_centerHorizontal="true"
-        android:hint="Podaj znaczenie słowa" />
+        android:hint="Podaj znaczenie słowa"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        />
 
     <TextView
         android:id="@+id/newSentenceTxt"
@@ -58,17 +73,21 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/newMeaningEdtTxt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:text="Przykładowe zdanie (opcjonalne)"
-        android:textSize="18sp" />
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        />
 
     <EditText
         android:id="@+id/newSentenceEdtTxt"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/newSentenceTxt"
         android:layout_centerHorizontal="true"
-        android:hint="Podaj przykładowe zdanie"/>
+        android:hint="Podaj przykładowe zdanie"
+        android:textColorHint="@color/black"
+        />
 
     <Button
         android:id="@+id/addNewWordBtn"
@@ -78,6 +97,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:onClick="addNewWord"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:backgroundTint="#2D175B"
         android:text="Dodaj słowo" />
 
     <TextView
@@ -86,11 +108,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/addNewWordBtn"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="50dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
         android:text="Komunikat"
         android:textSize="20dp"
-        android:visibility="invisible"
-        android:gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:visibility="invisible" />
 </RelativeLayout>

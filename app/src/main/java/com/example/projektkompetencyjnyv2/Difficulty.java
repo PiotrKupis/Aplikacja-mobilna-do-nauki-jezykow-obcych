@@ -19,8 +19,4 @@ public class Difficulty extends AppCompatActivity {
         startActivity(myIntent);
     }
 
-    public void mediumDifficultyBtnOnClick(View view) {
-        Intent myIntent = new Intent(getBaseContext(), BodyPartsMedium.class);
-        startActivity(myIntent);
-    }
 }

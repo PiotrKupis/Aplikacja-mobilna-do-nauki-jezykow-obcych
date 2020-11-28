@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main_screen"
     android:background="@drawable/english_background"
+    tools:context=".main_screen"
 
     >
 
@@ -14,38 +14,35 @@
         android:layout_height="55dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="550dp"
-        android:textAllCaps="false"
         android:backgroundTint="#2D175B"
-        android:textSize="20sp"
         android:elevation="20dp"
         android:onClick="register"
         android:text="Rejestracja"
-        />
+        android:textAllCaps="false"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/main_screen_login"
         android:layout_width="250dp"
         android:layout_height="55dp"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/main_screen_register"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:backgroundTint="#2D175B"
-        android:textAllCaps="false"
-        android:textSize="20sp"
         android:onClick="login"
         android:text="Zaloguj"
-        />
+        android:textAllCaps="false"
+        android:textSize="20sp" />
 
     <Button
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pomiń"
-        android:textSize="20sp"
-        android:textAllCaps="false"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:textColor="@color/white"
         android:layout_marginStart="280dp"
         android:layout_marginTop="20dp"
-        />
+        android:text="Pomiń"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 </RelativeLayout>

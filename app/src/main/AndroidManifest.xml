@@ -31,9 +31,9 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
         <activity android:name=".BodyPartsEasy" />
-        <activity android:name=".BodyPartsMedium" />
         <activity android:name=".Difficulty" />
         <activity android:name=".AfterGameStats" />
+        <activity android:name=".LoginUser"/>
         <activity
             android:name=".main_screen"
             android:label="Rejestacja">

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/blue_gradient_light"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Register">
-
+    tools:context=".LoginUser">
 
     <TextView
         android:id="@+id/loginText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rejestracja"
+        android:text="Logowanie"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
         android:textSize="30sp"
@@ -44,23 +44,11 @@
         android:textColorHint="@color/black"
         />
 
-    <EditText
-        android:id="@+id/passwordConfirmField"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/passwordField"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:hint="Potwierdź hasło"
-        android:inputType="textPassword"
-        android:textColorHint="@color/black"
-        />
-
     <Button
         android:id="@+id/registerConfirmBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/passwordConfirmField"
+        android:layout_below="@+id/passwordField"
         android:text="Potwierdź"
         android:textAllCaps="false"
         android:layout_centerHorizontal="true"
@@ -68,5 +56,7 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:onClick="signin"
         />
+
 </RelativeLayout>
