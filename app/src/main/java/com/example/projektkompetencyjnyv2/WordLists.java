@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -38,10 +39,16 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_lists);
 
+<<<<<<< Updated upstream
         //pobieranie id usera
         Intent intent = getIntent();
         userId = intent.getIntExtra(MainActivity.EXTRA_NUMBER, 0);
         userId = 1;//póki co id jest stałe (brak logowania)
+=======
+        //pobranie id użytkownika
+        CurrentUser currentUser = new CurrentUser(getApplicationContext());
+        userId=currentUser.getId();
+>>>>>>> Stashed changes
 
         //inicjalizacja list danych
         listNames = new ArrayList<>();
@@ -59,55 +66,73 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
         //tworzenie listy
         initRecyclerView();
 
-        /*
-        //trzeba bedzie wrzucić dostęp do bazy w innych wątkach
-            new Thread() {
-                public void run() {
-                            runOnUiThread(new Runnable() {
-
-                                @Override
-                                public void run() {
-                                    //pobieranie z bazy
-                                    initWordLists();
-                                    //tworzenie listy
-                                    initRecyvlerView();
-                                }
-                            });
-                }
-            }.start();
-            */
     }
 
     private void initWordLists() {
-        Log.d(TAG, "initWordLists: init records");
 
+        Log.d(TAG, "initWordLists: inicializacja wpisów");
+
+<<<<<<< Updated upstream
         int listId, ownerId;
         ResultSet listsRS, wordsRS, learnedRS, ownerRS;
         Statement commList, commWord, commLearned, commOwner;
+=======
+        int listId,ownerId;
+        ResultSet  wordsRS, learnedRS;
+        Statement commList, commWord, commLearned,commOwner;
+>>>>>>> Stashed changes
+
+        ResultSet listsRS,ownerRS;
+        PreparedStatement listsStmt,ownerStmt;
 
         try {
             if (con != null) {
 
-                commList = con.createStatement();
-                listsRS = commList.executeQuery(
+                //pobranie informacji o listach związanych z użytkownikiem
+                listsStmt = con.prepareStatement(
                         "select name,difficulty_level,owner_id,id_wordList\n" +
+<<<<<<< Updated upstream
                                 "from Word_list as wl inner join [User_WordList] as uwl \n" +
                                 "\ton wl.id_word_list=uwl.id_wordList \n" +
                                 "where uwl.id_user=" + userId);
 
                 while (listsRS.next()) {
                     Log.d(TAG, "initWordLists: nowy element listy");
+=======
+                        "from Word_list as wl inner join [User_WordList] as uwl \n" +
+                        "\ton wl.id_word_list=uwl.id_wordList \n" +
+                        "where uwl.id_user=?");
+                listsStmt.setInt(1,userId);
+                listsRS=listsStmt.executeQuery();
+
+                ownerStmt = con.prepareStatement("select login from [User] where id_user=?");
+
+                while (listsRS.next()){
+                    Log.d(TAG, "initWordLists: dodawanie nowej listy");
+>>>>>>> Stashed changes
 
                     listNames.add(listsRS.getString("name"));
                     difficultyLevels.add(listsRS.getInt("difficulty_level"));
                     listId = listsRS.getInt("id_wordList");
                     ownerId = listsRS.getInt("owner_id");
 
+
                     Log.d(TAG, "initWordLists: pobieranie nazwy właściciela");
+<<<<<<< Updated upstream
                     commOwner = con.createStatement();
                     ownerRS = commOwner.executeQuery(
                             "select login from [User] where id_user=" + ownerId);
                     if (ownerRS.next()) {
+=======
+
+                    ownerStmt.setInt(1,userId);
+                    ownerRS=ownerStmt.executeQuery();
+
+                    //commOwner=con.createStatement();
+                   // ownerRS=commOwner.executeQuery(
+                          //  "select login from [User] where id_user="+ownerId);
+                    if(ownerRS.next()) {
+>>>>>>> Stashed changes
                         owners.add(ownerRS.getString("login"));
                         Log.d(TAG, "initWordLists: " + ownerRS.getString("login"));
                     } else
