@@ -120,7 +120,7 @@ public class AddNewWord extends AppCompatActivity {
                 stmt.close();
 
                 //pobieranie id nowego słowa
-                Log.d(TAG, "addNewWord: pobiernaie id nowego słowa");
+                Log.d(TAG, "addNewWord: pobieranie id nowego słowa");
                 stmt = con.prepareStatement("\n" +
                         "select id_word " +
                         "from word " +

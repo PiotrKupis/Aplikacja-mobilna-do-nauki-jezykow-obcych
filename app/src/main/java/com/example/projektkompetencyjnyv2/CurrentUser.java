@@ -51,4 +51,22 @@ public class CurrentUser extends Application {
     public String getlogin() {
         return  pref.getString("login", null);
     }
+
+    public String getCurrentListName() {
+        return  pref.getString("currentListName", null);
+    }
+    public void setCurrentListName(String currentListName)
+    {
+        editor.putString("currentListName", currentListName);
+        editor.apply();
+    }
+
+    public String getCurrentListOwner() {
+        return  pref.getString("currentListOwner", null);
+    }
+    public void setCurrentListOwner(String currentListOwner)
+    {
+        editor.putString("currentListOwner", currentListOwner);
+        editor.apply();
+    }
 }

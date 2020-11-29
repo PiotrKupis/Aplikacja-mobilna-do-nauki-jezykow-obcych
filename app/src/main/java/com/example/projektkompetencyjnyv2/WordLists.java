@@ -24,6 +24,7 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
     private static final String TAG = "WordLists";
 
     private int userId;
+    private CurrentUser currentUser;
     private ConnectionClass connectionClass;
     private Connection con;
 
@@ -39,18 +40,9 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_lists);
 
-<<<<<<< Updated upstream
-        //pobieranie id usera
-        Intent intent = getIntent();
-        userId = intent.getIntExtra(MainActivity.EXTRA_NUMBER, 0);
-        userId = 1;//póki co id jest stałe (brak logowania)
-=======
-        //pobranie id użytkownika
-        CurrentUser currentUser = new CurrentUser(getApplicationContext());
+        currentUser = new CurrentUser(getApplicationContext());
         userId=currentUser.getId();
->>>>>>> Stashed changes
 
-        //inicjalizacja list danych
         listNames = new ArrayList<>();
         difficultyLevels = new ArrayList<>();
         wordQuantities = new ArrayList<>();
@@ -61,55 +53,51 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
         connectionClass = new ConnectionClass();
         con = connectionClass.CONN();
 
-        //pobieranie z bazy
         initWordLists();
-        //tworzenie listy
         initRecyclerView();
-
     }
 
     private void initWordLists() {
 
         Log.d(TAG, "initWordLists: inicializacja wpisów");
-
-<<<<<<< Updated upstream
         int listId, ownerId;
-        ResultSet listsRS, wordsRS, learnedRS, ownerRS;
-        Statement commList, commWord, commLearned, commOwner;
-=======
-        int listId,ownerId;
-        ResultSet  wordsRS, learnedRS;
-        Statement commList, commWord, commLearned,commOwner;
->>>>>>> Stashed changes
-
-        ResultSet listsRS,ownerRS;
-        PreparedStatement listsStmt,ownerStmt;
+        ResultSet listsRS=null,ownerRS=null,wordsRS=null,learnedRS=null;
+        PreparedStatement listsStmt,ownerStmt,wordsStmt,learnedStmt;
 
         try {
             if (con != null) {
 
                 //pobranie informacji o listach związanych z użytkownikiem
                 listsStmt = con.prepareStatement(
-                        "select name,difficulty_level,owner_id,id_wordList\n" +
-<<<<<<< Updated upstream
-                                "from Word_list as wl inner join [User_WordList] as uwl \n" +
-                                "\ton wl.id_word_list=uwl.id_wordList \n" +
-                                "where uwl.id_user=" + userId);
+                        "select name, difficulty_level, owner_id, id_wordList\n" +
+                            "from Word_list as wl inner join [User_WordList] as uwl \n" +
+                            "\ton wl.id_word_list=uwl.id_wordList \n" +
+                            "where uwl.id_user=?");
 
-                while (listsRS.next()) {
-                    Log.d(TAG, "initWordLists: nowy element listy");
-=======
-                        "from Word_list as wl inner join [User_WordList] as uwl \n" +
-                        "\ton wl.id_word_list=uwl.id_wordList \n" +
-                        "where uwl.id_user=?");
                 listsStmt.setInt(1,userId);
-                listsRS=listsStmt.executeQuery();
+                listsRS = listsStmt.executeQuery();
 
-                ownerStmt = con.prepareStatement("select login from [User] where id_user=?");
+
+                //prepared statements, początek:
+                ownerStmt=con.prepareStatement("select login from [User] where id_user=?");
+
+                wordsStmt=con.prepareStatement("" +
+                        "select count(id_progress) as wordsQuantity\n" +
+                        "from progress \n" +
+                        "where id_list=? \n" +
+                        "group by id_list");
+
+                learnedStmt=con.prepareStatement("" +
+                        "select count(id_progress) as learnedQuantity\n" +
+                        "from progress \n" +
+                        "where id_list=? and learned=1\n" +
+                        "group by id_list");
+
+                //prepared statements, koniec:
+
 
                 while (listsRS.next()){
-                    Log.d(TAG, "initWordLists: dodawanie nowej listy");
->>>>>>> Stashed changes
+                    Log.d(TAG, "initWordLists: pobieranie informacji o liście");
 
                     listNames.add(listsRS.getString("name"));
                     difficultyLevels.add(listsRS.getInt("difficulty_level"));
@@ -117,54 +105,53 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
                     ownerId = listsRS.getInt("owner_id");
 
 
-                    Log.d(TAG, "initWordLists: pobieranie nazwy właściciela");
-<<<<<<< Updated upstream
-                    commOwner = con.createStatement();
-                    ownerRS = commOwner.executeQuery(
-                            "select login from [User] where id_user=" + ownerId);
-                    if (ownerRS.next()) {
-=======
-
-                    ownerStmt.setInt(1,userId);
+                    //pobieranie loginu właściciela listy
+                    ownerStmt.setInt(1,ownerId);
                     ownerRS=ownerStmt.executeQuery();
 
-                    //commOwner=con.createStatement();
-                   // ownerRS=commOwner.executeQuery(
-                          //  "select login from [User] where id_user="+ownerId);
                     if(ownerRS.next()) {
->>>>>>> Stashed changes
                         owners.add(ownerRS.getString("login"));
-                        Log.d(TAG, "initWordLists: " + ownerRS.getString("login"));
+                        Log.d(TAG, "initWordLists: login właściciela listy: " + ownerRS.getString("login"));
                     } else
                         owners.add("-----");
 
-                    Log.d(TAG, "initWordLists: liczba słów");
-                    commWord = con.createStatement();
-                    wordsRS = commWord.executeQuery(
-                            "select count(id_progress) as wordsQuantity\n" +
-                                    "from progress \n" +
-                                    "where id_list=" + listId + "\n" +
-                                    "group by id_list");
+
+                    //pobieranie liczby wszystkich słów oraz nauczonych listy
+                    Log.d(TAG, "initWordLists: pobieranie liczby słów w danej liście");
+                    wordsStmt.setInt(1,listId);
+                    wordsRS=wordsStmt.executeQuery();
 
                     if (wordsRS.next()) {
                         wordQuantities.add(wordsRS.getInt("wordsQuantity"));
 
-                        Log.d(TAG, "initWordLists: liczba nauczonych");
-                        commLearned = con.createStatement();
-                        learnedRS = commLearned.executeQuery(
-                                "select count(id_progress) as learnedQuantity\n" +
-                                        "from progress \n" +
-                                        "where id_list=" + listId + " and learned=1\n" +
-                                        "group by id_list");
+                        Log.d(TAG, "initWordLists: pobieranie liczby nauczonych słów w danej liście");
+                        learnedStmt.setInt(1,listId);
+                        learnedRS=learnedStmt.executeQuery();
+
                         if (learnedRS.next())
                             learnedQuantities.add(learnedRS.getInt("learnedQuantity"));
                         else
                             learnedQuantities.add(0);
-                    } else {
+                    }
+                    else {
                         wordQuantities.add(0);
                         learnedQuantities.add(0);
                     }
                 }
+                listsRS.close();
+                listsStmt.close();
+
+                if(ownerRS!=null)
+                    ownerRS.close();
+                ownerStmt.close();
+
+                if(wordsRS!=null)
+                    wordsRS.close();
+                wordsStmt.close();
+
+                if(learnedRS!=null)
+                    learnedRS.close();
+                learnedStmt.close();
             } else {
                 Toast.makeText(this, "Błąd połączenia z bazą", Toast.LENGTH_LONG).show();
             }
@@ -174,7 +161,7 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
     }
 
     public void initRecyclerView() {
-        Log.d(TAG, "initRecyvlerView: init recyclerview");
+        Log.d(TAG, "initRecyvlerView: inicjalizacja recyclerview");
 
         listsRecView = findViewById(R.id.listsRecView);
         WordListsAdapter adapter = new WordListsAdapter(this, listNames, difficultyLevels, wordQuantities, learnedQuantities, owners);
@@ -194,10 +181,10 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
 
         switch (item.getItemId()) {
             case R.id.searchList:
-                Toast.makeText(this, "szukaj", Toast.LENGTH_SHORT).show();
+                //dodanie przejscia do okna z lista publicznymi
+                Toast.makeText(this, "Przejście do okna z listami publicznymi", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.createList:
-
                 Intent intent = new Intent(this, CreateNewList.class);
                 intent.putExtra(MainActivity.EXTRA_NUMBER, userId);
                 startActivity(intent);

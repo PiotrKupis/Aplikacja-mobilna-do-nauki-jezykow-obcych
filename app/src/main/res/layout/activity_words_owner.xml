@@ -7,12 +7,23 @@
     android:background="#F2F2FB"
     tools:context=".Words">
 
-    <TextView
-        android:id="@+id/listIdTxt"
+    <Button
+        android:id="@+id/addNewWordBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:onClick="moveToAddingNewWord"
+        android:text="Dodaj słowo do listy"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/listIdTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addNewWordBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:text="Słowa w podanej liście" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -27,6 +38,8 @@
         android:paddingTop="10dp"
         android:paddingEnd="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+
         />
 
 

@@ -1,5 +1,4 @@
 package com.example.projektkompetencyjnyv2;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -26,9 +25,11 @@ import java.util.List;
 public class CreateNewList extends AppCompatActivity{
 
     private static final String TAG = "CreateNewList";
+
     private ConnectionClass connectionClass;
     private Connection con;
     private int userId;
+    private CurrentUser currentUser;
 
     private EditText listNameEdtTxt;
     private RatingBar listDifficultyRB;
@@ -44,8 +45,8 @@ public class CreateNewList extends AppCompatActivity{
         connectionClass=new ConnectionClass();
         con=connectionClass.CONN();
 
-        Intent intent=getIntent();
-        userId = intent.getIntExtra(MainActivity.EXTRA_NUMBER,0);
+        currentUser = new CurrentUser(getApplicationContext());
+        userId=currentUser.getId();
 
         initLayout();
         initVariables();
@@ -65,7 +66,7 @@ public class CreateNewList extends AppCompatActivity{
         List<String> languages;
         ArrayAdapter<CharSequence> privacyAdapter;
         ResultSet languageRS;
-        Statement commLanguage;
+        PreparedStatement languageStmt;
 
         privacySpinner=findViewById(R.id.privacySpinner);
         privacyAdapter=ArrayAdapter.createFromResource(this,R.array.listPrivacy, android.R.layout.simple_spinner_item);
@@ -75,13 +76,17 @@ public class CreateNewList extends AppCompatActivity{
         languageSpinner=findViewById(R.id.languageSpinner);
         languages=new ArrayList<>();
 
+        //pobieranie dostępnych języków z bazy
         try {
-            commLanguage = con.createStatement();
-            languageRS = commLanguage.executeQuery("select language from language");
+            languageStmt = con.prepareStatement("select language from language");
+            languageRS = languageStmt.executeQuery();
 
             while (languageRS.next()){
                 languages.add(languageRS.getString("language"));
             }
+
+            languageRS.close();
+            languageStmt.close();
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
@@ -96,33 +101,41 @@ public class CreateNewList extends AppCompatActivity{
         String language,privacy,name;
         int difficultyLevel,languageId,isPublic,listId;
         ResultSet listNameRS,languageIdRs,listIdRS;
-        Statement commListName,commLanguageId,commListId;
-        PreparedStatement commCreateList;
+        PreparedStatement createListStmt,listNameStmt,languageIdStmt,listIdStmt;
 
         try {
             name=listNameEdtTxt.getText().toString();
 
             //sprawdzenie czy użytkownik nie stworzył już wcześniej listy o tej samej nazwie
-            commListName = con.createStatement();
-            listNameRS = commListName.executeQuery("\n" +
+            listNameStmt=con.prepareStatement("" +
                     "select *\n" +
                     "from Word_list\n" +
-                    "where owner_id="+userId+" and name='"+name+"'");
+                    "where owner_id=? and name=?");
+            listNameStmt.setInt(1,userId);
+            listNameStmt.setString(2,name);
+            listNameRS=listNameStmt.executeQuery();
 
             if(!listNameRS.next() && name.length()!=0){
+
+                listNameRS.close();
+                listNameStmt.close();
 
                 privacy=privacySpinner.getSelectedItem().toString();
                 language=languageSpinner.getSelectedItem().toString();;
                 difficultyLevel=(int)listDifficultyRB.getRating();
 
                 //pobranie id wybranego języka
-                commLanguageId = con.createStatement();
-                languageIdRs = commLanguageId.executeQuery("select id_language\n" +
+                languageIdStmt=con.prepareStatement("" +
+                        "select id_language\n" +
                         "from language\n" +
-                        "where language='"+language+"'");
+                        "where language=?");
+                languageIdStmt.setString(1,language);
+                languageIdRs=languageIdStmt.executeQuery();
 
                 if(languageIdRs.next()){
                     languageId=languageIdRs.getInt("id_language");
+                    languageIdRs.close();
+                    languageIdStmt.close();
 
                     //ustawienie prywatności listy
                     if(privacy.equals("prywatna"))
@@ -131,24 +144,39 @@ public class CreateNewList extends AppCompatActivity{
                         isPublic=1;
 
                     //dodanie listy do bazy
-                    commCreateList = con.prepareStatement("" +
+                    createListStmt = con.prepareStatement("" +
                             "insert into Word_list " +
-                            "values ('"+name+"',"+difficultyLevel+","+userId+","+languageId+","+isPublic+")");
-                    commCreateList.executeUpdate();
+                            "values (?,?,?,?,?)");
+                    createListStmt.setString(1,name);
+                    createListStmt.setInt(2,difficultyLevel);
+                    createListStmt.setInt(3,userId);
+                    createListStmt.setInt(4,languageId);
+                    createListStmt.setInt(5,isPublic);
+                    createListStmt.executeUpdate();
+                    createListStmt.close();
 
                     //pobranie id utworzonej listy
-                    commListId = con.createStatement();
-                    listIdRS = commListId.executeQuery("" +
+                    listIdStmt=con.prepareStatement("" +
                             "select id_word_list\n" +
                             "from Word_list\n" +
-                            "where owner_id="+userId+" and name='"+name+"'");
+                            "where owner_id=? and name=?");
+                    listIdStmt.setInt(1,userId);
+                    listIdStmt.setString(2,name);
+                    listIdRS=listIdStmt.executeQuery();
 
                     if(listIdRS.next()){
                         listId=listIdRS.getInt("id_word_list");
 
-                        commCreateList = con.prepareStatement("" +
-                                "insert into [User_WordList] values ("+listId+","+userId+")");
-                        commCreateList.executeUpdate();
+                        listIdRS.close();
+                        listIdStmt.close();
+
+                        createListStmt=con.prepareStatement("" +
+                                "insert into [User_WordList] " +
+                                "values (?,?)");
+                        createListStmt.setInt(1,listId);
+                        createListStmt.setInt(2,userId);
+                        createListStmt.executeUpdate();
+                        createListStmt.close();
 
                         newListMessage.setText("Lista została utworzona");
                         newListMessage.setTextColor(getResources().getColor(R.color.green));

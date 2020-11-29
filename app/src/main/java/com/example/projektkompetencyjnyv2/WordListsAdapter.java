@@ -34,9 +34,8 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
     private ArrayList<Integer> learnedQuantities;
     private ArrayList<String> owners;
     private Context mContext;
-    //tymczasowe id użytkownika
-    //TODO dodać przesyłanie id użytkownika
-    private int userId = 1;
+    private CurrentUser currentUser;
+    private int userId;
 
     public WordListsAdapter(Context mContext, ArrayList<String> listNames, ArrayList<Integer> difficultyLevels, ArrayList<Integer> wordQuantities, ArrayList<Integer> learnedQuantities, ArrayList<String> owners) {
         this.listNames = listNames;
@@ -45,6 +44,9 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
         this.wordQuantities = wordQuantities;
         this.learnedQuantities = learnedQuantities;
         this.owners = owners;
+
+        currentUser = new CurrentUser(mContext.getApplicationContext());
+        userId=currentUser.getId();
     }
 
     @NonNull
@@ -56,38 +58,27 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         Log.d(TAG, "onBindViewHolder: called");
 
         holder.listNameBtn.setText(listNames.get(position));
         holder.difficultyRB.setRating(difficultyLevels.get(position));
-        holder.progressBar.setProgress(learnedQuantities.get(position));
-        holder.progressBar.setMax(wordQuantities.get(position));
-        String progressTxt = learnedQuantities.get(position) + "/" + wordQuantities.get(position);
-        holder.progressTxt.setText(progressTxt);
-        Log.d(TAG, owners.get(position));
         holder.ownerTxt.setText("Utworzone przez: " + owners.get(position));
 
-        holder.listLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on: " + listNames.get(position));
-                Toast.makeText(mContext, listNames.get(position), Toast.LENGTH_SHORT).show();
+        holder.progressBar.setProgress(learnedQuantities.get(position));
+        holder.progressBar.setMax(wordQuantities.get(position));
 
-                Intent intent = new Intent(mContext, Words.class);
-                intent.putExtra("listName", listNames.get(position));
-                intent.putExtra("owner", owners.get(position));
-                mContext.startActivity(intent);
-            }
-        });
+        String progressTxt = learnedQuantities.get(position) + "/" + wordQuantities.get(position);
+        holder.progressTxt.setText(progressTxt);
 
         holder.listNameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "cliecked button", Toast.LENGTH_SHORT).show();
+
+                currentUser.setCurrentListName(listNames.get(position));
+                currentUser.setCurrentListOwner(owners.get(position));
 
                 Intent intent = new Intent(mContext, Words.class);
-                intent.putExtra(MainActivity.EXTRA_TEXT, listNames.get(position));
-                intent.putExtra(MainActivity.EXTRA_TEXT2, owners.get(position));
                 mContext.startActivity(intent);
             }
         });
@@ -139,7 +130,7 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
         public boolean onMenuItemClick(MenuItem item) {
 
             if (item.getItemId() == R.id.deleteList) {
-                Log.d(TAG, "onMenuItemClick: wybrano usuwanie" + getAdapterPosition());
+                Log.d(TAG, "onMenuItemClick: usuwanie listy: " + getAdapterPosition());
                 removeListItem(getAdapterPosition());
                 return true;
             }
@@ -185,9 +176,7 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
                             "delete\n" +
                             "from Word_list\n" +
                             "where id_word_list=?");
-
                     stmt.setInt(1, listId);
-                    stmt.executeUpdate();
                 } else {
                     //usuwanie z list użytkownika
                     Log.d(TAG, "removeListItem: usuwanie powiązania użytkownika z listą");
@@ -197,13 +186,12 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
                             "delete\n" +
                             "from [User_WordList]\n" +
                             "where id_wordList=? AND id_user=?");
-
                     stmt.setInt(1, listId);
                     stmt.setInt(2, userId);
-                    stmt.executeUpdate();
                 }
+                stmt.executeUpdate();
 
-                //usunięcie z listy w aplikacji
+                //usunięcie z listy z widoku aplikacji
                 listNames.remove(position);
                 difficultyLevels.remove(position);
                 wordQuantities.remove(position);
