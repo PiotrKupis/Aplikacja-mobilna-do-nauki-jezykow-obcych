@@ -21,12 +21,13 @@ public class BodyPartsEasy extends AppCompatActivity {
     private ConnectionClass connectionClass;
     private Connection con;
 
+    private ArrayList<Integer> wordsIds;
     private ArrayList<String> wordsEnglish;
     private ArrayList<String> wordsPolish;
 
     private void setConnection() {
         Intent intent = getIntent();
-        userId = intent.getIntExtra(MainActivity.EXTRA_NUMBER,0);
+        userId = intent.getIntExtra(MainActivity.EXTRA_NUMBER, 0);
         userId = 1;//póki co id jest stałe (brak logowania)
 
         //inicjalizacja połaczenia się z bazą
@@ -37,14 +38,16 @@ public class BodyPartsEasy extends AppCompatActivity {
     private int counter = 0;
     private int pointsCounter = 0;
     private int roundCounter = 1;
+    private int id_word;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_easy);
 
         setConnection();
-
         getWords();
+        getProgress();
 
         TextView txt = (TextView) findViewById(R.id.word);
         txt.setText(wordsPolish.get(0));
@@ -53,15 +56,17 @@ public class BodyPartsEasy extends AppCompatActivity {
     private void getWords() {
         wordsPolish = new ArrayList<>();
         wordsEnglish = new ArrayList<>();
+        wordsIds = new ArrayList<>();
         ResultSet words;
         Statement commList;
         try {
-            if(con != null) {
+            if (con != null) {
                 commList = con.createStatement();
                 words = commList.executeQuery(
                         "select * from Word"
                 );
-                while(words.next()) {
+                while (words.next()) {
+                    wordsIds.add(words.getInt("id_word"));
                     wordsEnglish.add(words.getString("word"));
                     wordsPolish.add(words.getString("meaning"));
                 }
@@ -71,8 +76,30 @@ public class BodyPartsEasy extends AppCompatActivity {
         }
     }
 
+    private ArrayList<Integer> progressValues;
+
+    public void getProgress() {
+        //id_word = wordsIds.get(counter);
+        progressValues = new ArrayList<>();
+        try {
+            if (con != null) {
+                Statement commList;
+                commList = con.createStatement();
+                ResultSet progress = commList.executeQuery(
+                        "select * from Progress where id_user = " + userId
+                                //" and id_word = " + id_word
+                );
+                while (progress.next()) {
+                    progressValues.add(progress.getInt("progress"));
+                }
+                System.out.println(progress);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
     @SuppressLint("SetTextI18n")
-    public void OKBtnClick(View view) throws SQLException, ClassNotFoundException {
+    public void OKBtnClick(View view) {
         TextView txt = (TextView) findViewById(R.id.word);
         EditText answer = (EditText) findViewById(R.id.answer);
         TextView roundCounterView = (TextView) findViewById(R.id.roundCounter);
@@ -83,15 +110,38 @@ public class BodyPartsEasy extends AppCompatActivity {
         answer.getText().clear();
         answerStr = wordsEnglish.get(counter);
 
-        if(answerStr.equals(guessStr)) {
+        int progress = progressValues.get(counter);
+
+        if (answerStr.equals(guessStr)) {
             isAnswerCorrect.setText("Odpowiedź poprawna!");
+            progress++;
             pointsCounter++;
             pointsCounterView.setText(pointsCounter + "pkt.");
+
         } else {
+            if (progress > 0) {
+                progress--;
+            }
+
+
             isAnswerCorrect.setText("Błąd! Poprawna odpowiedź: " + wordsEnglish.get(counter));
         }
         roundCounterView.setText(roundCounter + "/10");
+        try {
+            if (con != null) {
+                Statement commList;
+                commList = con.createStatement();
 
+                commList.executeUpdate(
+                        "update Progress set progress = "
+                                + progress +
+                                " where id_word = " + wordsIds.get(counter).toString()
+                );
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         if (roundCounter == 11) {
             endGameStats(view);
             counter = 0;
@@ -99,7 +149,7 @@ public class BodyPartsEasy extends AppCompatActivity {
             pointsCounter = 0;
             return;
         }
-        
+
         roundCounter++;
         counter++;
         txt.setText(wordsPolish.get(counter));

@@ -23,18 +23,13 @@ public class ConnectionClass {
 
         try {
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            ConnURL = "jdbc:jtds:sqlserver://" + ip + "/" + db+ ";user=" + un + ";password=" + password + ";";
+            ConnURL = "jdbc:jtds:sqlserver://" + ip + "/" + db + ";user=" + un + ";password=" + password + ";";
             conn = DriverManager.getConnection(ConnURL);
-        }catch (SQLException se)
-        {
+        } catch (SQLException se) {
             Log.e("error here 1 : ", se.getMessage());
-        }
-        catch (ClassNotFoundException e)
-        {
+        } catch (ClassNotFoundException e) {
             Log.e("error here 2 : ", e.getMessage());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Log.e("error here 3 : ", e.getMessage());
         }
 

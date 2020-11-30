@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjektKompetencyjnyV2"
         android:windowSoftInputMode="adjustPan|stateHidden">
+        <activity android:name=".GameWithSentence"></activity>
         <activity
             android:name=".AddNewWord"
             android:parentActivityName=".Words" />
@@ -33,7 +34,7 @@
         <activity android:name=".BodyPartsEasy" />
         <activity android:name=".Difficulty" />
         <activity android:name=".AfterGameStats" />
-        <activity android:name=".LoginUser"/>
+        <activity android:name=".LoginUser" />
         <activity
             android:name=".main_screen"
             android:label="Rejestacja">

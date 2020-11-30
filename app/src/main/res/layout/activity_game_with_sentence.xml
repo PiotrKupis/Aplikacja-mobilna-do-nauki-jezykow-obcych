@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameWithSentence">
+
+
+    <TextView
+        android:id="@+id/sentenceTxtPolish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/poppins_medium"
+        android:paddingTop="80dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/sentenceTxtEnglish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/poppins_medium"
+        android:paddingTop="80dp"
+        android:text=""
+        android:layout_below="@+id/sentenceTxtPolish"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        />
+    <TextView
+        android:id="@+id/answerCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/poppins_medium"
+        android:paddingTop="80dp"
+        android:text=""
+        android:layout_below="@+id/sentenceTxtEnglish"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        />
+
+    <LinearLayout
+        android:id="@+id/wordsLinearLayoutFirstLine"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/answerCheck"
+        android:layout_marginTop="100dp"
+        android:orientation="horizontal"
+
+        />
+
+    <LinearLayout
+        android:id="@+id/wordsLinearLayoutSecondLine"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/wordsLinearLayoutFirstLine"
+        android:orientation="horizontal"
+
+        />
+
+    <LinearLayout
+        android:id="@+id/wordsLinearLayoutThirdLine"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/wordsLinearLayoutSecondLine"
+        android:orientation="horizontal"
+
+        />
+</RelativeLayout>

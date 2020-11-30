@@ -16,7 +16,6 @@ import java.sql.Statement;
 import java.util.Arrays;
 
 public class Register extends AppCompatActivity {
-    private ConnectionClass connectionClass;
     private Connection con;
     private int correctdata;
     private String password;
@@ -24,14 +23,14 @@ public class Register extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
         Log.d(null, "uruchamiamy rejestacje");
         // connect with data base
-        connectionClass = new ConnectionClass();
+        ConnectionClass connectionClass = new ConnectionClass();
         con = connectionClass.CONN();
         Button button = findViewById(R.id.registerConfirmBtn);
         button.setOnClickListener(new View.OnClickListener() {
@@ -60,10 +59,10 @@ public class Register extends AppCompatActivity {
                             //TextInputLayout textInputLayoutpassword1 = ( TextInputLayout) findViewById(R.id.textInputLayout6);
                             //TextInputEditText textInputEditTextpassword = findViewById(R.id.password);
                             EditText passwordText = (EditText) findViewById(R.id.passwordFieldReg);
-                            EditText passworConfirmText = findViewById(R.id.passwordConfirmField);
+                            EditText passwordConfirmText = findViewById(R.id.passwordConfirmField);
                             Log.d(null, String.valueOf(passwordText.getText()));
-                            Log.d(null, String.valueOf(passworConfirmText.getText()));
-                            if (String.valueOf(passwordText.getText()).equals(String.valueOf(passworConfirmText.getText()))) {
+                            Log.d(null, String.valueOf(passwordConfirmText.getText()));
+                            if (String.valueOf(passwordText.getText()).equals(String.valueOf(passwordConfirmText.getText()))) {
                                 password = String.valueOf(passwordText.getText());
                                 passwordText.setError("");
                             } else {

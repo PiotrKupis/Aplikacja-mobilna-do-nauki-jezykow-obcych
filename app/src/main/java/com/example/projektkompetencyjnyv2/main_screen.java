@@ -12,8 +12,8 @@ public class main_screen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.hide();
         CurrentUser currentUser = new CurrentUser(getApplicationContext());
 
         if (currentUser.getId() != 0) {

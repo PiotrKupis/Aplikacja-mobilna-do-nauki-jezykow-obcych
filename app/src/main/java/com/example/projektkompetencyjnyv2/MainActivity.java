@@ -83,4 +83,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(myIntent);
     }
 
+    public void plantsClick(View view) {
+        Intent myIntent = new Intent(getBaseContext(), GameWithSentence.class);
+        startActivity(myIntent);
+    }
 }

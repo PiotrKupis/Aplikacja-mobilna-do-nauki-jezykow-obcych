@@ -19,7 +19,9 @@
         android:layout_height="20dp"
         android:id="@+id/wordTxt"
         android:text="window"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,15 +29,19 @@
         android:id="@+id/meaningTxt"
         android:text="okno"
         android:layout_below="@+id/wordTxt"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+
+        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:id="@+id/sentenceTxt"
+        android:id="@+id/sentenceTxtPolish"
         android:text="Close the window"
         android:layout_below="@+id/meaningTxt"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+
+        />
 
 
 </RelativeLayout>

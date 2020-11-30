@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/poppins_medium"
-        android:paddingTop="50dp"
+        android:paddingTop="80dp"
         android:text=""
         android:textColor="@color/black"
         android:textSize="30sp" />
@@ -47,7 +47,7 @@
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
         android:layout_marginStart="300dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="45dp"
         />
     <TextView
         android:id="@+id/pointsCouter"

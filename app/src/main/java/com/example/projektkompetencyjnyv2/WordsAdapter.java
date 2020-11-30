@@ -68,7 +68,7 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.wordsViewHol
             super(itemView);
             wordTxt = itemView.findViewById(R.id.wordTxt);
             meaningTxt = itemView.findViewById(R.id.meaningTxt);
-            sentenceTxt = itemView.findViewById(R.id.sentenceTxt);
+            sentenceTxt = itemView.findViewById(R.id.sentenceTxtPolish);
             wordLayout = itemView.findViewById(R.id.wordsLayout);
         }
     }

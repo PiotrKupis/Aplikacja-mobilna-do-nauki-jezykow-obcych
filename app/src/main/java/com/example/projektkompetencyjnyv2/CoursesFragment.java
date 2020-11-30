@@ -16,4 +16,5 @@ public class CoursesFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_courses, container,false);
     }
 
+
 }
