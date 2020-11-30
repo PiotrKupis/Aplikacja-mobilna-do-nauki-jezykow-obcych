@@ -60,6 +60,7 @@ public class Words extends AppCompatActivity {
         else{
             setContentView(R.layout.activity_words);
         }
+        currentUser.setCurrentListOwnerId(ownerId);
 
         initRecyclerView();
     }

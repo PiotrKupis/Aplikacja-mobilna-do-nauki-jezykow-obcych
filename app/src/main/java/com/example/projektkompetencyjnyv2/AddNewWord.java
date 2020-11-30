@@ -91,6 +91,7 @@ public class AddNewWord extends AppCompatActivity {
         meaning=newMeaningEdtTxt.getText().toString();
         exampleSentence=newSentenceEdtTxt.getText().toString();
 
+        //TODO dodać sprawdzenie czy podane słowo nie jest już w liscie
         if(word.length()==0){
             newWordMessage.setText("Pole słowo nie może być puste");
             newWordMessage.setTextColor(getResources().getColor(R.color.red));
