@@ -69,4 +69,13 @@ public class CurrentUser extends Application {
         editor.putString("currentListOwner", currentListOwner);
         editor.apply();
     }
+
+    public int getCurrentListOwnerId() {
+        return  pref.getInt("currentListOwnerId", 0);
+    }
+    public void setCurrentListOwnerId(int currentListOwnerId)
+    {
+        editor.putInt("currentListOwnerId", currentListOwnerId);
+        editor.apply();
+    }
 }
