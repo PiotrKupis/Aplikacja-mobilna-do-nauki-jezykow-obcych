@@ -1,5 +1,6 @@
 package com.example.projektkompetencyjnyv2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -84,23 +85,9 @@ public class Register extends AppCompatActivity {
                                 currentUser.setId(resultid.getInt("id_user"));
                             }
                             Log.d(null, "rejestacja udana");
-                            setContentView(R.layout.fragment_profile);
-
-                            /*
-                              File file2 = new File(getApplicationContext().getFilesDir(),"LoginPassword.txt");
-                              if(file2.exists())
-                              {
-                                  BufferedWriter writer = new BufferedWriter(new FileWriter(file2));
-                                  writer.write("");
-                                  writer.close();
-                              }
-                            if (file2.createNewFile() || file2.exists()) {
-                                BufferedWriter writer = new BufferedWriter(new FileWriter(file2));
-                                writer.write("Login:"+login+"\nPassword:"+password+"\n");
-                                writer.close();
-                                setContentView(R.layout.fragment_profile);
-                            }
-                             */
+                            
+                            Intent myIntent = new Intent(getBaseContext(), MainActivity.class);
+                            startActivity(myIntent);
                         }
                         correctdata = 0;
                     }
