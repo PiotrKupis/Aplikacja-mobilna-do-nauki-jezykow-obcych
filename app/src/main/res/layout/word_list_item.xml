@@ -3,10 +3,13 @@
     android:id="@+id/listLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
+
     android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
+    android:elevation="20dp"
+    >
 
     <Button
         android:id="@+id/listNameBtn"
@@ -20,8 +23,6 @@
         android:id="@+id/difficultyRB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/listNameBtn"
         android:clickable="false"
         android:isIndicator="true"

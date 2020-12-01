@@ -111,12 +111,13 @@ public class AddNewWord extends AppCompatActivity {
                 Log.d(TAG, "addNewWord: dodawanie słowa do listy");
                 stmt = con.prepareStatement("" +
                         "insert into [word] " +
-                        "values (?,?,?,?)");
+                        "values (?,?,?,?,?)");
 
                 stmt.setString(1,word);
                 stmt.setString(2,meaning);
                 stmt.setString(3,exampleSentence);
                 stmt.setInt(4,listId);
+                stmt.setString(5,"fdfd");
                 stmt.executeUpdate();
                 stmt.close();
 

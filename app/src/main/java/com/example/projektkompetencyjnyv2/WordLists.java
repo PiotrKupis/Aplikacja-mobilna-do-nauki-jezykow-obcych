@@ -57,6 +57,28 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
         initRecyclerView();
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setContentView(R.layout.activity_word_lists);
+
+        currentUser = new CurrentUser(getApplicationContext());
+        userId=currentUser.getId();
+
+        listNames = new ArrayList<>();
+        difficultyLevels = new ArrayList<>();
+        wordQuantities = new ArrayList<>();
+        learnedQuantities = new ArrayList<>();
+        owners = new ArrayList<>();
+
+        //inicjalizacja połaczenia się z bazą
+        connectionClass = new ConnectionClass();
+        con = connectionClass.CONN();
+
+        initWordLists();
+        initRecyclerView();
+    }
+
     private void initWordLists() {
 
         Log.d(TAG, "initWordLists: inicializacja wpisów");

@@ -65,6 +65,36 @@ public class Words extends AppCompatActivity {
         initRecyclerView();
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        currentUser = new CurrentUser(getApplicationContext());
+        listName=currentUser.getCurrentListName();
+        ownerLogin=currentUser.getCurrentListOwner();
+        userId=currentUser.getId();
+
+        words = new ArrayList<>();
+        meanings = new ArrayList<>();
+        sentences = new ArrayList<>();
+
+        connectionClass = new ConnectionClass();
+        con = connectionClass.CONN();
+
+        initWordLists();
+
+        //jeśli nie należy do użytkownika inny layout bez możliwosci dodawania słów do listy
+        if(userId==ownerId){
+            setContentView(R.layout.activity_words_owner);
+        }
+        else{
+            setContentView(R.layout.activity_words);
+        }
+        currentUser.setCurrentListOwnerId(ownerId);
+
+        initRecyclerView();
+    }
+
     private void initWordLists() {
 
         ResultSet ownerRS, wordsRS;
