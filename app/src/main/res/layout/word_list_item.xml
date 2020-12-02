@@ -3,49 +3,59 @@
     android:id="@+id/listLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    android:paddingRight="10dp"
-    android:paddingLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/rounded_panel"
     android:elevation="20dp"
-    >
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="10dp">
 
-    <Button
+    <TextView
         android:id="@+id/listNameBtn"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        android:gravity="center"
         android:text="Nazwa listy"
-        android:textAllCaps="false"
-        android:textSize="16dp" />
+        android:textColor="@color/blue_500"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <RatingBar
         android:id="@+id/difficultyRB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="-10dp"
         android:layout_toRightOf="@+id/listNameBtn"
         android:clickable="false"
         android:isIndicator="true"
         android:numStars="3"
         android:rating="2"
-        android:scaleX=".9"
-        android:scaleY=".9"
+        android:scaleX=".8"
+        android:scaleY=".8"
         android:theme="@style/RatingBar" />
 
     <TextView
+        android:id="@+id/ownerTxt"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_marginTop="-5dp"
         android:layout_below="@+id/listNameBtn"
+        android:layout_marginLeft="55dp"
         android:text="Utworzone przez: Adam"
-        android:id="@+id/ownerTxt"/>
+        android:textColor="@color/blue_500"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="260dp"
+        android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_below="@+id/ownerTxt"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="-5dp"
         android:max="100"
         android:progress="20" />
 
@@ -54,8 +64,19 @@
         android:layout_width="50dp"
         android:layout_height="30dp"
         android:layout_below="@+id/ownerTxt"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="-1dp"
         android:layout_toRightOf="@id/progressBar"
-        android:text="1/20" />
+        android:text="1/20"
+        android:textColor="@color/blue_500" />
+
+    <Button
+        android:id="@+id/listLearnBtn"
+        android:layout_width="370dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:text="Ucz się"
+        android:textAllCaps="false" />
 
 </RelativeLayout>

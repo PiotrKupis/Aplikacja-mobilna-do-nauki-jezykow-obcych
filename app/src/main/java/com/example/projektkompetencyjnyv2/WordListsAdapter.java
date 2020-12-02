@@ -71,7 +71,7 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
         String progressTxt = learnedQuantities.get(position) + "/" + wordQuantities.get(position);
         holder.progressTxt.setText(progressTxt);
 
-        holder.listNameBtn.setOnClickListener(new View.OnClickListener() {
+        holder.listLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -93,12 +93,13 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
 
         private static final String TAG = "ViewHolder";
 
-        Button listNameBtn;
+        TextView listNameBtn;
         RatingBar difficultyRB;
         ProgressBar progressBar;
         TextView progressTxt;
         RelativeLayout listLayout;
         TextView ownerTxt;
+        Button learnBtn;
 
         public ViewHolder(@NonNull View itemView) {
 
@@ -109,8 +110,17 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
             progressTxt = itemView.findViewById(R.id.progressTxt);
             listLayout = itemView.findViewById(R.id.listLayout);
             ownerTxt = itemView.findViewById(R.id.ownerTxt);
+            learnBtn=itemView.findViewById(R.id.listLearnBtn);
 
-            listNameBtn.setOnLongClickListener(this);
+            listLayout.setOnLongClickListener(this);
+
+            learnBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "onClick: naciśnięto przycisk do nauki słów");
+                    showLearnPopupMenu(v);
+                }
+            });
         }
 
         @Override
@@ -126,12 +136,87 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
             popupMenu.show();
         }
 
+        private void showLearnPopupMenu(View view) {
+            PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+            popupMenu.inflate(R.menu.list_learn_popup_menu);
+            popupMenu.setOnMenuItemClickListener(this);
+            popupMenu.show();
+        }
+
         @Override
         public boolean onMenuItemClick(MenuItem item) {
 
             if (item.getItemId() == R.id.deleteList) {
                 Log.d(TAG, "onMenuItemClick: usuwanie listy: " + getAdapterPosition());
                 removeListItem(getAdapterPosition());
+                return true;
+            }
+            else if(item.getItemId() == R.id.wordsGame || item.getItemId() == R.id.sentencesGame){
+
+                int listId;
+                ConnectionClass connectionClass;
+                Connection con;
+                ResultSet rs;
+                PreparedStatement stmt;
+
+                connectionClass = new ConnectionClass();
+                con = connectionClass.CONN();
+                try {
+                    //pobranie id listy
+                    stmt = con.prepareStatement("" +
+                            "select id_word_list \n" +
+                            "from Word_list as wl \n" +
+                            "\tinner join [User] as u on wl.owner_id=u.id_user\n" +
+                            "where name=? and login=?");
+
+                    stmt.setString(1, listNames.get(getAdapterPosition()));
+                    stmt.setString(2, owners.get(getAdapterPosition()));
+                    rs = stmt.executeQuery();
+
+                    if(rs.next()){
+
+                        listId=rs.getInt("id_word_list");
+                        //listId mozesz przesłać poprzez:
+                        /*
+                        przykład wysłania
+                        Intent intent = new Intent(this, AddNewWord.class);
+                        intent.putExtra("listName", listName);
+                        intent.putExtra("owner", ownerLogin);
+                        startActivity(intent);
+
+                        przykłąd odebrania:
+                        Intent intent=getIntent();
+                        listName = intent.getStringExtra("listName");
+                        ownerLogin = intent.getStringExtra("owner");
+
+                         */
+
+                        if(item.getItemId() == R.id.wordsGame){
+
+                            Log.d(TAG, "onMenuItemClick: przeniesienie do nauki slów"+listId);
+                            Toast.makeText(mContext, "przeniesienie do nauki slów", Toast.LENGTH_SHORT).show();
+
+                            //przeniesienie do pierwszej gry
+                            //Intent intent = new Intent(mContext, Words.class);
+                            //mContext.startActivity(intent);
+                        }
+                        else if(item.getItemId() == R.id.sentencesGame){
+
+                            Log.d(TAG, "onMenuItemClick: przeniesienie do nauki zdań"+listId);
+                            Toast.makeText(mContext, "przeniesienie do nauki zdań", Toast.LENGTH_SHORT).show();
+
+                            //przeniesienie do drugiej gry
+                            //Intent intent = new Intent(mContext, Words.class);
+                            //mContext.startActivity(intent);
+                            return true;
+                        }
+                        rs.close();
+                    }
+                    stmt.close();
+                    con.close();
+                } catch (SQLException throwable) {
+                    throwable.printStackTrace();
+                }
                 return true;
             }
             return false;
