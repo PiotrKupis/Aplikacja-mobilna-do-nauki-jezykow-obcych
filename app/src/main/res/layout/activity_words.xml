@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F2FB"
+    android:padding="10dp"
     tools:context=".Words">
 
     <TextView
@@ -12,26 +12,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Słowa w podanej liście"
-        android:fontFamily="@font/poppins_medium"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        />
+        android:layout_marginTop="15dp"
+        android:text="Słowa w wybranej liście"
+        android:textColor="@color/blue_500"
+        android:textSize="26sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wordsRecView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/listIdTxt"
-        android:layout_marginTop="20dp"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:paddingStart="0dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="10dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
+        android:layout_marginTop="20dp" />
 
 
 </RelativeLayout>

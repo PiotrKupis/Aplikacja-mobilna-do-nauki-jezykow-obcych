@@ -27,6 +27,7 @@ public class AddNewWord extends AppCompatActivity {
     private EditText newWordEdtTxt;
     private EditText newMeaningEdtTxt;
     private EditText newSentenceEdtTxt;
+    private EditText newSentenceMeaningEdtTxt;
     private TextView newWordMessage;
 
     private ConnectionClass connectionClass;
@@ -51,6 +52,7 @@ public class AddNewWord extends AppCompatActivity {
         newWordEdtTxt=findViewById(R.id.newWordEdtTxt);
         newMeaningEdtTxt=findViewById(R.id.newMeaningEdtTxt);
         newSentenceEdtTxt=findViewById(R.id.newSentenceEdtTxt);
+        newSentenceMeaningEdtTxt=findViewById(R.id.newSentenceMeaningEdtTxt);
         newWordMessage=findViewById(R.id.newWordMessage);
 
         connectionClass=new ConnectionClass();
@@ -83,17 +85,18 @@ public class AddNewWord extends AppCompatActivity {
 
     public void addNewWord(View view){
 
-        String word,meaning,exampleSentence;
+        String word,meaning,exampleSentence,exampleSentenceMeaning;
         int wordId;
         PreparedStatement stmtAddProgress;
 
         word=newWordEdtTxt.getText().toString();
         meaning=newMeaningEdtTxt.getText().toString();
         exampleSentence=newSentenceEdtTxt.getText().toString();
+        exampleSentenceMeaning=newSentenceMeaningEdtTxt.getText().toString();
 
         //TODO dodać sprawdzenie czy podane słowo nie jest już w liscie
         if(word.length()==0){
-            newWordMessage.setText("Pole słowo nie może być puste");
+            newWordMessage.setText("Pole słowa nie może być puste");
             newWordMessage.setTextColor(getResources().getColor(R.color.red));
             newWordMessage.setVisibility(View.VISIBLE);
         }
@@ -104,59 +107,86 @@ public class AddNewWord extends AppCompatActivity {
         }
         else{
             try {
-                if(exampleSentence.length()==0)
+                if(exampleSentence.length()==0){
                     exampleSentence="-";
+                    exampleSentenceMeaning="-";
+                }
 
-                //dodawanie słowa
-                Log.d(TAG, "addNewWord: dodawanie słowa do listy");
-                stmt = con.prepareStatement("" +
-                        "insert into [word] " +
-                        "values (?,?,?,?,?)");
-
-                stmt.setString(1,word);
-                stmt.setString(2,meaning);
-                stmt.setString(3,exampleSentence);
-                stmt.setInt(4,listId);
-                stmt.setString(5,"fdfd");
-                stmt.executeUpdate();
-                stmt.close();
-
-                //pobieranie id nowego słowa
-                Log.d(TAG, "addNewWord: pobieranie id nowego słowa");
+                Log.d(TAG, "addNewWord: sprawdzenie czy podane słowo już nie znajduje się w liście");
                 stmt = con.prepareStatement("\n" +
                         "select id_word " +
                         "from word " +
-                        "where word=? and meaning=? and example_sentence=? and id_list=?");
+                        "where word=? and id_list=?");
 
                 stmt.setString(1,word);
-                stmt.setString(2,meaning);
-                stmt.setString(3,exampleSentence);
-                stmt.setInt(4,listId);
+                stmt.setInt(2,listId);
                 rs=stmt.executeQuery();
 
                 if(rs.next()){
-                    wordId=rs.getInt("id_word");
+                    rs.close();
+                    stmt.close();
 
-                    //dodawnie wpisu o postepie w nauce danego słowa
-                    Log.d(TAG, "addNewWord: dodawnie postepu nowego słowa");
-                    stmtAddProgress = con.prepareStatement("" +
-                            "insert into [progress] values (?,?,?,?,?,?)");
-
-                    stmtAddProgress.setInt(1,0);
-                    stmtAddProgress.setInt(2,wordId);
-                    stmtAddProgress.setInt(3,listId);
-                    stmtAddProgress.setInt(4,ownerId);
-                    stmtAddProgress.setInt(5,0);
-                    stmtAddProgress.setInt(6,0);
-                    stmtAddProgress.executeUpdate();
-                    stmtAddProgress.close();
-
-                    newWordMessage.setText("Pomyślnie dodano słowo do listy");
-                    newWordMessage.setTextColor(getResources().getColor(R.color.green));
+                    newWordMessage.setText("Podane słowo już znajduje się w wybranej liście");
+                    newWordMessage.setTextColor(getResources().getColor(R.color.red));
                     newWordMessage.setVisibility(View.VISIBLE);
                 }
-                rs.close();
-                stmt.close();
+                else if(exampleSentence.length()>0 && exampleSentenceMeaning.length()==0){
+                    newWordMessage.setText("Nie podano znaczenia przykładowego zdania");
+                    newWordMessage.setTextColor(getResources().getColor(R.color.red));
+                    newWordMessage.setVisibility(View.VISIBLE);
+                }
+                else{
+                    //dodawanie słowa
+                    Log.d(TAG, "addNewWord: dodawanie słowa do listy");
+                    stmt = con.prepareStatement("" +
+                            "insert into [word] " +
+                            "values (?,?,?,?,?)");
+
+                    stmt.setString(1,word);
+                    stmt.setString(2,meaning);
+                    stmt.setString(3,exampleSentence);
+                    stmt.setInt(4,listId);
+                    stmt.setString(5,exampleSentenceMeaning);
+                    stmt.executeUpdate();
+                    stmt.close();
+
+                    //pobieranie id nowego słowa
+                    Log.d(TAG, "addNewWord: pobieranie id nowego słowa");
+                    stmt = con.prepareStatement("\n" +
+                            "select id_word " +
+                            "from word " +
+                            "where word=? and meaning=? and example_sentence=? and id_list=?");
+
+                    stmt.setString(1,word);
+                    stmt.setString(2,meaning);
+                    stmt.setString(3,exampleSentence);
+                    stmt.setInt(4,listId);
+                    rs=stmt.executeQuery();
+
+                    if(rs.next()){
+                        wordId=rs.getInt("id_word");
+
+                        //dodawnie wpisu o postepie w nauce danego słowa
+                        Log.d(TAG, "addNewWord: dodawnie postepu nowego słowa");
+                        stmtAddProgress = con.prepareStatement("" +
+                                "insert into [progress] values (?,?,?,?,?,?)");
+
+                        stmtAddProgress.setInt(1,0);
+                        stmtAddProgress.setInt(2,wordId);
+                        stmtAddProgress.setInt(3,listId);
+                        stmtAddProgress.setInt(4,ownerId);
+                        stmtAddProgress.setInt(5,0);
+                        stmtAddProgress.setInt(6,0);
+                        stmtAddProgress.executeUpdate();
+                        stmtAddProgress.close();
+
+                        newWordMessage.setText("Pomyślnie dodano słowo do listy");
+                        newWordMessage.setTextColor(getResources().getColor(R.color.green));
+                        newWordMessage.setVisibility(View.VISIBLE);
+                    }
+                    rs.close();
+                    stmt.close();
+                }
             }catch (SQLException throwable) {
                 throwable.printStackTrace();
             }

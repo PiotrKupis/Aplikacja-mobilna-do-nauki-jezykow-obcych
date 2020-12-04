@@ -34,6 +34,7 @@ public class Words extends AppCompatActivity {
     private ArrayList<String> words;
     private ArrayList<String> meanings;
     private ArrayList<String> sentences;
+    private ArrayList<String> sentencesMeanings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class Words extends AppCompatActivity {
         words = new ArrayList<>();
         meanings = new ArrayList<>();
         sentences = new ArrayList<>();
+        sentencesMeanings=new ArrayList<>();
 
         connectionClass = new ConnectionClass();
         con = connectionClass.CONN();
@@ -77,6 +79,7 @@ public class Words extends AppCompatActivity {
         words = new ArrayList<>();
         meanings = new ArrayList<>();
         sentences = new ArrayList<>();
+        sentencesMeanings=new ArrayList<>();
 
         connectionClass = new ConnectionClass();
         con = connectionClass.CONN();
@@ -118,7 +121,7 @@ public class Words extends AppCompatActivity {
                     //pobranie słów z wybranej listy
                     Log.d(TAG, "initWordLists: pobieranie słów z listy");
                     wordsStmt=con.prepareStatement("" +
-                            "select w.word as word, w.meaning as meaning, w.example_sentence as sentence\n" +
+                            "select w.word as word, w.meaning as meaning, w.example_sentence as sentence, w.example_sentence_pl as sentenceMeaning \n" +
                             "from Word_list as wl\n" +
                             "inner join Word as w on wl.id_word_list=w.id_list\n" +
                             "where wl.owner_id=? and wl.name=?");
@@ -130,6 +133,7 @@ public class Words extends AppCompatActivity {
                         words.add(wordsRS.getString("word"));
                         meanings.add(wordsRS.getString("meaning"));
                         sentences.add(wordsRS.getString("sentence"));
+                        sentencesMeanings.add(wordsRS.getString("sentenceMeaning"));
                     }
                     ownerRS.close();
                     ownerStmt.close();
@@ -148,7 +152,7 @@ public class Words extends AppCompatActivity {
         Log.d(TAG, "initRecyclerView: inicjalizacja recyclerview words");
 
         wordsRecView = findViewById(R.id.wordsRecView);
-        WordsAdapter adapter = new WordsAdapter(this, words, meanings, sentences);
+        WordsAdapter adapter = new WordsAdapter(this, words, meanings, sentences,sentencesMeanings);
         wordsRecView.setAdapter(adapter);
         wordsRecView.setLayoutManager(new LinearLayoutManager(this));
     }

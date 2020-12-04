@@ -4,43 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F2FB"
+    android:padding="10dp"
     tools:context=".Words">
-
-    <Button
-        android:id="@+id/addNewWordBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:onClick="moveToAddingNewWord"
-        android:text="Dodaj słowo do listy"
-        android:textAllCaps="false" />
 
     <TextView
         android:id="@+id/listIdTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addNewWordBtn"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Słowa w podanej liście" />
+        android:layout_marginTop="15dp"
+        android:text="Słowa w wybranej liście"
+        android:textColor="@color/blue_500"
+        android:textSize="26sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wordsRecView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/listIdTxt"
-        android:layout_marginTop="30dp"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:paddingStart="0dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="10dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="20dp" />
 
-
-        />
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginTop="590dp"
+        android:layout_marginLeft="-65dp"
+        android:layout_toRightOf="@+id/listIdTxt"
+        android:backgroundTint="@color/blue_300"
+        android:elevation="10dp"
+        android:onClick="moveToAddingNewWord"
+        android:src="@drawable/ic_add_menu"
+        app:backgroundTint="@color/purple_500"
+        app:borderWidth="1dp"
+        app:fabSize="normal"
+        app:pressedTranslationZ="12dp"
+        app:rippleColor="@color/blue_500"
+        app:fabCustomSize="80dp"
+        app:maxImageSize="65dp"/>
 
 </RelativeLayout>

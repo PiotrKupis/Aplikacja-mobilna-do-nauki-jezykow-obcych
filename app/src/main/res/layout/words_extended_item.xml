@@ -32,6 +32,28 @@
         android:textColor="@color/blue_500"
         android:textSize="20sp" />
 
+    <TextView
+        android:id="@+id/sentenceTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/meaningTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:text="Close the window"
+        android:textColor="@color/blue_500"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/sentenceMeaningTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sentenceTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="5dp"
+        android:text="Zamknij okno"
+        android:textColor="@color/blue_500"
+        android:textSize="20sp" />
 
 
 </RelativeLayout>

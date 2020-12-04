@@ -12,10 +12,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:text="Tworzenie nowej listy"
-        android:textSize="25sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/blue_500"
+        android:textSize="26sp"
+        android:textStyle="bold"
         />
 
     <TextView
@@ -26,8 +26,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:text="Nazwa listy"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textColor="@color/blue_500"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/listNameEdtTxt"
@@ -36,7 +37,10 @@
         android:layout_below="@+id/listNameTxt"
         android:layout_centerHorizontal="true"
         android:hint="Podaj nazwę nowej listy"
-        android:textColorHint="@color/black"
+        android:textColor="@color/blue_500"
+        android:textStyle="italic"
+        android:gravity="center"
+        android:textColorHint="@color/blue_500"
         />
 
     <TextView
@@ -46,9 +50,10 @@
         android:layout_below="@+id/listNameEdtTxt"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:textColor="@color/black"
         android:text="Wybierz poziom trudności listy"
-        android:textSize="20sp" />
+        android:textColor="@color/blue_500"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
 
     <RatingBar
         android:id="@+id/listDifficultyRB"
@@ -73,8 +78,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="Wybierz język listy"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textColor="@color/blue_500"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
 
     <Spinner
         android:id="@+id/languageSpinner"
@@ -82,7 +88,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/languageSpinnerTxt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        />
 
     <TextView
         android:id="@+id/privacySpinnerTxt"
@@ -94,8 +101,9 @@
         android:layout_marginTop="15dp"
         android:layout_marginRight="10dp"
         android:text="Wybierz widoczność listy"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textColor="@color/blue_500"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
 
     <Spinner
         android:id="@+id/privacySpinner"
@@ -115,8 +123,7 @@
         android:onClick="createNewList"
         android:text="Utwórz listę"
         android:textAllCaps="false"
-        android:backgroundTint="#2D175B"
-        android:textSize="20sp"
+        android:textSize="22sp"
 
         />
 
@@ -131,7 +138,8 @@
         android:layout_marginRight="10dp"
         android:gravity="center"
         android:text="Komunikat"
-        android:textSize="20dp"
+        android:textSize="22dp"
+        android:textStyle="bold"
         android:visibility="invisible" />
 
 
