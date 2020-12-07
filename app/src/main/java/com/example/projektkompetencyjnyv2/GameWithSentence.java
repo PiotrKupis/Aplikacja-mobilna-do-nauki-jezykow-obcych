@@ -16,12 +16,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class GameWithSentence extends AppCompatActivity {
-//    private ArrayList<LinearLayout> allLayouts;
+    //    private ArrayList<LinearLayout> allLayouts;
     private int layoutCounter = 0;
 
     int clickedButtonsCounter = 0;
 
     private int userId;
+    private int listId;
     private ConnectionClass connectionClass;
     private Connection con;
 
@@ -32,6 +33,16 @@ public class GameWithSentence extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_with_sentence);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            userId = extras.getInt("userID");
+            System.out.println("ID użytkownika" + userId);
+            listId = extras.getInt("listID");
+        } else {
+            userId = 1;
+            listId = 19;
+        }
 
         setConnection();
         getSentences();
@@ -92,8 +103,8 @@ public class GameWithSentence extends AppCompatActivity {
         rowSizes[1] = Math.min(englishWordsCounter, 8);
         rowSizes[2] = englishWordsCounter;
 
-        for (int t = 0; t < 12; t+=4) {
-            for (int i = t; i < rowSizes[t/4]; i++) {
+        for (int t = 0; t < 12; t += 4) {
+            for (int i = t; i < rowSizes[t / 4]; i++) {
                 final Button button = new Button(this);
                 button.setLayoutParams(new LinearLayout.LayoutParams(265, 150));
                 button.setId(i);
@@ -105,9 +116,9 @@ public class GameWithSentence extends AppCompatActivity {
                     public void onClick(View view) {
                         sentenceTextEnglish.append(englishWords[finalI] + " ");
                         clickedButtonsCounter++;
-                        if(clickedButtonsCounter == englishWordsCounter) {
+                        if (clickedButtonsCounter == englishWordsCounter) {
                             TextView answerCheck = findViewById(R.id.answerCheck);
-                            if(sentenceTextEnglish.getText().toString().equals(sentenceEnglish.get(0))) {
+                            if (sentenceTextEnglish.getText().toString().trim().equals(sentenceEnglish.get(0))) {
                                 answerCheck.setText("Odpowiedź poprawna!");
                             } else {
                                 answerCheck.setText("Błąd");
@@ -124,6 +135,7 @@ public class GameWithSentence extends AppCompatActivity {
         }
     }
 
+
     private void getSentences() {
         sentencePolish = new ArrayList<>();
         sentenceEnglish = new ArrayList<>();
@@ -133,9 +145,11 @@ public class GameWithSentence extends AppCompatActivity {
             if (con != null) {
                 commList = con.createStatement();
                 sentences = commList.executeQuery(
-                        "SELECT * FROM word WHERE example_sentence_pl IS NOT NULL"
+                        "SELECT * FROM word WHERE example_sentence_pl != '-' " +
+                                "and id_list = " + listId
                 );
                 while (sentences.next()) {
+                    System.out.println(sentences.getString("example_sentence"));
                     sentenceEnglish.add(sentences.getString("example_sentence"));
                     sentencePolish.add(sentences.getString("example_sentence_pl"));
                 }
@@ -148,6 +162,7 @@ public class GameWithSentence extends AppCompatActivity {
     private void setConnection() {
         Intent intent = getIntent();
         userId = intent.getIntExtra(MainActivity.EXTRA_NUMBER, 0);
+
         userId = 1;//póki co id jest stałe (brak logowania)
 
         //inicjalizacja połaczenia się z bazą

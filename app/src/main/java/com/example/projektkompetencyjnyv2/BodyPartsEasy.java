@@ -20,7 +20,7 @@ public class BodyPartsEasy extends AppCompatActivity {
     private int userId;
     private ConnectionClass connectionClass;
     private Connection con;
-
+    private int listId;
     private ArrayList<Integer> wordsIds;
     private ArrayList<String> wordsEnglish;
     private ArrayList<String> wordsPolish;
@@ -31,8 +31,9 @@ public class BodyPartsEasy extends AppCompatActivity {
         //userId = 1;//póki co id jest stałe (brak logowania)
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            userId = extras.getInt("key");
-
+            userId = extras.getInt("userID");
+            System.out.println("ID użytkownika" + userId);
+            listId = extras.getInt("listID");
         } else {
             userId = 1;
         }
@@ -69,7 +70,7 @@ public class BodyPartsEasy extends AppCompatActivity {
             if (con != null) {
                 commList = con.createStatement();
                 words = commList.executeQuery(
-                        "select * from Word"
+                        "select * from Word where id_list = " + listId
                 );
                 while (words.next()) {
                     wordsIds.add(words.getInt("id_word"));
@@ -96,12 +97,13 @@ public class BodyPartsEasy extends AppCompatActivity {
                         //" and id_word = " + id_word
                 );
                 while (progress.next()) {
+
                     progressValues.add(progress.getInt("progress"));
                 }
                 System.out.println(progress);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
     }
 

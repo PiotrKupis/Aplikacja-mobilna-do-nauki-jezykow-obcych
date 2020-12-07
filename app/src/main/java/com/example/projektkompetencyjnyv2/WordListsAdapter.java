@@ -176,19 +176,20 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
 
                         listId = rs.getInt("id_word_list");
                         //listId mozesz przesłać poprzez:
-                        /*
-                        przykład wysłania
-                        Intent intent = new Intent(this, AddNewWord.class);
-                        intent.putExtra("listName", listName);
-                        intent.putExtra("owner", ownerLogin);
-                        startActivity(intent);
 
-                        przykłąd odebrania:
-                        Intent intent=getIntent();
-                        listName = intent.getStringExtra("listName");
-                        ownerLogin = intent.getStringExtra("owner");
+//                        przykład wysłania
+//                        Intent myIntent = new Intent(currentUser.getBaseContext(), BodyPartsEasy.class);
+//                        //Intent intent = new Intent(this, BodyPartsEasy.class);
+//                        myIntent.putExtra("listName", listName);
+//                        myIntent.putExtra("owner", ownerLogin);
+//                        startActivity(intent);
+//
+//                        przykłąd odebrania:
+//                        Intent intent=getIntent();
+//                        listName = intent.getStringExtra("listName");
+//                        ownerLogin = intent.getStringExtra("owner");
 
-                         */
+
 
                         if (item.getItemId() == R.id.wordsGame) {
 
@@ -196,7 +197,10 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
                             Toast.makeText(mContext, "przeniesienie do nauki slów", Toast.LENGTH_SHORT).show();
 
                             //przeniesienie do pierwszej gry
-                            Intent intent = new Intent(mContext, Words.class);
+                            Intent intent = new Intent(mContext, BodyPartsEasy.class);
+                            //TODO: UserID przekazuje 0, trzeba poprawić, żeby pobierało dobrą wartość
+                            intent.putExtra("UserID", userId);
+                            intent.putExtra("listID", listId);
                             mContext.startActivity(intent);
                         } else if (item.getItemId() == R.id.sentencesGame) {
 

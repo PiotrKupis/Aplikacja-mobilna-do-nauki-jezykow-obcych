@@ -32,8 +32,8 @@ public class LoginUser extends AppCompatActivity {
         //EditText password = findViewById(R.id.password);
         EditText passwordText = (EditText) findViewById(R.id.passwordField);
 
-        loginText.setError("");
-        passwordText.setError("");
+//        loginText.setError("");
+//        passwordText.setError("");
 
         if (loginText.getText().length() == 0) {
             loginText.setError("Wpisz login");
