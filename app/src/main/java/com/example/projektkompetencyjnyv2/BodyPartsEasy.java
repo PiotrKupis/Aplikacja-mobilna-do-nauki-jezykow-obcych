@@ -32,10 +32,11 @@ public class BodyPartsEasy extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userId = extras.getInt("userID");
-            System.out.println("ID użytkownika" + userId);
+            System.out.println("ID użytkownika: " + userId);
             listId = extras.getInt("listID");
         } else {
-            userId = 1;
+            listId = 19;
+            userId = 26;
         }
         //inicjalizacja połaczenia się z bazą
         connectionClass = new ConnectionClass();

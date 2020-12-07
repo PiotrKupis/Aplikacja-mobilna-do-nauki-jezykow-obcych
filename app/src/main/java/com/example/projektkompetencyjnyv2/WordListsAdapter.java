@@ -199,14 +199,17 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
                             //przeniesienie do pierwszej gry
                             Intent intent = new Intent(mContext, BodyPartsEasy.class);
                             //TODO: UserID przekazuje 0, trzeba poprawić, żeby pobierało dobrą wartość
-                            intent.putExtra("UserID", userId);
+                            intent.putExtra("userID", currentUser.getId());
                             intent.putExtra("listID", listId);
                             mContext.startActivity(intent);
                         } else if (item.getItemId() == R.id.sentencesGame) {
 
                             Log.d(TAG, "onMenuItemClick: przeniesienie do nauki zdań" + listId);
                             Toast.makeText(mContext, "przeniesienie do nauki zdań", Toast.LENGTH_SHORT).show();
-
+                            Intent intent = new Intent(mContext, GameWithSentence.class);
+                            intent.putExtra("userID", currentUser.getId());
+                            intent.putExtra("listID", listId);
+                            mContext.startActivity(intent);
                             //przeniesienie do drugiej gry
                             //Intent intent = new Intent(mContext, Words.class);
                             //mContext.startActivity(intent);

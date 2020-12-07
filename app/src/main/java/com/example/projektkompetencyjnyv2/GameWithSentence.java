@@ -20,12 +20,15 @@ public class GameWithSentence extends AppCompatActivity {
     private int layoutCounter = 0;
 
     int clickedButtonsCounter = 0;
-
+    LinearLayout[] allLayouts;
+    int[] rowSizes;
     private int userId;
     private int listId;
     private ConnectionClass connectionClass;
     private Connection con;
 
+    private int roundsCounter = 0;
+    TextView sentenceTextPolish;
     private ArrayList<String> sentencePolish;
     private ArrayList<String> sentenceEnglish;
 
@@ -48,10 +51,11 @@ public class GameWithSentence extends AppCompatActivity {
         getSentences();
 
         TextView sentenceTextEnglish = (TextView) findViewById(R.id.sentenceTxtEnglish);
-        TextView sentenceTextPolish = (TextView) findViewById(R.id.sentenceTxtPolish);
-        sentenceTextPolish.setText(sentencePolish.get(0));
+        sentenceTextPolish = (TextView) findViewById(R.id.sentenceTxtPolish);
 
+        initGame();
         generateButtons(sentenceTextEnglish);
+
 
 //        String[] englishWords = sentenceEnglish.get(0).split(" ");
 //        int englishWordsCounter = englishWords.length;
@@ -88,20 +92,25 @@ public class GameWithSentence extends AppCompatActivity {
 //
 //        }
     }
-
-    private void generateButtons(TextView sentenceTextEnglish) {
-        String[] englishWords = sentenceEnglish.get(0).split(" ");
-        int englishWordsCounter = englishWords.length;
-
-        LinearLayout[] allLayouts = new LinearLayout[3];
+    private void initGame() {
+        allLayouts = new LinearLayout[3];
         allLayouts[0] = findViewById(R.id.wordsLinearLayoutFirstLine);
         allLayouts[1] = findViewById(R.id.wordsLinearLayoutSecondLine);
         allLayouts[2] = findViewById(R.id.wordsLinearLayoutThirdLine);
 
-        int[] rowSizes = new int[3];
+        rowSizes = new int[3];
+
+    }
+    private void generateButtons(TextView sentenceTextEnglish) {
+        String[] englishWords = sentenceEnglish.get(roundsCounter).split(" ");
+        int englishWordsCounter = englishWords.length;
+        sentenceTextPolish.setText(sentencePolish.get(roundsCounter));
+
         rowSizes[0] = Math.min(englishWordsCounter, 4);
         rowSizes[1] = Math.min(englishWordsCounter, 8);
         rowSizes[2] = englishWordsCounter;
+
+
 
         for (int t = 0; t < 12; t += 4) {
             for (int i = t; i < rowSizes[t / 4]; i++) {
@@ -114,13 +123,16 @@ public class GameWithSentence extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if (clickedButtonsCounter == 0) sentenceTextEnglish.setText("");
                         sentenceTextEnglish.append(englishWords[finalI] + " ");
                         clickedButtonsCounter++;
                         if (clickedButtonsCounter == englishWordsCounter) {
                             TextView answerCheck = findViewById(R.id.answerCheck);
-                            if (sentenceTextEnglish.getText().toString().trim().equals(sentenceEnglish.get(0))) {
+                            if (sentenceTextEnglish.getText().toString().trim().equals(sentenceEnglish.get(roundsCounter))) {
                                 answerCheck.setText("Odpowiedź poprawna!");
+                                nextSentence(sentenceTextEnglish);
                             } else {
+                                nextSentence(sentenceTextEnglish);
                                 answerCheck.setText("Błąd");
                                 System.out.println("\n" + sentenceTextEnglish.getText());
                                 System.out.println(sentenceEnglish.get(0));
@@ -135,7 +147,19 @@ public class GameWithSentence extends AppCompatActivity {
         }
     }
 
+    private void nextSentence(TextView sentenceTextEnglish) {
+        roundsCounter++;
+        rowSizes[0] = 0;
+        rowSizes[1] = 0;
+        rowSizes[2] = 0;
 
+        allLayouts[0].removeAllViews();
+        allLayouts[1].removeAllViews();
+        allLayouts[2].removeAllViews();
+        layoutCounter = 0;
+        clickedButtonsCounter = 0;
+        generateButtons(sentenceTextEnglish);
+    }
     private void getSentences() {
         sentencePolish = new ArrayList<>();
         sentenceEnglish = new ArrayList<>();
