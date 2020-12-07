@@ -5,24 +5,14 @@
     android:background="@android:color/background_light">
 
     <Button
-        android:id="@+id/registerBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:onClick="registerBtnClick"
-        android:text="@string/rejestracja"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Listy słów"
         android:id="@+id/wordListsBtn"
+        android:layout_width="267dp"
+        android:layout_height="156dp"
         android:layout_below="@+id/registerBtn"
-        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
         android:onClick="moveToWordLists"
-        />
+        android:text="Listy słów" />
 
 
 </RelativeLayout>
