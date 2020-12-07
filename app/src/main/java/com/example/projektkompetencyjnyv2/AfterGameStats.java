@@ -19,11 +19,10 @@ public class AfterGameStats extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             int score = extras.getInt("key");
-            TextView wynik = (TextView) findViewById(R.id.wynik);
+            TextView wynik = findViewById(R.id.wynik);
             wynik.setText("" + score + " pkt.");
         }
     }
-
 
     public void backToCategories(View view) {
         Intent myIntent = new Intent(getBaseContext(), MainActivity.class);

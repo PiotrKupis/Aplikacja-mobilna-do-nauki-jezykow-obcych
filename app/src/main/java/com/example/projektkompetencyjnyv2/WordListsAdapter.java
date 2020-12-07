@@ -46,7 +46,7 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
         this.owners = owners;
 
         currentUser = new CurrentUser(mContext.getApplicationContext());
-        userId=currentUser.getId();
+        userId = currentUser.getId();
     }
 
     @NonNull
@@ -110,7 +110,7 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
             progressTxt = itemView.findViewById(R.id.progressTxt);
             listLayout = itemView.findViewById(R.id.listLayout);
             ownerTxt = itemView.findViewById(R.id.ownerTxt);
-            learnBtn=itemView.findViewById(R.id.listLearnBtn);
+            learnBtn = itemView.findViewById(R.id.listLearnBtn);
 
             listLayout.setOnLongClickListener(this);
 
@@ -150,8 +150,7 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
                 Log.d(TAG, "onMenuItemClick: usuwanie listy: " + getAdapterPosition());
                 removeListItem(getAdapterPosition());
                 return true;
-            }
-            else if(item.getItemId() == R.id.wordsGame || item.getItemId() == R.id.sentencesGame){
+            } else if (item.getItemId() == R.id.wordsGame || item.getItemId() == R.id.sentencesGame) {
 
                 int listId;
                 ConnectionClass connectionClass;
@@ -173,9 +172,9 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
                     stmt.setString(2, owners.get(getAdapterPosition()));
                     rs = stmt.executeQuery();
 
-                    if(rs.next()){
+                    if (rs.next()) {
 
-                        listId=rs.getInt("id_word_list");
+                        listId = rs.getInt("id_word_list");
                         //listId mozesz przesłać poprzez:
                         /*
                         przykład wysłania
@@ -191,18 +190,17 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
 
                          */
 
-                        if(item.getItemId() == R.id.wordsGame){
+                        if (item.getItemId() == R.id.wordsGame) {
 
-                            Log.d(TAG, "onMenuItemClick: przeniesienie do nauki slów"+listId);
+                            Log.d(TAG, "onMenuItemClick: przeniesienie do nauki slów" + listId);
                             Toast.makeText(mContext, "przeniesienie do nauki slów", Toast.LENGTH_SHORT).show();
 
                             //przeniesienie do pierwszej gry
-                            //Intent intent = new Intent(mContext, Words.class);
-                            //mContext.startActivity(intent);
-                        }
-                        else if(item.getItemId() == R.id.sentencesGame){
+                            Intent intent = new Intent(mContext, Words.class);
+                            mContext.startActivity(intent);
+                        } else if (item.getItemId() == R.id.sentencesGame) {
 
-                            Log.d(TAG, "onMenuItemClick: przeniesienie do nauki zdań"+listId);
+                            Log.d(TAG, "onMenuItemClick: przeniesienie do nauki zdań" + listId);
                             Toast.makeText(mContext, "przeniesienie do nauki zdań", Toast.LENGTH_SHORT).show();
 
                             //przeniesienie do drugiej gry

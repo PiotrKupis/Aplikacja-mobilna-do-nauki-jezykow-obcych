@@ -28,8 +28,14 @@ public class BodyPartsEasy extends AppCompatActivity {
     private void setConnection() {
         Intent intent = getIntent();
         userId = intent.getIntExtra(MainActivity.EXTRA_NUMBER, 0);
-        userId = 1;//póki co id jest stałe (brak logowania)
+        //userId = 1;//póki co id jest stałe (brak logowania)
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            userId = extras.getInt("key");
 
+        } else {
+            userId = 1;
+        }
         //inicjalizacja połaczenia się z bazą
         connectionClass = new ConnectionClass();
         con = connectionClass.CONN();
@@ -87,7 +93,7 @@ public class BodyPartsEasy extends AppCompatActivity {
                 commList = con.createStatement();
                 ResultSet progress = commList.executeQuery(
                         "select * from Progress where id_user = " + userId
-                                //" and id_word = " + id_word
+                        //" and id_word = " + id_word
                 );
                 while (progress.next()) {
                     progressValues.add(progress.getInt("progress"));
@@ -98,6 +104,7 @@ public class BodyPartsEasy extends AppCompatActivity {
             throwables.printStackTrace();
         }
     }
+
     @SuppressLint("SetTextI18n")
     public void OKBtnClick(View view) {
         TextView txt = (TextView) findViewById(R.id.word);
@@ -122,8 +129,6 @@ public class BodyPartsEasy extends AppCompatActivity {
             if (progress > 0) {
                 progress--;
             }
-
-
             isAnswerCorrect.setText("Błąd! Poprawna odpowiedź: " + wordsEnglish.get(counter));
         }
         roundCounterView.setText(roundCounter + "/10");
