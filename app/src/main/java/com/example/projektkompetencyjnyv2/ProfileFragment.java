@@ -2,6 +2,7 @@ package com.example.projektkompetencyjnyv2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,12 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Arrays;
 
 public class ProfileFragment extends Fragment {
 
@@ -24,6 +31,23 @@ public class ProfileFragment extends Fragment {
         text.setText("Login: " + currentUser.getlogin());
         TextView TextID = (TextView) view.findViewById(R.id.TextID);
         TextID.setText("ID: " + currentUser.getId());
+
+        ConnectionClass connectionClass = new ConnectionClass();
+        Connection con = connectionClass.CONN();
+        try {
+            if (con != null) {
+
+                Statement commList = con.createStatement();
+                ResultSet listsRS = commList.executeQuery(
+                        "SELECT learned_words_quantity FROM [User] WHERE id_user =" + currentUser.getId());
+                if (listsRS.next()) {
+                    TextView textlearnword = (TextView) view.findViewById(R.id.TextAmountLearnWord);
+                    textlearnword.setText("Liczba nauczonych słów " + listsRS.getInt("learned_words_quantity"));
+                }
+            }
+        } catch (SQLException throwables) {
+            Log.d(null, "Problem z połaczeniem z bazą");
+        }
         Button button = (Button) view.findViewById(R.id.buttonlogout);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,3 +61,4 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 }
+
