@@ -1,5 +1,6 @@
 package com.example.projektkompetencyjnyv2;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -40,10 +41,13 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment selectedFragment = null;
-
+                    Activity selectActitivy = null;
                     switch (item.getItemId()) {
                         case R.id.nav_home:
                             selectedFragment = new HomeFragment();
+                            break;
+                        case R.id.nav_list:
+                            selectActitivy = new WordLists();
                             break;
                         case R.id.nav_profile:
                             selectedFragment = new ProfileFragment();
@@ -51,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.nav_courses:
                             selectedFragment = new CoursesFragment();
                             break;
+                    }
+                    if(selectActitivy != null)
+                    {
+                        Intent myIntent = new Intent(getBaseContext(), WordLists.class);
+                        startActivity(myIntent);
+                        return true;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             selectedFragment).commit();
