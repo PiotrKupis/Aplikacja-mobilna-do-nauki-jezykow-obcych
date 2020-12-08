@@ -46,7 +46,17 @@
         android:layout_marginLeft="170dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Id:"
+        android:textSize="20sp" />
 
+    <TextView
+        android:id="@+id/TextAmountLearnWord"
+        android:layout_width="215dp"
+        android:layout_height="74dp"
+        android:layout_below="@+id/nameText"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="39dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Liczba nauczonych słów:"
         android:textSize="20sp" />
 
     <Button
