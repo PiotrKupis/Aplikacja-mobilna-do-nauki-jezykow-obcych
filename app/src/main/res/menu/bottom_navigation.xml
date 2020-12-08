@@ -9,6 +9,7 @@
         android:id="@+id/nav_list"
         android:icon="@drawable/ic_lists_menu"
         android:tint="@android:color/white"
+        android:onClick="movetoWordList"
         android:title="Listy" />
     <item
         android:id="@+id/nav_courses"
