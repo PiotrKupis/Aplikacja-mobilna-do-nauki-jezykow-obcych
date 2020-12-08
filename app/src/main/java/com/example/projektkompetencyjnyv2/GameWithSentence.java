@@ -16,7 +16,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class GameWithSentence extends AppCompatActivity {
-    //    private ArrayList<LinearLayout> allLayouts;
     private int layoutCounter = 0;
 
     int clickedButtonsCounter = 0;
@@ -122,17 +121,19 @@ public class GameWithSentence extends AppCompatActivity {
         }
     }
 
-//    public void endGameStats(View view) {
-//        Intent myIntent = new Intent(getBaseContext(), AfterGameStats.class);
-//        myIntent.putExtra("key", pointsCounter);
-//        startActivity(myIntent);
-//    }
+    public void endGameStats() {
+        Intent myIntent = new Intent(getBaseContext(), AfterGameStats.class);
+        myIntent.putExtra("key", scoreCounter);
+        startActivity(myIntent);
+    }
 
     private void nextSentence(TextView sentenceTextEnglish) {
         roundsCounter++;
-//        if(roundsCounter == sentencesCounter) {
-//
-//        }
+        if(roundsCounter == sentencesCounter) {
+            endGameStats();
+            return;
+        }
+
         rowSizes[0] = 0;
         rowSizes[1] = 0;
         rowSizes[2] = 0;
