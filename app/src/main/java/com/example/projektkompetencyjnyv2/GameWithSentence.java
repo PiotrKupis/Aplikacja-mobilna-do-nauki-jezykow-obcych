@@ -27,10 +27,15 @@ public class GameWithSentence extends AppCompatActivity {
     private ConnectionClass connectionClass;
     private Connection con;
 
-    private int roundsCounter = 0;
+    private int sentencesCounter;
+    private int roundsCounter;
+    private int scoreCounter;
     TextView sentenceTextPolish;
     private ArrayList<String> sentencePolish;
     private ArrayList<String> sentenceEnglish;
+
+    TextView roundScoreSentences;
+    TextView roundCounterSentences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,52 +60,23 @@ public class GameWithSentence extends AppCompatActivity {
 
         initGame();
         generateButtons(sentenceTextEnglish);
-
-
-//        String[] englishWords = sentenceEnglish.get(0).split(" ");
-//        int englishWordsCounter = englishWords.length;
-//
-//        int firstRow = Math.min(englishWordsCounter, 4);
-//        int secondRow = Math.min(englishWordsCounter, 8);
-
-//        for (int i = 0; i < firstRow; i++) {
-//            final Button button = new Button(this);
-//            button.setLayoutParams(new LinearLayout.LayoutParams(265, 150));
-//            button.setId(i);
-//            button.setText(englishWords[i]);
-//            int finalI = i;
-//            button.setOnClickListener(view -> sentenceTextEnglish.append(englishWords[finalI] + " "));
-//            layoutFirstLine.addView(button);
-//        }
-//        for (int i = 4; i < secondRow; i++) {
-//            final Button button = new Button(this);
-//            button.setLayoutParams(new LinearLayout.LayoutParams(265, 150));
-//            button.setId(i);
-//            button.setText(englishWords[i]);
-//            int finalI = i;
-//            button.setOnClickListener(view -> sentenceTextEnglish.append(englishWords[finalI] + " "));
-//            layoutSecondLine.addView(button);
-//        }
-//        for (int i = 8; i < englishWordsCounter; i++) {
-//            final Button button = new Button(this);
-//            button.setLayoutParams(new LinearLayout.LayoutParams(265, 150));
-//            button.setId(i);
-//            button.setText(englishWords[i]);
-//            int FinalI = i;
-//            button.setOnClickListener(view -> sentenceTextEnglish.append(englishWords[FinalI] + " "));
-//            layoutSecondLine.addView(button);
-//
-//        }
     }
+
     private void initGame() {
         allLayouts = new LinearLayout[3];
         allLayouts[0] = findViewById(R.id.wordsLinearLayoutFirstLine);
         allLayouts[1] = findViewById(R.id.wordsLinearLayoutSecondLine);
         allLayouts[2] = findViewById(R.id.wordsLinearLayoutThirdLine);
+        roundCounterSentences = findViewById(R.id.roundCounterSentences);
+        roundScoreSentences = findViewById(R.id.pointsCounterSentences);
+
+        roundsCounter = 0;
+        scoreCounter = 0;
+        roundCounterSentences.setText("0/" + sentencesCounter);
 
         rowSizes = new int[3];
-
     }
+
     private void generateButtons(TextView sentenceTextEnglish) {
         String[] englishWords = sentenceEnglish.get(roundsCounter).split(" ");
         int englishWordsCounter = englishWords.length;
@@ -109,8 +85,6 @@ public class GameWithSentence extends AppCompatActivity {
         rowSizes[0] = Math.min(englishWordsCounter, 4);
         rowSizes[1] = Math.min(englishWordsCounter, 8);
         rowSizes[2] = englishWordsCounter;
-
-
 
         for (int t = 0; t < 12; t += 4) {
             for (int i = t; i < rowSizes[t / 4]; i++) {
@@ -131,8 +105,10 @@ public class GameWithSentence extends AppCompatActivity {
                             if (sentenceTextEnglish.getText().toString().trim().equals(sentenceEnglish.get(roundsCounter))) {
                                 answerCheck.setText("Odpowiedź poprawna!");
                                 nextSentence(sentenceTextEnglish);
+                                setScore(1);
                             } else {
                                 nextSentence(sentenceTextEnglish);
+                                setScore(0);
                                 answerCheck.setText("Błąd");
                                 System.out.println("\n" + sentenceTextEnglish.getText());
                                 System.out.println(sentenceEnglish.get(0));
@@ -140,15 +116,23 @@ public class GameWithSentence extends AppCompatActivity {
                         }
                     }
                 });
-                //button.setOnClickListener(view -> sentenceTextEnglish.append(englishWords[finalI] + " "));
                 allLayouts[layoutCounter].addView(button);
             }
             layoutCounter++;
         }
     }
 
+//    public void endGameStats(View view) {
+//        Intent myIntent = new Intent(getBaseContext(), AfterGameStats.class);
+//        myIntent.putExtra("key", pointsCounter);
+//        startActivity(myIntent);
+//    }
+
     private void nextSentence(TextView sentenceTextEnglish) {
         roundsCounter++;
+//        if(roundsCounter == sentencesCounter) {
+//
+//        }
         rowSizes[0] = 0;
         rowSizes[1] = 0;
         rowSizes[2] = 0;
@@ -160,6 +144,13 @@ public class GameWithSentence extends AppCompatActivity {
         clickedButtonsCounter = 0;
         generateButtons(sentenceTextEnglish);
     }
+
+    private void setScore(int point) {
+        scoreCounter += point;
+        roundScoreSentences.setText(scoreCounter + " pkt.");
+        roundCounterSentences.setText(roundsCounter + "/" + sentencesCounter);
+    }
+
     private void getSentences() {
         sentencePolish = new ArrayList<>();
         sentenceEnglish = new ArrayList<>();
@@ -173,6 +164,7 @@ public class GameWithSentence extends AppCompatActivity {
                                 "and id_list = " + listId
                 );
                 while (sentences.next()) {
+                    sentencesCounter++;
                     System.out.println(sentences.getString("example_sentence"));
                     sentenceEnglish.add(sentences.getString("example_sentence"));
                     sentencePolish.add(sentences.getString("example_sentence_pl"));
@@ -184,12 +176,6 @@ public class GameWithSentence extends AppCompatActivity {
     }
 
     private void setConnection() {
-        Intent intent = getIntent();
-        userId = intent.getIntExtra(MainActivity.EXTRA_NUMBER, 0);
-
-        userId = 1;//póki co id jest stałe (brak logowania)
-
-        //inicjalizacja połaczenia się z bazą
         connectionClass = new ConnectionClass();
         con = connectionClass.CONN();
     }

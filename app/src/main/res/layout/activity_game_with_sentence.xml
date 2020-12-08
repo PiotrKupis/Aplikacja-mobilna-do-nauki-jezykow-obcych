@@ -13,9 +13,34 @@
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/poppins_medium"
         android:paddingTop="80dp"
-        android:text=""
+        android:text="Smaple text"
         android:textColor="@color/black"
         android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/roundCounterSentences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0/10"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="20dp"
+
+        />
+    <TextView
+        android:id="@+id/pointsCounterSentences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginStart="300dp"
+        android:text="0 pkt."
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_below="@id/roundCounterSentences"
+
         />
 
     <TextView
@@ -24,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/poppins_medium"
-        android:paddingTop="80dp"
+        android:paddingTop="60dp"
         android:text=""
         android:layout_below="@+id/sentenceTxtPolish"
         android:textColor="@color/black"
@@ -37,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/poppins_medium"
-        android:paddingTop="80dp"
+        android:paddingTop="60dp"
         android:text=""
         android:layout_below="@+id/sentenceTxtEnglish"
         android:textColor="@color/black"

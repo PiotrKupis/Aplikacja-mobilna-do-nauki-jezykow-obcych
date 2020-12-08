@@ -300,6 +300,3 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
         }
     }
 }
-
-
-
