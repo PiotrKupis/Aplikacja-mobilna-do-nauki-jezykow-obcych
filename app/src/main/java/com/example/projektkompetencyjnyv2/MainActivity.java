@@ -46,21 +46,12 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.nav_home:
                             selectedFragment = new HomeFragment();
                             break;
-                        case R.id.nav_list:
-                            selectActitivy = new WordLists();
-                            break;
                         case R.id.nav_profile:
                             selectedFragment = new ProfileFragment();
                             break;
                         case R.id.nav_courses:
                             selectedFragment = new CoursesFragment();
                             break;
-                    }
-                    if(selectActitivy != null)
-                    {
-                        Intent myIntent = new Intent(getBaseContext(), WordLists.class);
-                        startActivity(myIntent);
-                        return true;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             selectedFragment).commit();
@@ -69,23 +60,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-
-    public void registerBtnClick(View view) {
-        File file = new File(getApplicationContext().getFilesDir(), "LoginPassword.txt");
-        if (file.exists()) {
-            setContentView(R.layout.fragment_profile);
-            return;
-        }
-        Intent myIntent = new Intent(getBaseContext(), Register.class);
-        startActivity(myIntent);
-    }
     public void moveToWordLists(View view){
-
-        int userId = 1;
-        Intent intent = new Intent(this, WordLists.class);
-        intent.putExtra(EXTRA_NUMBER ,userId);
-
-        startActivity(intent);
+        Intent myIntent = new Intent(getBaseContext(), WordLists.class);
+        startActivity(myIntent);
     }
 
     public void bodyPartsClick(View view) {
@@ -95,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void plantsClick(View view) {
         Intent myIntent = new Intent(getBaseContext(), GameWithSentence.class);
+        startActivity(myIntent);
+    }
+
+    public void movetoWordList(MenuItem item) {
+        Intent myIntent = new Intent(getBaseContext(), WordLists.class);
         startActivity(myIntent);
     }
 }

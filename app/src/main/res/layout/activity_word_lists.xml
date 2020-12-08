@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:paddingBottom="0dp"
     tools:context=".WordLists">
 
     <TextView
@@ -31,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_toRightOf="@+id/userIdTxt"
-        android:layout_marginTop="590dp"
+        android:layout_marginTop="560dp"
         android:layout_marginLeft="-20dp"
         android:backgroundTint="@color/blue_300"
         android:elevation="10dp"
