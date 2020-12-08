@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:layout_marginTop="590dp"
+        android:layout_marginTop="560dp"
         android:layout_marginLeft="-65dp"
         android:layout_toRightOf="@+id/listIdTxt"
         android:backgroundTint="@color/blue_300"
