@@ -201,13 +201,15 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
     @Override
     public boolean onMenuItemClick(MenuItem item) {
 
+        Intent intent;
+
         switch (item.getItemId()) {
             case R.id.searchList:
-                //dodanie przejscia do okna z lista publicznymi
-                Toast.makeText(this, "Przejście do okna z listami publicznymi", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, AddFromPublicLists.class);
+                startActivity(intent);
                 return true;
             case R.id.createList:
-                Intent intent = new Intent(this, CreateNewList.class);
+                intent = new Intent(this, CreateNewList.class);
                 intent.putExtra(MainActivity.EXTRA_NUMBER, userId);
                 startActivity(intent);
                 return true;

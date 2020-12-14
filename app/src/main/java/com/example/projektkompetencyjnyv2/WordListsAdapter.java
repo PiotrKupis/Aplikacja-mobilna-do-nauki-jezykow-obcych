@@ -175,21 +175,6 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
                     if (rs.next()) {
 
                         listId = rs.getInt("id_word_list");
-                        //listId mozesz przesłać poprzez:
-
-//                        przykład wysłania
-//                        Intent myIntent = new Intent(currentUser.getBaseContext(), BodyPartsEasy.class);
-//                        //Intent intent = new Intent(this, BodyPartsEasy.class);
-//                        myIntent.putExtra("listName", listName);
-//                        myIntent.putExtra("owner", ownerLogin);
-//                        startActivity(intent);
-//
-//                        przykłąd odebrania:
-//                        Intent intent=getIntent();
-//                        listName = intent.getStringExtra("listName");
-//                        ownerLogin = intent.getStringExtra("owner");
-
-
 
                         if (item.getItemId() == R.id.wordsGame) {
 
@@ -210,9 +195,6 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
                             intent.putExtra("userID", currentUser.getId());
                             intent.putExtra("listID", listId);
                             mContext.startActivity(intent);
-                            //przeniesienie do drugiej gry
-                            //Intent intent = new Intent(mContext, Words.class);
-                            //mContext.startActivity(intent);
                             return true;
                         }
                         rs.close();
