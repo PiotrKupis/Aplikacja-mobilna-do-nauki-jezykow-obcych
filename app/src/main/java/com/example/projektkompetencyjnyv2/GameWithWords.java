@@ -23,6 +23,7 @@ public class GameWithWords extends AppCompatActivity {
     private ArrayList<Integer> wordsIds;
     private ArrayList<String> wordsEnglish;
     private ArrayList<String> wordsPolish;
+    TextView roundCounterView;
 
     private void setConnection() {
         Intent intent = getIntent();
@@ -42,9 +43,10 @@ public class GameWithWords extends AppCompatActivity {
         con = connectionClass.CONN();
     }
 
-    private int counter = 0;
+    private int currentWordCounter = 0;
     private int pointsCounter = 0;
     private int roundCounter = 1;
+    private int totalRoundsCounter = 0;
     private int id_word;
 
     @Override
@@ -53,10 +55,13 @@ public class GameWithWords extends AppCompatActivity {
         setContentView(R.layout.activity_easy);
 
         setConnection();
-        getWords();
-        getProgress();
+        getWordsAndProgressFromDatabase();
+//        getWords();
+//        getProgress();
 
-        TextView txt = (TextView) findViewById(R.id.word);
+        TextView txt = findViewById(R.id.word);
+        roundCounterView = findViewById(R.id.roundCounter);
+        roundCounterView.setText(roundCounter + "/" + totalRoundsCounter);
         txt.setText(wordsPolish.get(0));
     }
 
@@ -73,6 +78,7 @@ public class GameWithWords extends AppCompatActivity {
                         "select * from Word where id_list = " + listId
                 );
                 while (words.next()) {
+                    totalRoundsCounter++;
                     wordsIds.add(words.getInt("id_word"));
                     wordsEnglish.add(words.getString("word"));
                     wordsPolish.add(words.getString("meaning"));
@@ -83,21 +89,50 @@ public class GameWithWords extends AppCompatActivity {
         }
     }
 
+    private void getWordsAndProgressFromDatabase() {
+        wordsPolish = new ArrayList<>();
+        wordsEnglish = new ArrayList<>();
+        wordsIds = new ArrayList<>();
+        progressValues = new ArrayList<>();
+        ResultSet queryResult;
+        Statement commList;
+        try {
+            if (con != null) {
+                commList = con.createStatement();
+                queryResult = commList.executeQuery(
+                        "select word, meaning, progress, w.id_word from Progress as p " +
+                                "join Word as w " +
+                                "on p.id_word = w.id_word " +
+                                "and id_user = " + userId +
+                                "and w.id_list = " + listId +
+                                "and learned = 0 "
+                );
+                while (queryResult.next()) {
+                    totalRoundsCounter++;
+                    wordsEnglish.add(queryResult.getString("word"));
+                    wordsPolish.add(queryResult.getString("meaning"));
+                    progressValues.add(queryResult.getInt("progress"));
+                    wordsIds.add(queryResult.getInt("id_word"));
+                }
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
     private ArrayList<Integer> progressValues;
 
     public void getProgress() {
-        //id_word = wordsIds.get(counter);
+        id_word = wordsIds.get(currentWordCounter);
         progressValues = new ArrayList<>();
         try {
             if (con != null) {
                 Statement commList;
                 commList = con.createStatement();
                 ResultSet progress = commList.executeQuery(
-                        "select * from Progress where id_user = " + userId
-                        //" and id_word = " + id_word
+                        "select * from Progress where id_user = " + userId +
+                        " and id_word = " + id_word
                 );
                 while (progress.next()) {
-
                     progressValues.add(progress.getInt("progress"));
                 }
                 System.out.println(progress);
@@ -110,16 +145,17 @@ public class GameWithWords extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     public void OKBtnClick(View view) {
         TextView txt = findViewById(R.id.word);
-        EditText answer = findViewById(R.id.answer);
-        TextView roundCounterView = findViewById(R.id.roundCounter);
         TextView pointsCounterView = findViewById(R.id.pointsCouter);
         TextView isAnswerCorrect = findViewById(R.id.isAnswerCorrect);
+
+        EditText answer = findViewById(R.id.answer);
         String guessStr = answer.getText().toString();
         String answerStr;
-        answer.getText().clear();
-        answerStr = wordsEnglish.get(counter);
 
-        int progress = progressValues.get(counter);
+        answer.getText().clear();
+        answerStr = wordsEnglish.get(currentWordCounter);
+
+        int progress = progressValues.get(currentWordCounter);
 
         if (answerStr.equals(guessStr)) {
             isAnswerCorrect.setText("Odpowiedź poprawna!");
@@ -131,37 +167,53 @@ public class GameWithWords extends AppCompatActivity {
             if (progress > 0) {
                 progress--;
             }
-            isAnswerCorrect.setText("Błąd! Poprawna odpowiedź: " + wordsEnglish.get(counter));
+            isAnswerCorrect.setText("Błąd! Poprawna odpowiedź: " + wordsEnglish.get(currentWordCounter));
         }
-        roundCounterView.setText(roundCounter + "/10");
         try {
-            if (con != null) {
-                Statement commList;
-                commList = con.createStatement();
-
-                commList.executeUpdate(
-                        "update Progress set progress = "
-                                + progress +
-                                " where id_word = " + wordsIds.get(counter).toString()
-                );
-
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            updateProgress(progress);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
-        if (roundCounter == 11) {
+
+        roundCounterView.setText(roundCounter + "/" + totalRoundsCounter);
+
+        if (roundCounter == totalRoundsCounter) {
             endGameStats(view);
-            counter = 0;
+            currentWordCounter = 0;
             roundCounter = 0;
             pointsCounter = 0;
             return;
         }
 
         roundCounter++;
-        counter++;
-        txt.setText(wordsPolish.get(counter));
+        currentWordCounter++;
+        txt.setText(wordsPolish.get(currentWordCounter));
     }
 
+    private void updateProgress(int progress) throws SQLException {
+        if (con != null) {
+            Statement commList;
+            commList = con.createStatement();
+            if(progress < 3) {
+                commList.executeUpdate(
+                        "update Progress set progress = "
+                                + progress +
+                                " where id_word = " + wordsIds.get(currentWordCounter).toString()
+                );
+            } else {
+                commList.executeUpdate(
+                        "update Progress set progress = "
+                                + progress +
+                                " where id_word = " + wordsIds.get(currentWordCounter).toString()
+                );
+                commList.executeUpdate(
+                        "update Progress set learned = 1 " +
+                                " where id_word = " + wordsIds.get(currentWordCounter).toString()
+                );
+            }
+
+        }
+    }
     public void endGameStats(View view) {
         Intent myIntent = new Intent(getBaseContext(), AfterGameStats.class);
         myIntent.putExtra("key", pointsCounter);

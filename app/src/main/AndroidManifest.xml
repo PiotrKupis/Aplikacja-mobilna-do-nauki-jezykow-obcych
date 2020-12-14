@@ -17,7 +17,7 @@
         android:windowSoftInputMode="adjustPan|stateHidden">
 
         <activity android:name=".AddFromPublicLists"></activity>
-        <activity android:name=".GameWithSentence" />
+        <activity android:name=".GameWithSentences" />
         <activity
             android:name=".AddNewWord"
             android:parentActivityName=".Words" />

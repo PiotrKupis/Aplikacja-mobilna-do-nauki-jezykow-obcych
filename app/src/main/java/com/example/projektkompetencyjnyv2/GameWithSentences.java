@@ -108,11 +108,11 @@ public class GameWithSentences extends AppCompatActivity {
                             TextView answerCheck = findViewById(R.id.answerCheck);
                             if (sentenceTextEnglish.getText().toString().trim().equals(sentenceEnglish.get(roundsCounter))) {
                                 answerCheck.setText("Odpowiedź poprawna!");
-                                nextSentence(sentenceTextEnglish);
                                 setScore(1);
-                            } else {
                                 nextSentence(sentenceTextEnglish);
+                            } else {
                                 setScore(0);
+                                nextSentence(sentenceTextEnglish);
                                 answerCheck.setText("Błąd");
                                 System.out.println("\n" + sentenceTextEnglish.getText());
                                 System.out.println(sentenceEnglish.get(0));
@@ -133,7 +133,6 @@ public class GameWithSentences extends AppCompatActivity {
     }
 
     private void nextSentence(TextView sentenceTextEnglish) {
-        roundsCounter++;
         if (roundsCounter == sentencesCounter) {
             endGameStats();
             return;
@@ -152,6 +151,7 @@ public class GameWithSentences extends AppCompatActivity {
     }
 
     private void setScore(int point) {
+        roundsCounter++;
         scoreCounter += point;
         roundScoreSentences.setText(scoreCounter + " pkt.");
         roundCounterSentences.setText(roundsCounter + "/" + sentencesCounter);
