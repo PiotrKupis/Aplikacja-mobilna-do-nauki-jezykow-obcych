@@ -69,15 +69,13 @@ public class PublicWordListsAdapter extends RecyclerView.Adapter<PublicWordLists
         holder.listLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "onClick: Przeniesienie do listy słów");
 
-                Toast.makeText(mContext, "przeniesienie do listy słów", Toast.LENGTH_SHORT).show();
-                /*
                 currentUser.setCurrentListName(listNames.get(position));
                 currentUser.setCurrentListOwner(owners.get(position));
 
                 Intent intent = new Intent(mContext, Words.class);
                 mContext.startActivity(intent);
-                 */
             }
         });
     }
@@ -111,8 +109,53 @@ public class PublicWordListsAdapter extends RecyclerView.Adapter<PublicWordLists
             addListBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, "dodanie list do swojego katalogu", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "onClick: naciśnięto przycisk do nauki słów");
+                    Log.d(TAG, "onClick: dodanie wybranej listy do zbioru list użytkownika");
+
+                    int listId;
+                    ConnectionClass connectionClass;
+                    Connection con;
+                    ResultSet rs;
+                    PreparedStatement stmt,addListStmt;
+
+                    connectionClass = new ConnectionClass();
+                    con = connectionClass.CONN();
+
+                    try {
+                        //pobranie id listy
+                        stmt = con.prepareStatement("" +
+                                "select id_word_list \n" +
+                                "from Word_list as wl \n" +
+                                "\tinner join [User] as u on wl.owner_id=u.id_user\n" +
+                                "where name=? and login=?");
+
+                        stmt.setString(1, listNames.get(getAdapterPosition()));
+                        stmt.setString(2, owners.get(getAdapterPosition()));
+                        rs = stmt.executeQuery();
+
+                        if (rs.next()) {
+                            listId = rs.getInt("id_word_list");
+
+                            addListStmt = con.prepareStatement("" +
+                                    "insert into [User_WordList] " +
+                                    "values (?,?)");
+                            addListStmt.setInt(1, listId);
+                            addListStmt.setInt(2, userId);
+                            addListStmt.executeUpdate();
+                        }
+
+                        listNames.remove(getAdapterPosition());
+                        difficultyLevels.remove(getAdapterPosition());
+                        wordQuantities.remove(getAdapterPosition());
+                        owners.remove(getAdapterPosition());
+                        notifyItemRemoved(getAdapterPosition());
+                        notifyItemRangeChanged(getAdapterPosition(), listNames.size());
+
+                        rs.close();
+                        stmt.close();
+                        con.close();
+                    } catch (SQLException throwable) {
+                        throwable.printStackTrace();
+                    }
                 }
             });
         }

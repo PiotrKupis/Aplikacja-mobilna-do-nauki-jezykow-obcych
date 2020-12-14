@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -29,6 +31,7 @@ public class AddFromPublicLists extends AppCompatActivity {
     private int userId;
     private CurrentUser currentUser;
     private Spinner languageSpinner;
+    private String listsLanguage;
 
     private RecyclerView publicListsRecView;
     private ArrayList<String> listNames;
@@ -67,6 +70,29 @@ public class AddFromPublicLists extends AppCompatActivity {
         languageSpinner=findViewById(R.id.selectLanguageSpinner);
         languages=new ArrayList<>();
 
+        listsLanguage="angielski";
+
+        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG, "onItemSelected: zmieniono jezyk");
+
+                listsLanguage=languageSpinner.getSelectedItem().toString();
+
+                listNames.clear();
+                difficultyLevels.clear();
+                wordQuantities.clear();
+                owners.clear();
+
+                initWordLists();
+                initRecyclerView();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
         //pobieranie dostępnych języków z bazy
         try {
             languageStmt = con.prepareStatement("select language from language");
@@ -100,9 +126,20 @@ public class AddFromPublicLists extends AppCompatActivity {
                 //pobranie informacji o listach związanych z użytkownikiem
                 listsStmt = con.prepareStatement(
                         "select name, difficulty_level, owner_id, id_wordList\n" +
-                                "from Word_list as wl inner join [User_WordList] as uwl\n" +
-                                "on wl.id_word_list=uwl.id_wordList");
-                //TODO dodac wybieranie według jezyka oraz nie wyswietlac list ktore sa uzyt lub juz je ma
+                            "from Word_list as wl \n" +
+                                "\t inner join [User_WordList] as uwl on wl.id_word_list=uwl.id_wordList" +
+                                " inner join Language as l on wl.id_language=l.id_language \n" +
+                            "where  wl.is_public=1 and l.language=?\n " +
+                            "\n" +
+                            "except\n" +
+                            "\n" +
+                            "select name, difficulty_level, owner_id, id_wordList\n" +
+                            "from Word_list as wl \n" +
+                                "\t inner join [User_WordList] as uwl on wl.id_word_list=uwl.id_wordList\n" +
+                            "where  uwl.id_user=?");
+
+                listsStmt.setString(1, listsLanguage);
+                listsStmt.setInt(2, userId);
                 listsRS = listsStmt.executeQuery();
 
                 //prepared statements, początek:
@@ -117,7 +154,6 @@ public class AddFromPublicLists extends AppCompatActivity {
                         "group by id_word_list");
 
                 //prepared statements, koniec:
-
 
                 while (listsRS.next()){
                     Log.d(TAG, "initWordLists: pobieranie informacji o liście");

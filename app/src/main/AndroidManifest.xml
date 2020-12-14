@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjektKompetencyjnyV2"
-        android:windowSoftInputMode="adjustPan|stateHidden">
+        android:windowSoftInputMode="adjustPan|stateHidden"
+        android:screenOrientation="sensorLandscape">
 
         <activity android:name=".AddFromPublicLists"></activity>
         <activity android:name=".GameWithSentences" />

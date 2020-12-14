@@ -177,7 +177,6 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
                         if (item.getItemId() == R.id.wordsGame) {
 
                             Log.d(TAG, "onMenuItemClick: przeniesienie do nauki slów" + listId);
-                            Toast.makeText(mContext, "przeniesienie do nauki slów", Toast.LENGTH_SHORT).show();
 
                             //przeniesienie do pierwszej gry
                             Intent intent = new Intent(mContext, GameWithWords.class);
@@ -187,7 +186,7 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
                             mContext.startActivity(intent);
                         } else if (item.getItemId() == R.id.sentencesGame) {
                             Log.d(TAG, "onMenuItemClick: przeniesienie do nauki zdań" + listId);
-                            Toast.makeText(mContext, "przeniesienie do nauki zdań", Toast.LENGTH_SHORT).show();
+
                             Intent intent = new Intent(mContext, GameWithSentences.class);
                             intent.putExtra("userID", currentUser.getId());
                             intent.putExtra("listID", listId);
