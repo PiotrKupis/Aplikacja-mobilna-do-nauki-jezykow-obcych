@@ -16,9 +16,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class BodyPartsEasy extends AppCompatActivity {
+public class GameWithWords extends AppCompatActivity {
     private int userId;
-    private ConnectionClass connectionClass;
     private Connection con;
     private int listId;
     private ArrayList<Integer> wordsIds;
@@ -39,7 +38,7 @@ public class BodyPartsEasy extends AppCompatActivity {
             userId = 26;
         }
         //inicjalizacja połaczenia się z bazą
-        connectionClass = new ConnectionClass();
+        ConnectionClass connectionClass = new ConnectionClass();
         con = connectionClass.CONN();
     }
 
@@ -110,11 +109,11 @@ public class BodyPartsEasy extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     public void OKBtnClick(View view) {
-        TextView txt = (TextView) findViewById(R.id.word);
-        EditText answer = (EditText) findViewById(R.id.answer);
-        TextView roundCounterView = (TextView) findViewById(R.id.roundCounter);
-        TextView pointsCounterView = (TextView) findViewById(R.id.pointsCouter);
-        TextView isAnswerCorrect = (TextView) findViewById(R.id.isAnswerCorrect);
+        TextView txt = findViewById(R.id.word);
+        EditText answer = findViewById(R.id.answer);
+        TextView roundCounterView = findViewById(R.id.roundCounter);
+        TextView pointsCounterView = findViewById(R.id.pointsCouter);
+        TextView isAnswerCorrect = findViewById(R.id.isAnswerCorrect);
         String guessStr = answer.getText().toString();
         String answerStr;
         answer.getText().clear();

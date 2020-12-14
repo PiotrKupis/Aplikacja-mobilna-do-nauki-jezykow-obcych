@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjektKompetencyjnyV2"
         android:windowSoftInputMode="adjustPan|stateHidden">
-        <activity android:name=".GameWithSentence" />
+        <activity android:name=".GameWithSentences" />
         <activity
             android:name=".AddNewWord"
             android:parentActivityName=".Words" />
@@ -31,7 +31,7 @@
         <activity android:name=".Profile" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
-        <activity android:name=".BodyPartsEasy" />
+        <activity android:name=".GameWithWords" />
         <activity android:name=".Difficulty" />
         <activity android:name=".AfterGameStats" />
         <activity android:name=".LoginUser" />

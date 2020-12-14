@@ -1,57 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-<!--    Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>-->
+    <!--    Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>-->
     <TextView
         android:id="@+id/bodyPartsDifficultyLvl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Wybierz poziom trudności"
-        android:fontFamily="@font/poppins_medium"
-        android:textColor="@color/black"
-        android:layout_marginTop="30dp"
-        android:textSize="30sp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Wybierz poziom trudności"
+        android:textColor="@color/black"
+        android:textSize="30sp"
         />
 
     <ImageButton
         android:id="@+id/easyDifficultyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/easy_difficulty"
         android:layout_below="@+id/bodyPartsDifficultyLvl"
-        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
         android:background="@color/white"
         android:onClick="easyDifficultyBtnOnClick"
-    />
+        android:src="@drawable/easy_difficulty"
+        />
+
     <ImageButton
         android:id="@+id/mediumDifficultyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/medium_difficulty"
         android:layout_below="@+id/easyDifficultyBtn"
-        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
         android:background="@color/white"
         android:onClick="mediumDifficultyBtnOnClick"
+        android:src="@drawable/medium_difficulty"
         />
+
     <ImageButton
         android:id="@+id/hardDifficultyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/hard_difficulty"
         android:layout_below="@+id/mediumDifficultyBtn"
-        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
         android:background="@color/white"
-
+        android:src="@drawable/hard_difficulty"
         />
-
-
-
-
 
 
 </RelativeLayout>

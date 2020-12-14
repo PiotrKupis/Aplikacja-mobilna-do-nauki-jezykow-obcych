@@ -14,16 +14,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
-public class GameWithSentence extends AppCompatActivity {
+public class GameWithSentences extends AppCompatActivity {
     private int layoutCounter = 0;
 
     int clickedButtonsCounter = 0;
     LinearLayout[] allLayouts;
     int[] rowSizes;
-    private int userId;
     private int listId;
-    private ConnectionClass connectionClass;
     private Connection con;
 
     private int sentencesCounter;
@@ -42,6 +42,7 @@ public class GameWithSentence extends AppCompatActivity {
         setContentView(R.layout.activity_game_with_sentence);
 
         Bundle extras = getIntent().getExtras();
+        int userId;
         if (extras != null) {
             userId = extras.getInt("userID");
             System.out.println("ID użytkownika" + userId);
@@ -54,8 +55,8 @@ public class GameWithSentence extends AppCompatActivity {
         setConnection();
         getSentences();
 
-        TextView sentenceTextEnglish = (TextView) findViewById(R.id.sentenceTxtEnglish);
-        sentenceTextPolish = (TextView) findViewById(R.id.sentenceTxtPolish);
+        TextView sentenceTextEnglish = findViewById(R.id.sentenceTxtEnglish);
+        sentenceTextPolish = findViewById(R.id.sentenceTxtPolish);
 
         initGame();
         generateButtons(sentenceTextEnglish);
@@ -78,6 +79,7 @@ public class GameWithSentence extends AppCompatActivity {
 
     private void generateButtons(TextView sentenceTextEnglish) {
         String[] englishWords = sentenceEnglish.get(roundsCounter).split(" ");
+        Collections.shuffle(Arrays.asList(englishWords));
         int englishWordsCounter = englishWords.length;
         sentenceTextPolish.setText(sentencePolish.get(roundsCounter));
 
@@ -96,6 +98,9 @@ public class GameWithSentence extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        button.setBackgroundColor(0);
+                        button.setText("");
+                        button.setEnabled(false);
                         if (clickedButtonsCounter == 0) sentenceTextEnglish.setText("");
                         sentenceTextEnglish.append(englishWords[finalI] + " ");
                         clickedButtonsCounter++;
@@ -129,7 +134,7 @@ public class GameWithSentence extends AppCompatActivity {
 
     private void nextSentence(TextView sentenceTextEnglish) {
         roundsCounter++;
-        if(roundsCounter == sentencesCounter) {
+        if (roundsCounter == sentencesCounter) {
             endGameStats();
             return;
         }
@@ -177,7 +182,7 @@ public class GameWithSentence extends AppCompatActivity {
     }
 
     private void setConnection() {
-        connectionClass = new ConnectionClass();
+        ConnectionClass connectionClass = new ConnectionClass();
         con = connectionClass.CONN();
     }
 }

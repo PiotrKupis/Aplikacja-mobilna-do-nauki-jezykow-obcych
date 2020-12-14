@@ -15,7 +15,8 @@
         android:text="Dodawanie nowego słowa"
         android:textColor="@color/blue_500"
         android:textSize="26sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
 
     <TextView
         android:id="@+id/newWordTxt"
@@ -27,7 +28,8 @@
         android:text="Słowo"
         android:textColor="@color/blue_500"
         android:textSize="22sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        />
 
     <EditText
         android:id="@+id/newWordEdtTxt"
@@ -35,11 +37,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/newWordTxt"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:hint="Podaj nowe słowo"
         android:textColor="@color/blue_500"
+        android:textColorHint="@color/blue_500"
         android:textStyle="italic"
-        android:gravity="center"
-        android:textColorHint="@color/blue_500" />
+        />
 
     <TextView
         android:id="@+id/newMeaningTxt"
@@ -60,11 +63,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/newMeaningTxt"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:hint="Podaj znaczenie słowa"
         android:textColor="@color/blue_500"
+        android:textColorHint="@color/blue_500"
         android:textStyle="italic"
-        android:gravity="center"
-        android:textColorHint="@color/blue_500"/>
+        />
 
     <TextView
         android:id="@+id/newSentences"
@@ -76,7 +80,8 @@
         android:text="Opcjonalne zdania przykładowe:"
         android:textColor="@color/blue_500"
         android:textSize="23sp"
-        android:textStyle="italic|bold"/>
+        android:textStyle="italic|bold"
+        />
 
     <TextView
         android:id="@+id/newSentenceTxt"
@@ -88,7 +93,8 @@
         android:text="Przykładowe zdanie"
         android:textColor="@color/blue_500"
         android:textSize="22sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        />
 
     <EditText
         android:id="@+id/newSentenceEdtTxt"
@@ -96,11 +102,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/newSentenceTxt"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:hint="Podaj przykładowe zdanie"
         android:textColor="@color/blue_500"
+        android:textColorHint="@color/blue_500"
         android:textStyle="italic"
-        android:gravity="center"
-        android:textColorHint="@color/blue_500"/>
+        />
 
     <TextView
         android:id="@+id/newSentenceMeaningTxt"
@@ -112,7 +119,8 @@
         android:text="Znaczenie zdania"
         android:textColor="@color/blue_500"
         android:textSize="22sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        />
 
     <EditText
         android:id="@+id/newSentenceMeaningEdtTxt"
@@ -120,11 +128,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/newSentenceMeaningTxt"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:hint="Podaj znaczenie zdania"
         android:textColor="@color/blue_500"
+        android:textColorHint="@color/blue_500"
         android:textStyle="italic"
-        android:gravity="center"
-        android:textColorHint="@color/blue_500"/>
+        />
 
 
     <Button
@@ -137,7 +146,8 @@
         android:onClick="addNewWord"
         android:text="Dodaj słowo"
         android:textAllCaps="false"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        />
 
     <TextView
         android:id="@+id/newWordMessage"
@@ -152,5 +162,6 @@
         android:text="Komunikat"
         android:textSize="22dp"
         android:textStyle="bold"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        />
 </RelativeLayout>

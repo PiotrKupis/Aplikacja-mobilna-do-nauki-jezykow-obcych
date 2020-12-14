@@ -16,7 +16,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
@@ -41,7 +40,7 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
         setContentView(R.layout.activity_word_lists);
 
         currentUser = new CurrentUser(getApplicationContext());
-        userId=currentUser.getId();
+        userId = currentUser.getId();
 
         listNames = new ArrayList<>();
         difficultyLevels = new ArrayList<>();
@@ -63,7 +62,7 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
         setContentView(R.layout.activity_word_lists);
 
         currentUser = new CurrentUser(getApplicationContext());
-        userId=currentUser.getId();
+        userId = currentUser.getId();
 
         listNames = new ArrayList<>();
         difficultyLevels = new ArrayList<>();
@@ -83,8 +82,8 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
 
         Log.d(TAG, "initWordLists: inicializacja wpisów");
         int listId, ownerId;
-        ResultSet listsRS=null,ownerRS=null,wordsRS=null,learnedRS=null;
-        PreparedStatement listsStmt,ownerStmt,wordsStmt,learnedStmt;
+        ResultSet listsRS = null, ownerRS = null, wordsRS = null, learnedRS = null;
+        PreparedStatement listsStmt, ownerStmt, wordsStmt, learnedStmt;
 
         try {
             if (con != null) {
@@ -92,24 +91,24 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
                 //pobranie informacji o listach związanych z użytkownikiem
                 listsStmt = con.prepareStatement(
                         "select name, difficulty_level, owner_id, id_wordList\n" +
-                            "from Word_list as wl inner join [User_WordList] as uwl \n" +
-                            "\ton wl.id_word_list=uwl.id_wordList \n" +
-                            "where uwl.id_user=?");
+                                "from Word_list as wl inner join [User_WordList] as uwl \n" +
+                                "\ton wl.id_word_list=uwl.id_wordList \n" +
+                                "where uwl.id_user=?");
 
-                listsStmt.setInt(1,userId);
+                listsStmt.setInt(1, userId);
                 listsRS = listsStmt.executeQuery();
 
 
                 //prepared statements, początek:
-                ownerStmt=con.prepareStatement("select login from [User] where id_user=?");
+                ownerStmt = con.prepareStatement("select login from [User] where id_user=?");
 
-                wordsStmt=con.prepareStatement("" +
+                wordsStmt = con.prepareStatement("" +
                         "select count(id_progress) as wordsQuantity\n" +
                         "from progress \n" +
                         "where id_list=? \n" +
                         "group by id_list");
 
-                learnedStmt=con.prepareStatement("" +
+                learnedStmt = con.prepareStatement("" +
                         "select count(id_progress) as learnedQuantity\n" +
                         "from progress \n" +
                         "where id_list=? and learned=1\n" +
@@ -118,7 +117,7 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
                 //prepared statements, koniec:
 
 
-                while (listsRS.next()){
+                while (listsRS.next()) {
                     Log.d(TAG, "initWordLists: pobieranie informacji o liście");
 
                     listNames.add(listsRS.getString("name"));
@@ -128,10 +127,10 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
 
 
                     //pobieranie loginu właściciela listy
-                    ownerStmt.setInt(1,ownerId);
-                    ownerRS=ownerStmt.executeQuery();
+                    ownerStmt.setInt(1, ownerId);
+                    ownerRS = ownerStmt.executeQuery();
 
-                    if(ownerRS.next()) {
+                    if (ownerRS.next()) {
                         owners.add(ownerRS.getString("login"));
                         Log.d(TAG, "initWordLists: login właściciela listy: " + ownerRS.getString("login"));
                     } else
@@ -140,22 +139,21 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
 
                     //pobieranie liczby wszystkich słów oraz nauczonych listy
                     Log.d(TAG, "initWordLists: pobieranie liczby słów w danej liście");
-                    wordsStmt.setInt(1,listId);
-                    wordsRS=wordsStmt.executeQuery();
+                    wordsStmt.setInt(1, listId);
+                    wordsRS = wordsStmt.executeQuery();
 
                     if (wordsRS.next()) {
                         wordQuantities.add(wordsRS.getInt("wordsQuantity"));
 
                         Log.d(TAG, "initWordLists: pobieranie liczby nauczonych słów w danej liście");
-                        learnedStmt.setInt(1,listId);
-                        learnedRS=learnedStmt.executeQuery();
+                        learnedStmt.setInt(1, listId);
+                        learnedRS = learnedStmt.executeQuery();
 
                         if (learnedRS.next())
                             learnedQuantities.add(learnedRS.getInt("learnedQuantity"));
                         else
                             learnedQuantities.add(0);
-                    }
-                    else {
+                    } else {
                         wordQuantities.add(0);
                         learnedQuantities.add(0);
                     }
@@ -163,15 +161,15 @@ public class WordLists extends AppCompatActivity implements PopupMenu.OnMenuItem
                 listsRS.close();
                 listsStmt.close();
 
-                if(ownerRS!=null)
+                if (ownerRS != null)
                     ownerRS.close();
                 ownerStmt.close();
 
-                if(wordsRS!=null)
+                if (wordsRS != null)
                     wordsRS.close();
                 wordsStmt.close();
 
-                if(learnedRS!=null)
+                if (learnedRS != null)
                     learnedRS.close();
                 learnedStmt.close();
             } else {

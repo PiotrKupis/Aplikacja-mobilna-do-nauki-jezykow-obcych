@@ -2,7 +2,6 @@ package com.example.projektkompetencyjnyv2;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -173,46 +172,25 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
                     rs = stmt.executeQuery();
 
                     if (rs.next()) {
-
                         listId = rs.getInt("id_word_list");
-                        //listId mozesz przesłać poprzez:
-
-//                        przykład wysłania
-//                        Intent myIntent = new Intent(currentUser.getBaseContext(), BodyPartsEasy.class);
-//                        //Intent intent = new Intent(this, BodyPartsEasy.class);
-//                        myIntent.putExtra("listName", listName);
-//                        myIntent.putExtra("owner", ownerLogin);
-//                        startActivity(intent);
-//
-//                        przykłąd odebrania:
-//                        Intent intent=getIntent();
-//                        listName = intent.getStringExtra("listName");
-//                        ownerLogin = intent.getStringExtra("owner");
-
-
-
                         if (item.getItemId() == R.id.wordsGame) {
 
                             Log.d(TAG, "onMenuItemClick: przeniesienie do nauki slów" + listId);
                             Toast.makeText(mContext, "przeniesienie do nauki slów", Toast.LENGTH_SHORT).show();
 
                             //przeniesienie do pierwszej gry
-                            Intent intent = new Intent(mContext, BodyPartsEasy.class);
+                            Intent intent = new Intent(mContext, GameWithWords.class);
                             //TODO: UserID przekazuje 0, trzeba poprawić, żeby pobierało dobrą wartość
                             intent.putExtra("userID", currentUser.getId());
                             intent.putExtra("listID", listId);
                             mContext.startActivity(intent);
                         } else if (item.getItemId() == R.id.sentencesGame) {
-
                             Log.d(TAG, "onMenuItemClick: przeniesienie do nauki zdań" + listId);
                             Toast.makeText(mContext, "przeniesienie do nauki zdań", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(mContext, GameWithSentence.class);
+                            Intent intent = new Intent(mContext, GameWithSentences.class);
                             intent.putExtra("userID", currentUser.getId());
                             intent.putExtra("listID", listId);
                             mContext.startActivity(intent);
-                            //przeniesienie do drugiej gry
-                            //Intent intent = new Intent(mContext, Words.class);
-                            //mContext.startActivity(intent);
                             return true;
                         }
                         rs.close();

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/blue_gradient_light"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/blue_gradient_light"
     tools:context=".Register">
 
 
@@ -11,26 +11,26 @@
         android:id="@+id/loginText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rejestracja"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
-        android:textSize="30sp"
-        android:textColor="@color/black"
         android:fontFamily="@font/poppins_medium"
+        android:text="Rejestracja"
+        android:textColor="@color/black"
+        android:textSize="30sp"
         />
 
     <EditText
         android:id="@+id/loginFieldReg"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_below="@id/loginText"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:hint="Login"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:textColorHint="@color/black"
-
-        android:importantForAutofill="no" />
+        />
 
     <EditText
         android:id="@+id/passwordFieldReg"
@@ -40,9 +40,10 @@
         android:layout_centerHorizontal='true'
         android:layout_marginTop="20dp"
         android:hint="Hasło"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         android:textColorHint="@color/black"
-        android:importantForAutofill="no" />
+        />
 
     <EditText
         android:id="@+id/passwordConfirmField"
@@ -52,30 +53,30 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:hint="Potwierdź hasło"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         android:textColorHint="@color/black"
-        android:importantForAutofill="no" />
+        />
 
     <CheckBox
         android:id="@+id/cookiesConfirm"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordConfirmField"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/passwordConfirmField"
-        android:text="Zgadzam się na prztwarzanie moich danych osobowych i lubię ciasteczka"
-        />
+        android:text="Zgadzam się na prztwarzanie moich danych osobowych i lubię ciasteczka" />
 
     <Button
         android:id="@+id/registerConfirmBtn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cookiesConfirm"
-        android:text="Potwierdź"
-        android:textAllCaps="false"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:text="Potwierdź"
+        android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="18sp"
         />

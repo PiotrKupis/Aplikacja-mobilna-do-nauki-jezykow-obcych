@@ -29,7 +29,6 @@
         android:hint="Login"
         android:inputType="textPersonName"
         android:textColorHint="@color/black"
-
         />
 
     <EditText

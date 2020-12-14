@@ -15,10 +15,9 @@ public class Difficulty extends AppCompatActivity {
     }
 
     public void easyDifficultyBtnOnClick(View view) {
-        Intent myIntent = new Intent(getBaseContext(), BodyPartsEasy.class);
+        Intent myIntent = new Intent(getBaseContext(), GameWithWords.class);
         startActivity(myIntent);
     }
-
 
 
 }

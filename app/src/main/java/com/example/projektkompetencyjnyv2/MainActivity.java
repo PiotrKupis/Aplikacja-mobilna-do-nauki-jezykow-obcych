@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,14 +12,12 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.File;
-
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_TEXT="com.example.projektkompetencyjnyv2.EXTRA_TEXT";
-    public static final String EXTRA_TEXT2="com.example.projektkompetencyjnyv2.EXTRA_TEXT2";
-    public static final String EXTRA_NUMBER="com.example.projektkompetencyjnyv2.EXTRA_NUMBER";
+    public static final String EXTRA_TEXT = "com.example.projektkompetencyjnyv2.EXTRA_TEXT";
+    public static final String EXTRA_TEXT2 = "com.example.projektkompetencyjnyv2.EXTRA_TEXT2";
+    public static final String EXTRA_NUMBER = "com.example.projektkompetencyjnyv2.EXTRA_NUMBER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-    public void moveToWordLists(View view){
+    public void moveToWordLists(View view) {
         Intent myIntent = new Intent(getBaseContext(), WordLists.class);
         startActivity(myIntent);
     }
@@ -71,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void plantsClick(View view) {
-        Intent myIntent = new Intent(getBaseContext(), GameWithSentence.class);
+        Intent myIntent = new Intent(getBaseContext(), GameWithSentences.class);
         startActivity(myIntent);
     }
 
