@@ -1,49 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!--    Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>-->
     <TextView
         android:id="@+id/gratulacje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gratulacje! Twój wynik to imponujące: "
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
         android:fontFamily="@font/poppins_medium"
+        android:text="Gratulacje! Twój wynik to: "
+        android:textAlignment="center"
         android:textColor="@color/black"
-        android:layout_marginTop="30dp"
         android:textSize="30sp"
-        android:layout_centerHorizontal="true"
         />
 
     <TextView
         android:id="@+id/wynik"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="100sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:fontFamily="@font/poppins_medium"
+        android:text=""
         android:textColor="@color/black"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
+        android:textSize="100sp"
         />
 
     <Button
+        android:id="@+id/statsSeenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/wynik"
         android:layout_centerHorizontal="true"
-        android:text="OK!"
-        android:id="@+id/statsSeenButton"
         android:onClick="backToCategories"
+        android:text="OK!"
         />
-
-
-
-
 
 
 </RelativeLayout>

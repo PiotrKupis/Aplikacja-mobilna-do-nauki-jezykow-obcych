@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
@@ -35,7 +34,7 @@ public class WordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.words = words;
         this.meanings = meanings;
         this.sentences = sentences;
-        this.sentencesMeanings=sentencesMeanings;
+        this.sentencesMeanings = sentencesMeanings;
         currentUser = new CurrentUser(mContext.getApplicationContext());
     }
 
@@ -50,8 +49,8 @@ public class WordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         } else if (viewType == ITEM_TYPE_TWO) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.words_item, parent, false);
             return new wordsViewHolder(view);
-        }else {
-            return  null;
+        } else {
+            return null;
         }
     }
 
@@ -59,7 +58,7 @@ public class WordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public int getItemViewType(int position) {
 
         //wybór rodzaju layoutu
-        if(sentences.get(position).length()>1){
+        if (sentences.get(position).length() > 1) {
             return ITEM_TYPE_ONE;
         } else {
             return ITEM_TYPE_TWO;
@@ -85,8 +84,7 @@ public class WordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     Log.d(TAG, "onClick: clicked on: " + words.get(position));
                 }
             });
-        }
-        else{
+        } else {
             wordsViewHolder holder = (wordsViewHolder) viewHolder;
             holder.wordTxt.setText(words.get(position));
             holder.meaningTxt.setText(meanings.get(position));
@@ -105,7 +103,7 @@ public class WordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return words.size();
     }
 
-    public class wordsViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, PopupMenu.OnMenuItemClickListener{
+    public class wordsViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, PopupMenu.OnMenuItemClickListener {
 
         TextView wordTxt;
         TextView meaningTxt;
@@ -124,7 +122,7 @@ public class WordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @Override
         public boolean onLongClick(View v) {
 
-            if(currentUser.getId()==currentUser.getCurrentListOwnerId())
+            if (currentUser.getId() == currentUser.getCurrentListOwnerId())
                 showPopupMenu(v);
 
             return false;
@@ -166,14 +164,14 @@ public class WordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                         "from Word as w inner join Word_list as wl on w.id_list=wl.id_word_list\n" +
                         "where wl.owner_id=? and wl.name=? and word=? and meaning=?");
 
-                stmt.setInt(1,currentUser.getCurrentListOwnerId());
+                stmt.setInt(1, currentUser.getCurrentListOwnerId());
                 stmt.setString(2, currentUser.getCurrentListName());
                 stmt.setString(3, words.get(position));
                 stmt.setString(4, meanings.get(position));
                 rs = stmt.executeQuery();
 
                 if (rs.next()) {
-                    wordId=rs.getInt("id_word");
+                    wordId = rs.getInt("id_word");
                     rs.close();
                     stmt.close();
 
@@ -199,7 +197,7 @@ public class WordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    public class wordsViewHolderExtended extends RecyclerView.ViewHolder implements View.OnLongClickListener, PopupMenu.OnMenuItemClickListener{
+    public class wordsViewHolderExtended extends RecyclerView.ViewHolder implements View.OnLongClickListener, PopupMenu.OnMenuItemClickListener {
 
         TextView wordTxt;
         TextView meaningTxt;
@@ -214,7 +212,7 @@ public class WordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             wordTxt = itemView.findViewById(R.id.wordTxt);
             meaningTxt = itemView.findViewById(R.id.meaningTxt);
             sentenceTxt = itemView.findViewById(R.id.sentenceTxt);
-            sentenceMeaningTxt=itemView.findViewById(R.id.sentenceMeaningTxt);
+            sentenceMeaningTxt = itemView.findViewById(R.id.sentenceMeaningTxt);
             wordLayout = itemView.findViewById(R.id.wordsLayout);
             wordLayout.setOnLongClickListener(this);
         }
@@ -222,7 +220,7 @@ public class WordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @Override
         public boolean onLongClick(View v) {
 
-            if(currentUser.getId()==currentUser.getCurrentListOwnerId())
+            if (currentUser.getId() == currentUser.getCurrentListOwnerId())
                 showPopupMenu(v);
 
             return false;
@@ -264,14 +262,14 @@ public class WordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                         "from Word as w inner join Word_list as wl on w.id_list=wl.id_word_list\n" +
                         "where wl.owner_id=? and wl.name=? and word=? and meaning=?");
 
-                stmt.setInt(1,currentUser.getCurrentListOwnerId());
+                stmt.setInt(1, currentUser.getCurrentListOwnerId());
                 stmt.setString(2, currentUser.getCurrentListName());
                 stmt.setString(3, words.get(position));
                 stmt.setString(4, meanings.get(position));
                 rs = stmt.executeQuery();
 
                 if (rs.next()) {
-                    wordId=rs.getInt("id_word");
+                    wordId = rs.getInt("id_word");
                     rs.close();
                     stmt.close();
 

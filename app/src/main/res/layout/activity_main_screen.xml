@@ -19,7 +19,8 @@
         android:onClick="register"
         android:text="Rejestracja"
         android:textAllCaps="false"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        />
 
     <Button
         android:id="@+id/main_screen_login"
@@ -32,7 +33,8 @@
         android:onClick="login"
         android:text="Zaloguj"
         android:textAllCaps="false"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        />
 
     <Button
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -43,6 +45,7 @@
         android:text="Pomiń"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        />
 
 </RelativeLayout>

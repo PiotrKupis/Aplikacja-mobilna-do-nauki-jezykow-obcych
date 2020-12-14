@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.sql.Connection;
@@ -85,7 +84,7 @@ public class Register extends AppCompatActivity {
                                 currentUser.setId(resultid.getInt("id_user"));
                             }
                             Log.d(null, "rejestacja udana");
-                            
+
                             Intent myIntent = new Intent(getBaseContext(), MainActivity.class);
                             startActivity(myIntent);
                         }

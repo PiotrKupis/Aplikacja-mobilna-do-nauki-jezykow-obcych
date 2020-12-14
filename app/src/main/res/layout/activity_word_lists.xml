@@ -17,7 +17,8 @@
         android:text="Twoje listy słów"
         android:textColor="@color/blue_500"
         android:textSize="26sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -25,14 +26,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/userIdTxt"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
+
         android:layout_toRightOf="@+id/userIdTxt"
         android:layout_marginTop="610dp"
+
         android:layout_marginLeft="-20dp"
         android:backgroundTint="@color/blue_300"
         android:elevation="10dp"
@@ -40,10 +44,11 @@
         android:src="@drawable/ic_add_list_menu"
         app:backgroundTint="@color/purple_500"
         app:borderWidth="1dp"
+        app:fabCustomSize="80dp"
         app:fabSize="normal"
+        app:maxImageSize="55dp"
         app:pressedTranslationZ="12dp"
         app:rippleColor="@color/blue_500"
-        app:fabCustomSize="80dp"
-        app:maxImageSize="55dp"/>
+        />
 
 </RelativeLayout>

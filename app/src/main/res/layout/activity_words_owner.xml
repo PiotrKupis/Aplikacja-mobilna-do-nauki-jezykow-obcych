@@ -16,14 +16,16 @@
         android:text="Słowa w wybranej liście"
         android:textColor="@color/blue_500"
         android:textSize="26sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wordsRecView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/listIdTxt"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
@@ -38,10 +40,11 @@
         android:src="@drawable/ic_add_menu"
         app:backgroundTint="@color/purple_500"
         app:borderWidth="1dp"
+        app:fabCustomSize="80dp"
         app:fabSize="normal"
+        app:maxImageSize="65dp"
         app:pressedTranslationZ="12dp"
         app:rippleColor="@color/blue_500"
-        app:fabCustomSize="80dp"
-        app:maxImageSize="65dp"/>
+        />
 
 </RelativeLayout>
