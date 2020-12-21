@@ -13,31 +13,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:text="Publiczne listy"
         android:textColor="@color/blue_500"
         android:textSize="26sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/selectLanguageSpinnerTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/availableLanguagesTxt"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Sortuje według języka"
-        android:textColor="@color/blue_500"
-        android:textSize="16sp"
-        android:textStyle="normal"/>
-
     <Spinner
         android:id="@+id/selectLanguageSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/selectLanguageSpinnerTxt"
+        android:layout_below="@+id/availableLanguagesTxt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         />
 
     <androidx.recyclerview.widget.RecyclerView

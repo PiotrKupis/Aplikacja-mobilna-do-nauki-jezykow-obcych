@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light">
+
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".AddNewWord">
+
+        <TextView
+            android:id="@+id/addWordTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Dodawanie nowego słowa"
+            android:textColor="@color/blue_500"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/newWordTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addWordTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:text="Słowo"
+            android:textColor="@color/blue_500"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:id="@+id/newWordEdtTxt"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newWordTxt"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:hint="Podaj nowe słowo"
+            android:textColor="@color/blue_500"
+            android:textColorHint="@color/blue_500"
+            android:textStyle="italic"
+            />
+
+        <TextView
+            android:id="@+id/newMeaningTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newWordEdtTxt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="Znaczenie"
+            android:textColor="@color/blue_500"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:id="@+id/newMeaningEdtTxt"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newMeaningTxt"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:hint="Podaj znaczenie słowa"
+            android:textColor="@color/blue_500"
+            android:textColorHint="@color/blue_500"
+            android:textStyle="italic"
+            />
+
+        <TextView
+            android:id="@+id/newSentences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newMeaningEdtTxt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:text="Opcjonalne zdania przykładowe:"
+            android:textColor="@color/blue_500"
+            android:textSize="23sp"
+            android:textStyle="italic|bold"
+            />
+
+        <TextView
+            android:id="@+id/newSentenceTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newSentences"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:text="Przykładowe zdanie"
+            android:textColor="@color/blue_500"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:id="@+id/newSentenceEdtTxt"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newSentenceTxt"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:hint="Podaj przykładowe zdanie"
+            android:textColor="@color/blue_500"
+            android:textColorHint="@color/blue_500"
+            android:textStyle="italic"
+            />
+
+        <TextView
+            android:id="@+id/newSentenceMeaningTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newSentenceEdtTxt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="Znaczenie zdania"
+            android:textColor="@color/blue_500"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:id="@+id/newSentenceMeaningEdtTxt"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newSentenceMeaningTxt"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:hint="Podaj znaczenie zdania"
+            android:textColor="@color/blue_500"
+            android:textColorHint="@color/blue_500"
+            android:textStyle="italic"
+            />
+
+
+        <Button
+            android:id="@+id/addNewWordBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newSentenceMeaningEdtTxt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:onClick="addNewWord"
+            android:text="Dodaj słowo"
+            android:textAllCaps="false"
+            android:textSize="22sp"
+            />
+
+        <TextView
+            android:id="@+id/newWordMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/addNewWordBtn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="50dp"
+            android:gravity="center"
+            android:text="Komunikat"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            />
+    </RelativeLayout>
+
+
+</ScrollView>
