@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/rounded_panel"
+    android:elevation="20dp"
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/listNameBtn"
+        android:layout_width="480dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        android:gravity="center"
+        android:text="Nazwa listy"
+        android:textColor="@color/blue_500"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <RatingBar
+        android:id="@+id/difficultyRB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-10dp"
+        android:layout_toRightOf="@+id/listNameBtn"
+        android:clickable="false"
+        android:isIndicator="true"
+        android:numStars="3"
+        android:rating="2"
+        android:scaleX=".8"
+        android:scaleY=".8"
+        android:backgroundTint="@color/blue_500"
+        android:theme="@style/RatingBar" />
+
+    <TextView
+        android:id="@+id/ownerTxt"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/listNameBtn"
+        android:layout_marginLeft="165dp"
+        android:text="Utworzone przez: Adam"
+        android:textColor="@color/blue_500"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="560dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/ownerTxt"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="-5dp"
+        android:max="100"
+        android:progress="20" />
+
+    <TextView
+        android:id="@+id/progressTxt"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/ownerTxt"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="-1dp"
+        android:layout_toRightOf="@id/progressBar"
+        android:text="1/20"
+        android:textColor="@color/blue_500" />
+
+    <Button
+        android:id="@+id/listLearnBtn"
+        android:layout_width="620dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:text="Ucz się"
+        android:textAllCaps="false"
+        android:layout_marginBottom="10dp"/>
+
+</RelativeLayout>
