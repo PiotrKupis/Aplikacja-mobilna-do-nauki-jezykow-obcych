@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,22 +48,39 @@ public class GameWithWords extends AppCompatActivity {
     private int pointsCounter = 0;
     private int roundCounter = 1;
     private int totalRoundsCounter = 0;
-    private int id_word;
 
+    private TextView pointsCounterView;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_easy);
 
         setConnection();
-        getWordsAndProgressFromDatabase();
-//        getWords();
-//        getProgress();
-
         TextView txt = findViewById(R.id.word);
+
+        if (savedInstanceState != null) {
+            currentWordCounter = savedInstanceState.getInt("currentWordCounter");
+            pointsCounter = savedInstanceState.getInt("pointsCounter");
+            roundCounter = savedInstanceState.getInt("roundCounter");
+            totalRoundsCounter = savedInstanceState.getInt("totalRoundsCounter");
+            currentWordCounter = savedInstanceState.getInt("currentWordCounter");
+            userId = savedInstanceState.getInt("userId");
+            listId = savedInstanceState.getInt("listId");
+
+            wordsPolish = savedInstanceState.getStringArrayList("wordsPolish");
+            wordsEnglish = savedInstanceState.getStringArrayList("wordsEnglish");
+
+            wordsIds = savedInstanceState.getIntegerArrayList("wordsIds");
+            progressValues = savedInstanceState.getIntegerArrayList("progressValues");
+        } else {
+            getWordsAndProgressFromDatabase();
+        }
+
+        pointsCounterView = findViewById(R.id.pointsCouter);
+        pointsCounterView.setText(pointsCounter + "pkt.");
         roundCounterView = findViewById(R.id.roundCounter);
         roundCounterView.setText(roundCounter + "/" + totalRoundsCounter);
-        txt.setText(wordsPolish.get(0));
+        txt.setText(wordsPolish.get(roundCounter - 1));
     }
 
     private void getWords() {
@@ -119,10 +137,11 @@ public class GameWithWords extends AppCompatActivity {
             throwable.printStackTrace();
         }
     }
+
     private ArrayList<Integer> progressValues;
 
     public void getProgress() {
-        id_word = wordsIds.get(currentWordCounter);
+        int id_word = wordsIds.get(currentWordCounter);
         progressValues = new ArrayList<>();
         try {
             if (con != null) {
@@ -130,7 +149,7 @@ public class GameWithWords extends AppCompatActivity {
                 commList = con.createStatement();
                 ResultSet progress = commList.executeQuery(
                         "select * from Progress where id_user = " + userId +
-                        " and id_word = " + id_word
+                                " and id_word = " + id_word
                 );
                 while (progress.next()) {
                     progressValues.add(progress.getInt("progress"));
@@ -145,7 +164,7 @@ public class GameWithWords extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     public void OKBtnClick(View view) {
         TextView txt = findViewById(R.id.word);
-        TextView pointsCounterView = findViewById(R.id.pointsCouter);
+
         TextView isAnswerCorrect = findViewById(R.id.isAnswerCorrect);
 
         EditText answer = findViewById(R.id.answer);
@@ -194,7 +213,7 @@ public class GameWithWords extends AppCompatActivity {
         if (con != null) {
             Statement commList;
             commList = con.createStatement();
-            if(progress < 3) {
+            if (progress < 3) {
                 commList.executeUpdate(
                         "update Progress set progress = "
                                 + progress +
@@ -214,9 +233,28 @@ public class GameWithWords extends AppCompatActivity {
 
         }
     }
+
     public void endGameStats(View view) {
         Intent myIntent = new Intent(getBaseContext(), AfterGameStats.class);
         myIntent.putExtra("key", pointsCounter);
         startActivity(myIntent);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("currentWordCounter", currentWordCounter);
+        outState.putInt("pointsCounter", pointsCounter);
+        outState.putInt("roundCounter", roundCounter);
+        outState.putInt("totalRoundsCounter", totalRoundsCounter);
+        outState.putInt("userId", userId);
+        outState.putInt("listId", listId);
+
+        outState.putStringArrayList("wordsEnglish", wordsEnglish);
+        outState.putStringArrayList("wordsPolish", wordsPolish);
+
+        outState.putIntegerArrayList("wordsIds", wordsIds);
+        outState.putIntegerArrayList("progressValues", progressValues);
     }
 }

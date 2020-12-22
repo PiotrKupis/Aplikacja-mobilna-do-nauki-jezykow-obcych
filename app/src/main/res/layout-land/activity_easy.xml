@@ -9,8 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/poppins_medium"
-        android:paddingTop="80dp"
-        android:text=""
+        android:paddingTop="40dp"
+        android:text="sample text"
         android:textColor="@color/black"
         android:textSize="30sp"
 
@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="textPersonName"
-        android:paddingTop="60dp"
+        android:paddingTop="30dp"
         android:textColor="@color/black"
         android:textSize="30sp"
 
@@ -48,7 +48,7 @@
         android:id="@+id/roundCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="300dp"
+        android:layout_marginStart="600dp"
         android:layout_marginTop="45dp"
         android:fontFamily="@font/poppins_medium"
         android:text="0/10"
@@ -62,11 +62,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/roundCounter"
-        android:layout_marginStart="300dp"
+        android:layout_marginStart="600dp"
         android:fontFamily="@font/poppins_medium"
         android:text="0 pkt."
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="30sp" 
 
         />
 
