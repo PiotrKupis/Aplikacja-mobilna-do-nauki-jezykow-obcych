@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listLayout"
     android:layout_width="match_parent"
+
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
@@ -14,13 +15,14 @@
 
     <TextView
         android:id="@+id/listNameBtn"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
+        android:layout_width="219dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="Nazwa listy"
         android:textColor="@color/blue_500"
-        android:textSize="24sp"
+        android:textSize="24dp"
         android:textStyle="bold" />
 
     <RatingBar
@@ -41,9 +43,10 @@
     <TextView
         android:id="@+id/ownerTxt"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
+
         android:layout_below="@+id/listNameBtn"
-        android:layout_marginLeft="55dp"
+        android:layout_marginLeft="30dp"
         android:text="Utworzone przez: Adam"
         android:textColor="@color/blue_500"
         android:textSize="14sp"
