@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listLayout"
-    android:layout_width="match_parent"
+    android:layout_width="370dp"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
     android:background="@drawable/rounded_panel"
-    android:elevation="20dp"
-    android:paddingLeft="10dp"
-    android:paddingTop="10dp"
-    android:paddingRight="10dp"
-    android:paddingBottom="10dp">
+    android:elevation="10dp">
 
     <TextView
         android:id="@+id/listNameBtn"
         android:layout_width="220dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="Nazwa listy"
         android:textColor="@color/blue_500"
@@ -29,13 +27,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="-10dp"
         android:layout_toRightOf="@+id/listNameBtn"
+        android:backgroundTint="@color/blue_500"
         android:clickable="false"
         android:isIndicator="true"
         android:numStars="3"
         android:rating="2"
         android:scaleX=".8"
         android:scaleY=".8"
-        android:backgroundTint="@color/blue_500"
         android:theme="@style/RatingBar" />
 
     <TextView
@@ -43,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_below="@+id/listNameBtn"
-        android:layout_marginLeft="55dp"
+        android:layout_marginLeft="30dp"
         android:text="Utworzone przez: Adam"
         android:textColor="@color/blue_500"
         android:textSize="14sp"
@@ -52,19 +50,21 @@
     <TextView
         android:id="@+id/wordsQuantityTxt"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:layout_below="@+id/ownerTxt"
-        android:layout_marginLeft="55dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="-1dp"
         android:text="Liczba słów w liscie: 5"
         android:textColor="@color/blue_500" />
 
     <Button
         android:id="@+id/addListBtn"
-        android:layout_width="370dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@+id/wordsQuantityTxt"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="5dp"
         android:text="Dodaj do swoich list"
         android:textAllCaps="false" />
 

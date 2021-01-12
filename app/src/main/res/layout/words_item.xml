@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/wordsLayout"
-    android:layout_width="match_parent"
+    android:layout_width="370dp"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
     android:background="@drawable/rounded_panel"
-    android:elevation="20dp"
-    android:paddingLeft="10dp"
-    android:paddingTop="10dp"
-    android:paddingRight="10dp"
-    android:paddingBottom="10dp">
+    android:elevation="15dp">
 
     <TextView
         android:id="@+id/wordTxt"
@@ -31,7 +28,6 @@
         android:text="okno"
         android:textColor="@color/blue_500"
         android:textSize="20sp" />
-
 
 
 </RelativeLayout>
