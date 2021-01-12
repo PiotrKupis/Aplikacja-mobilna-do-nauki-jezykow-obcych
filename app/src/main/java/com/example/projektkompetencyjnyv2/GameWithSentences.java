@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.sql.Connection;
@@ -53,13 +54,31 @@ public class GameWithSentences extends AppCompatActivity {
         }
 
         setConnection();
-        getSentences();
+        initGame();
+        if (savedInstanceState != null) {
+
+            sentencesCounter = savedInstanceState.getInt("sentencesCounter");
+            roundsCounter = savedInstanceState.getInt("roundsCounter");
+            scoreCounter = savedInstanceState.getInt("scoreCounter");
+            sentencePolish = savedInstanceState.getStringArrayList("sentencePolish");
+            sentenceEnglish = savedInstanceState.getStringArrayList("sentenceEnglish");
+            setScore(0, 0);
+        } else {
+            getSentences();
+            setScore();
+        }
 
         TextView sentenceTextEnglish = findViewById(R.id.sentenceTxtEnglish);
         sentenceTextPolish = findViewById(R.id.sentenceTxtPolish);
 
-        initGame();
+
         generateButtons(sentenceTextEnglish);
+    }
+
+    private void setScore() {
+        roundCounterSentences.setText("0/" + sentencesCounter);
+        roundsCounter = 0;
+        scoreCounter = 0;
     }
 
     private void initGame() {
@@ -69,11 +88,6 @@ public class GameWithSentences extends AppCompatActivity {
         allLayouts[2] = findViewById(R.id.wordsLinearLayoutThirdLine);
         roundCounterSentences = findViewById(R.id.roundCounterSentences);
         roundScoreSentences = findViewById(R.id.pointsCounterSentences);
-
-        roundsCounter = 0;
-        scoreCounter = 0;
-        roundCounterSentences.setText("0/" + sentencesCounter);
-
         rowSizes = new int[3];
     }
 
@@ -108,10 +122,10 @@ public class GameWithSentences extends AppCompatActivity {
                             TextView answerCheck = findViewById(R.id.answerCheck);
                             if (sentenceTextEnglish.getText().toString().trim().equals(sentenceEnglish.get(roundsCounter))) {
                                 answerCheck.setText("Odpowiedź poprawna!");
-                                setScore(1);
+                                setScore(1, 1);
                                 nextSentence(sentenceTextEnglish);
                             } else {
-                                setScore(0);
+                                setScore(0, 1);
                                 nextSentence(sentenceTextEnglish);
                                 answerCheck.setText("Błąd");
                                 System.out.println("\n" + sentenceTextEnglish.getText());
@@ -150,8 +164,8 @@ public class GameWithSentences extends AppCompatActivity {
         generateButtons(sentenceTextEnglish);
     }
 
-    private void setScore(int point) {
-        roundsCounter++;
+    private void setScore(int point, int nextRound) {
+        roundsCounter += nextRound;
         scoreCounter += point;
         roundScoreSentences.setText(scoreCounter + " pkt.");
         roundCounterSentences.setText(roundsCounter + "/" + sentencesCounter);
@@ -184,5 +198,18 @@ public class GameWithSentences extends AppCompatActivity {
     private void setConnection() {
         ConnectionClass connectionClass = new ConnectionClass();
         con = connectionClass.CONN();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("sentencesCounter", sentencesCounter);
+        outState.putInt("roundsCounter", roundsCounter);
+        outState.putInt("scoreCounter", scoreCounter);
+
+        outState.putStringArrayList("sentencePolish", sentencePolish);
+        outState.putStringArrayList("sentenceEnglish", sentenceEnglish);
+
     }
 }
