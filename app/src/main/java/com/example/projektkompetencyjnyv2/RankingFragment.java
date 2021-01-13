@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class CoursesFragment extends Fragment {
+public class Ranking extends Fragment {
 
     @Nullable
     @Override
