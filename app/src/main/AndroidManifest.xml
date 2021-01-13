@@ -12,12 +12,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="sensorLandscape"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjektKompetencyjnyV2"
-        android:windowSoftInputMode="adjustPan|stateHidden"
-        android:screenOrientation="sensorLandscape">
-
-        <activity android:name=".AddFromPublicLists"></activity>
+        android:windowSoftInputMode="adjustPan|stateHidden">
+        <activity android:name=".AddFromPublicLists" />
         <activity android:name=".GameWithSentences" />
         <activity
             android:name=".AddNewWord"

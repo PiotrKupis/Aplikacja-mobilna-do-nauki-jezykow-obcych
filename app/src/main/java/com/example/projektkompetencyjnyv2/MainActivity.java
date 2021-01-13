@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_TEXT = "com.example.projektkompetencyjnyv2.EXTRA_TEXT";
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new HomeFragment()).commit();
+                    new WordListsFragment()).commit();
         }
     }
 
@@ -37,17 +36,19 @@ public class MainActivity extends AppCompatActivity {
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                     Fragment selectedFragment = null;
                     Activity selectActitivy = null;
+
                     switch (item.getItemId()) {
                         case R.id.nav_home:
-                            selectedFragment = new HomeFragment();
+                            selectedFragment = new WordListsFragment();
+                            break;
+                        case R.id.nav_ranking:
+                            selectedFragment = new RankingFragment();
                             break;
                         case R.id.nav_profile:
                             selectedFragment = new ProfileFragment();
-                            break;
-                        case R.id.nav_courses:
-                            selectedFragment = new CoursesFragment();
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
 
     public void moveToWordLists(View view) {
         Intent myIntent = new Intent(getBaseContext(), WordLists.class);
@@ -69,11 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void plantsClick(View view) {
         Intent myIntent = new Intent(getBaseContext(), GameWithSentences.class);
-        startActivity(myIntent);
-    }
-
-    public void movetoWordList(MenuItem item) {
-        Intent myIntent = new Intent(getBaseContext(), WordLists.class);
         startActivity(myIntent);
     }
 }

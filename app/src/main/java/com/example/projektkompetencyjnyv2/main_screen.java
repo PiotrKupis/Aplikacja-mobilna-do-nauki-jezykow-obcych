@@ -16,6 +16,21 @@ public class main_screen extends AppCompatActivity {
         CurrentUser currentUser = new CurrentUser(getApplicationContext());
 
         if (currentUser.getId() != 0) {
+
+            Intent myIntent = new Intent(getBaseContext(), MainActivity.class);
+            startActivity(myIntent);
+        } else {
+            setContentView(R.layout.activity_main_screen);
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        CurrentUser currentUser = new CurrentUser(getApplicationContext());
+
+        if (currentUser.getId() != 0) {
             Intent myIntent = new Intent(getBaseContext(), WordLists.class);
             startActivity(myIntent);
         } else {
