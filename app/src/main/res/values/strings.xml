@@ -25,6 +25,12 @@
         <item>publiczna</item>
         <item>prywatna</item>
     </string-array>
+
+    <string-array name="rankingPeriods">
+        <item>Miesięczny</item>
+        <item>Ogólny</item>
+    </string-array>
+
     <string name="title_activity_main2">MainActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

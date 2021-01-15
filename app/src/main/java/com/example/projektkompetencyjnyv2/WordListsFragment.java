@@ -9,27 +9,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class WordListsFragment extends Fragment{
+/**
+ * Class that shows user's lists and allows him to add, delete or learn selected list
+ */
+public class WordListsFragment extends Fragment {
 
     private static final String TAG = "WordLists";
-
     private View rootView;
     private int userId;
-    private CurrentUser currentUser;
-    private ConnectionClass connectionClass;
     private Connection con;
-    private RecyclerView listsRecView;
     private ArrayList<String> listNames;
     private ArrayList<Integer> difficultyLevels;
     private ArrayList<Integer> wordQuantities;
@@ -41,7 +43,7 @@ public class WordListsFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.activity_word_lists, container, false);
-        currentUser = new CurrentUser(getActivity().getApplicationContext());
+        CurrentUser currentUser = new CurrentUser(getActivity().getApplicationContext());
         userId = currentUser.getId();
 
         listNames = new ArrayList<>();
@@ -50,13 +52,13 @@ public class WordListsFragment extends Fragment{
         learnedQuantities = new ArrayList<>();
         owners = new ArrayList<>();
 
-        connectionClass = new ConnectionClass();
+        ConnectionClass connectionClass = new ConnectionClass();
         con = connectionClass.CONN();
 
         initWordLists();
         initRecyclerView();
 
-        FloatingActionButton actionButton = (FloatingActionButton) rootView.findViewById(R.id.listsFloatingButton);
+        FloatingActionButton actionButton = rootView.findViewById(R.id.listsFloatingButton);
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,12 +195,11 @@ public class WordListsFragment extends Fragment{
     public void initRecyclerView() {
         Log.d(TAG, "initRecyvlerView: inicjalizacja recyclerview");
 
-        listsRecView = (RecyclerView) rootView.findViewById(R.id.listsRecView);
+        RecyclerView listsRecView = rootView.findViewById(R.id.listsRecView);
         listsRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         WordListsAdapter adapter = new WordListsAdapter(getActivity(), listNames, difficultyLevels, wordQuantities, learnedQuantities, owners);
         listsRecView.setAdapter(adapter);
-
     }
 
 }
