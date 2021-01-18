@@ -47,6 +47,15 @@ public class WordListsFragment extends Fragment {
         Log.d(TAG, "onCreateView: created word lists");
         rootView = inflater.inflate(R.layout.activity_word_lists, container, false);
 
+        return rootView;
+    }
+
+    @Override
+    public void onResume() {
+
+        Log.d(TAG, "onResume: resumed");
+        super.onResume();
+
         CurrentUser currentUser = new CurrentUser(getActivity().getApplicationContext());
         userId = currentUser.getId();
 
@@ -91,9 +100,6 @@ public class WordListsFragment extends Fragment {
                 listPopupMenu.show();
             }
         });
-
-        Log.d(TAG, "onCreateView: created");
-        return rootView;
     }
 
     /**
