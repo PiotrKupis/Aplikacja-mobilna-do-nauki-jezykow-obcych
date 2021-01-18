@@ -14,8 +14,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_TEXT = "com.example.projektkompetencyjnyv2.EXTRA_TEXT";
-    public static final String EXTRA_TEXT2 = "com.example.projektkompetencyjnyv2.EXTRA_TEXT2";
     public static final String EXTRA_NUMBER = "com.example.projektkompetencyjnyv2.EXTRA_NUMBER";
 
     @Override
@@ -58,19 +56,4 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-
-    public void moveToWordLists(View view) {
-        Intent myIntent = new Intent(getBaseContext(), WordLists.class);
-        startActivity(myIntent);
-    }
-
-    public void bodyPartsClick(View view) {
-        Intent myIntent = new Intent(getBaseContext(), Difficulty.class);
-        startActivity(myIntent);
-    }
-
-    public void plantsClick(View view) {
-        Intent myIntent = new Intent(getBaseContext(), GameWithSentences.class);
-        startActivity(myIntent);
-    }
 }

@@ -21,15 +21,8 @@
         <activity
             android:name=".AddNewWord"
             android:parentActivityName=".Words" />
-        <activity
-            android:name=".CreateNewList"
-            android:parentActivityName=".WordLists" />
-        <activity
-            android:name=".Words"
-            android:parentActivityName=".WordLists" />
-        <activity
-            android:name=".WordLists"
-            android:parentActivityName=".MainActivity" />
+        <activity android:name=".CreateNewList" />
+        <activity android:name=".Words" />
         <activity android:name=".Profile" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
