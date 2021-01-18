@@ -92,14 +92,8 @@ public class WordListsFragment extends Fragment {
             }
         });
 
+        Log.d(TAG, "onCreateView: created");
         return rootView;
-    }
-
-    @Override
-    public void onResume() {
-
-        Log.d(TAG, "onResume: resumed word lists");
-        super.onResume();
     }
 
     /**
@@ -114,13 +108,15 @@ public class WordListsFragment extends Fragment {
         final Object lock;
         ResultSet listsRS;
         PreparedStatement listsStmt;
-        Thread thread = null;
+        Thread thread;
+        ArrayList<Thread> threads;
 
         try {
             if (con != null) {
 
                 //creating a lock for threads
                 lock = new Object();
+                threads = new ArrayList<>();
 
                 //getting information about user's lists
                 listsStmt = con.prepareStatement(
@@ -141,8 +137,11 @@ public class WordListsFragment extends Fragment {
                     //thread that gets information about the list
                     thread = new Thread(new GetListInformation(lock, listId, ownerId, difficultyLevel, listName, listNames, difficultyLevels, wordQuantities, learnedQuantities, owners));
                     thread.start();
+                    threads.add(thread);
                 }
-                thread.join();
+
+                for(Thread thread1:threads)
+                    thread1.join();
 
                 listsRS.close();
                 listsStmt.close();
