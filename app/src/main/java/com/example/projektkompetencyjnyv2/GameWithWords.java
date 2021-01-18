@@ -53,7 +53,7 @@ public class GameWithWords extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_easy);
+        setContentView(R.layout.activity_game_with_words);
 
         setConnection();
         TextView txt = findViewById(R.id.word);
