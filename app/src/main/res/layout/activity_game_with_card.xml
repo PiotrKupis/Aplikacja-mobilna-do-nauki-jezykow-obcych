@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameWithCard">
+
+    <TextView android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Czas 0s"
+        android:textSize="24dp"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:onClick="ValidateButton"
+        android:id="@+id/button1"
+        android:layout_width="187dp"
+        android:layout_height="107dp"
+        android:layout_alignRight="@id/time"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="61dp"
+        android:text="Left" />
+
+    <Button
+        android:onClick="ValidateButton"
+        android:id="@+id/button2"
+        android:layout_width="186dp"
+        android:layout_height="103dp"
+        android:layout_alignLeft="@id/time"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="62dp"
+        android:layout_marginTop="40dp"
+        android:text="Right" />
+    <Button
+        android:onClick="ValidateButton"
+        android:id="@+id/button3"
+        android:layout_width="187dp"
+        android:layout_height="107dp"
+        android:layout_below="@id/button1"
+        android:layout_marginTop="20dp"
+        android:text="Left" />
+
+    <Button
+        android:onClick="ValidateButton"
+        android:id="@+id/button4"
+        android:layout_width="187dp"
+        android:layout_height="107dp"
+        android:layout_marginLeft="36dp"
+        android:layout_toRightOf="@id/button3"
+        android:layout_below="@id/button2"
+        android:layout_marginTop="20dp"
+        android:text="Right" />
+    <Button
+        android:onClick="ValidateButton"
+        android:id="@+id/button5"
+        android:layout_width="187dp"
+        android:layout_height="107dp"
+        android:layout_below="@id/button3"
+        android:layout_marginTop="20dp"
+        android:text="Left" />
+
+    <Button
+        android:onClick="ValidateButton"
+        android:id="@+id/button6"
+        android:layout_width="187dp"
+        android:layout_height="107dp"
+        android:layout_marginLeft="35dp"
+        android:layout_toRightOf="@id/button5"
+        android:layout_below="@id/button4"
+        android:layout_marginTop="20dp"
+        android:text="Right" />
+    <Button
+        android:onClick="ValidateButton"
+        android:id="@+id/button7"
+        android:layout_width="187dp"
+        android:layout_height="107dp"
+        android:layout_below="@id/button5"
+        android:layout_marginTop="20dp"
+        android:text="Left" />
+
+    <Button
+        android:onClick="ValidateButton"
+        android:id="@+id/button8"
+        android:layout_width="187dp"
+        android:layout_height="107dp"
+        android:layout_marginLeft="35dp"
+        android:layout_toRightOf="@id/button7"
+        android:layout_below="@id/button6"
+        android:layout_marginTop="20dp"
+        android:text="Right" />
+    <Button
+        android:onClick="ValidateButton"
+        android:id="@+id/button9"
+        android:layout_width="187dp"
+        android:layout_height="107dp"
+        android:layout_below="@id/button7"
+        android:layout_marginTop="20dp"
+        android:text="Left" />
+
+    <Button
+        android:onClick="ValidateButton"
+        android:id="@+id/button10"
+        android:layout_width="187dp"
+        android:layout_height="107dp"
+        android:layout_marginLeft="35dp"
+        android:layout_toRightOf="@id/button9"
+        android:layout_below="@id/button8"
+        android:layout_marginTop="20dp"
+        android:text="Right" />
+
+</RelativeLayout>

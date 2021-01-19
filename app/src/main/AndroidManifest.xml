@@ -30,6 +30,8 @@
         <activity android:name=".Difficulty" />
         <activity android:name=".AfterGameStats" />
         <activity android:name=".LoginUser" />
+        <activity android:name=".GameWithCard"/>
+        <activity android:name=".ResultGameWithCard"/>
         <activity
             android:name=".main_screen"
             android:label="Rejestacja">
@@ -39,6 +41,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

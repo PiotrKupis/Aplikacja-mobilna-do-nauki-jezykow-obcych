@@ -5,4 +5,6 @@
         android:title="Nauka słów"/>
     <item android:id="@+id/sentencesGame"
         android:title="Nauka zdań"/>
+    <item android:id="@+id/wordsGame2"
+        android:title="Nauka Słów (karty)"/>
 </menu>

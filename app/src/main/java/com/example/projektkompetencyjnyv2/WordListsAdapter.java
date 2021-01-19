@@ -149,7 +149,7 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
                 Log.d(TAG, "onMenuItemClick: usuwanie listy: " + getAdapterPosition());
                 removeListItem(getAdapterPosition());
                 return true;
-            } else if (item.getItemId() == R.id.wordsGame || item.getItemId() == R.id.sentencesGame) {
+            } else if (item.getItemId() == R.id.wordsGame || item.getItemId() == R.id.sentencesGame||  item.getItemId() == R.id.wordsGame2) {
 
                 int listId;
                 ConnectionClass connectionClass;
@@ -188,6 +188,15 @@ public class WordListsAdapter extends RecyclerView.Adapter<WordListsAdapter.View
                             Log.d(TAG, "onMenuItemClick: przeniesienie do nauki zdań" + listId);
 
                             Intent intent = new Intent(mContext, GameWithSentences.class);
+                            intent.putExtra("userID", currentUser.getId());
+                            intent.putExtra("listID", listId);
+                            mContext.startActivity(intent);
+                            return true;
+                        }else if(item.getItemId() == R.id.wordsGame2)
+                        {
+                            //przeniesienie do kolejnej gry z slowami
+                            Log.d(TAG, "onMenuItemClick: przeniesienie do slow z kartami" + listId);
+                            Intent intent = new Intent(mContext, GameWithCard.class);
                             intent.putExtra("userID", currentUser.getId());
                             intent.putExtra("listID", listId);
                             mContext.startActivity(intent);
