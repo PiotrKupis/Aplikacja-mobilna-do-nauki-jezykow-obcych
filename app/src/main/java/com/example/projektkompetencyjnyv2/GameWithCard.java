@@ -84,6 +84,7 @@ public class GameWithCard extends AppCompatActivity {
                     }
 
                 }
+                con.close();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
