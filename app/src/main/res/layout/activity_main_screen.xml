@@ -36,16 +36,4 @@
         android:textSize="20sp"
         />
 
-    <Button
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="280dp"
-        android:layout_marginTop="20dp"
-        android:text="Pomiń"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        />
-
 </RelativeLayout>
