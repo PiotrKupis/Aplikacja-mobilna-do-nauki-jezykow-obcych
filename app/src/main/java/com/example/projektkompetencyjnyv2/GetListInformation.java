@@ -24,8 +24,9 @@ public class GetListInformation implements Runnable {
     private final ArrayList<Integer> wordQuantities;
     private final ArrayList<Integer> learnedQuantities;
     private final ArrayList<String> owners;
+    private int userId;
 
-    public GetListInformation(Object lock, int listId, int ownerId, int difficultyLevel, String listName, ArrayList<String> listNames, ArrayList<Integer> difficultyLevels, ArrayList<Integer> wordQuantities, ArrayList<Integer> learnedQuantities, ArrayList<String> owners) {
+    public GetListInformation(int userId, Object lock, int listId, int ownerId, int difficultyLevel, String listName, ArrayList<String> listNames, ArrayList<Integer> difficultyLevels, ArrayList<Integer> wordQuantities, ArrayList<Integer> learnedQuantities, ArrayList<String> owners) {
         this.lock = lock;
         this.listId = listId;
         this.ownerId = ownerId;
@@ -36,6 +37,8 @@ public class GetListInformation implements Runnable {
         this.wordQuantities = wordQuantities;
         this.learnedQuantities = learnedQuantities;
         this.owners = owners;
+        this.userId = userId;
+
     }
 
     @Override
@@ -65,7 +68,7 @@ public class GetListInformation implements Runnable {
             learnedStmt = con.prepareStatement("" +
                     "select count(id_progress) as learnedQuantity\n" +
                     "from progress \n" +
-                    "where id_list=? and learned=1\n" +
+                    "where id_list=? and learned=1 and id_user=? \n" +
                     "group by id_list");
             //prepared statements, end
 
@@ -88,6 +91,7 @@ public class GetListInformation implements Runnable {
                 wordsQuantity = wordsRS.getInt("wordsQuantity");
 
                 learnedStmt.setInt(1, listId);
+                learnedStmt.setInt(2, userId);
                 learnedRS = learnedStmt.executeQuery();
 
                 if (learnedRS.next())

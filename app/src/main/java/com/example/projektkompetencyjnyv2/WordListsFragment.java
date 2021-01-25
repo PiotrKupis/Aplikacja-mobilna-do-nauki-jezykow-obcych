@@ -141,7 +141,7 @@ public class WordListsFragment extends Fragment {
                     ownerId = listsRS.getInt("owner_id");
 
                     //thread that gets information about the list
-                    thread = new Thread(new GetListInformation(lock, listId, ownerId, difficultyLevel, listName, listNames, difficultyLevels, wordQuantities, learnedQuantities, owners));
+                    thread = new Thread(new GetListInformation(userId, lock, listId, ownerId, difficultyLevel, listName, listNames, difficultyLevels, wordQuantities, learnedQuantities, owners));
                     thread.start();
                     threads.add(thread);
                 }
