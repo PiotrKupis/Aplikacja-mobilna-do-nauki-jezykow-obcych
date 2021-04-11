@@ -9,3 +9,5 @@ Zakłada on stworzenie aplikacji mobilnej na system android, umożlwiającej:
 * usuwanie list powiązanych z kontem użytkownika
 * dodawanie oraz usuwanie słów z własnych list
 * naukę słów z wybranej listy
+
+# Więcej w pliku Dokumentacja PK
